@@ -1,0 +1,18 @@
+{
+  "name": "crawler",
+  "version": "0.0.1",
+  "description": "Simple crawler runs on nodejs",
+  "homepage": "https://crawler.leetrunghoo.com",
+  "author": "Trung Ho",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leetrunghoo/crawler"
+  },
+  "devDependencies": {
+    "request": "latest",
+    "cheerio": "latest",
+    "mkdirp": "latest",
+    "lodash": "latest"
+  }
+}
