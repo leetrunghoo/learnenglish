@@ -1,0 +1,60 @@
+@charset "UTF-8";
+header,
+main,
+footer,
+nav {
+    padding-left: 280px;
+    @media only screen and (max-width: 992px) {
+        padding-left: 0;
+    }
+}
+
+a {
+	color: #0277bd;
+}
+
+#slideNav {
+    width: 280px;
+    .collapsible-header {
+        @media only screen and (max-width: 992px) {
+            height: 56px;
+            line-height: 56px;
+        }
+        padding: 0 5px;
+        .material-icons {
+            margin-right: 0.5rem;
+        }
+        border-bottom: 1px solid #ddd;
+    }
+    .collapsible-body li {
+        a {
+            padding: 0 10px;
+            height: 44px;
+            line-height: 44px;
+        }
+        &:last-child a {
+            border-bottom: 1px solid #ddd;
+        }
+    }
+}
+
+nav .brand-logo {
+    padding-left: 20px;
+}
+
+main {
+    .lesson-item {
+        // height: 5.8em;
+        font-size: 16px;
+        cursor: pointer;
+    }
+}
+
+#lessonContent {
+	h1{
+		font-size: 2em;
+	}
+	a {
+		line-height: 1.8em;
+	}
+}
