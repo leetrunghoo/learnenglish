@@ -1,3 +1,14 @@
+// load font
+function loadFont(fontName) {
+    fontName = fontName.replace(/\s+/g, '+');
+    var linkFont = document.createElement('link');
+    linkFont.rel = 'stylesheet';
+    linkFont.type = 'text/css';
+    linkFont.href = 'https://fonts.googleapis.com/css?family=' + fontName + ':100,400';
+    document.getElementsByTagName('head')[0].appendChild(linkFont);
+}
+// loadFont('Roboto');
+
 (function() {
     'use strict';
 
@@ -6,13 +17,21 @@
     var sectionTpl_raw = $("#sectionTpl").html();
     var sectionTpl = Handlebars.compile(sectionTpl_raw);
 
+    var audioPlayer = document.getElementById("audioPlayer");
+    audioPlayer.onended = function() {
+        $('.playingAudio').removeClass('playingAudio');
+    };
+
     $('.modal-trigger').leanModal({
         dismissible: true, // Modal can be dismissed by clicking outside of the modal
         opacity: .5, // Opacity of modal background
         in_duration: 300, // Transition in duration
         out_duration: 200, // Transition out duration
-        ready: function() { }, // Callback for Modal open
-        complete: function() { } // Callback for Modal close
+        ready: function() { // Callback for Modal open
+        },
+        complete: function() { // Callback for Modal close
+            audioPlayer.pause();
+        }
     });
 
     $.getJSON('data/listLessons.json', function(data) {
@@ -24,6 +43,8 @@
         $('.collapsible').collapsible();
 
         $('li.section-item').click(function() {
+            $('.section-item').removeClass('selected');
+            $(this).addClass('selected');
             var sectionIndex = $(this).index();
             var cateIndex = $(this).parents('.category-item').index();
             $('#mainContent').html(sectionTpl(data.categories[cateIndex].sections[sectionIndex]));
@@ -35,7 +56,6 @@
 
     $(document).on('click', '.lesson-item', function() {
         var lessonIndex = $(this).data('lesson');
-        console.log('lessonIndex', lessonIndex);
         $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
             $('#lessonTitle').text(lesson.title);
             $('#lessonContent').html(lesson.html);
@@ -43,12 +63,13 @@
         });
     });
     $(document).on('click', 'a', function(e) {
-        e.preventDefault();
-        if(e.target.href.indexOf('.mp3') > -1) {
-            new Audio(e.target.href).play();
+        if (e.target.href && e.target.href.indexOf('.mp3') > -1) {
+            e.preventDefault();
+            $('.playingAudio').removeClass('playingAudio');
+            $(this).addClass('playingAudio');
+            audioPlayer.src = e.target.href;
+            audioPlayer.play();
         }
     });
-
-
 
 })();
