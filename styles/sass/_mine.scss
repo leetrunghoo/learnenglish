@@ -1,4 +1,8 @@
 @charset "UTF-8";
+html {
+    font-size: 16px;
+}
+
 header,
 main,
 footer {
@@ -9,27 +13,36 @@ footer {
 }
 
 a {
-	color: #0277bd;
+    color: #0277bd;
 }
 
 #slideNav {
     width: 280px;
     .collapsible-header {
-        @media only screen and (max-width: 992px) {
+        &.active {
+            background-color: #e0e0e0;
+        }
+        // @media only screen and (max-width: 992px) {
             height: 56px;
             line-height: 56px;
-        }
+        // }
         padding: 0 5px;
         .material-icons {
             margin-right: 0.5rem;
         }
         border-bottom: 1px solid #ddd;
     }
-    .collapsible-body li {
+    .collapsible-body li.section-item {
+        display: block;
+        &.selected {
+            background-color: #eee;
+            color: $sidenav-font-color;
+        }
         a {
             padding: 0 10px;
             height: 44px;
             line-height: 44px;
+            font-size: 14px;
         }
         &:last-child a {
             border-bottom: 1px solid #ddd;
@@ -37,11 +50,7 @@ a {
     }
 }
 
-nav .brand-logo {
-    padding-left: 20px;
-}
-
-main {
+#mainContent {
     .lesson-item {
         // height: 5.8em;
         font-size: 16px;
@@ -50,10 +59,43 @@ main {
 }
 
 #lessonContent {
-	h1{
-		font-size: 2em;
-	}
-	a {
-		line-height: 1.8em;
-	}
+    h1 {
+        font-size: 2em;
+    }
+    a {
+        line-height: 1.8em;
+        &.playingAudio {
+            color: #b71c1c;
+        }
+    }
+}
+
+#audioPlayback {
+    display: none;
+}
+
+
+/** override materialize **/
+
+nav {
+    height: 56px;
+            line-height: 56px;
+    a {
+        i.material-icons {
+            font-size: 2rem;
+        }
+    }
+    .brand-logo {
+        font-size: 1.8rem;
+        @media #{$large-and-up} {
+            padding-left: 20px;
+        }
+    }
+}
+
+.modal {
+    @media #{$medium-and-down} {
+        width: 90%;
+        max-height: 90%;
+    }
 }

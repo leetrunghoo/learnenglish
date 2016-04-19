@@ -37,14 +37,14 @@
         <nav class=" light-blue darken-3">
             <ul class="left">
                 <li>
-                    <a href="#" data-activates="slideNav" class="button-collapse">
-                        <i class="large material-icons">menu</i>
+                    <a data-activates="slideNav" class="button-collapse">
+                        <i class="small material-icons">menu</i>
                     </a>
                 </li>
             </ul>
-            <a href="#" class="brand-logo">Learn English</a>
+            <a class="brand-logo">Learn English</a>
             <ul class="right">
-                <li><a href="#modalAbout" class="modal-trigger">about</a></li>
+                <li><a href="#modalAbout" class="modal-trigger"><i class="material-icons">info_outline</i></a></li>
             </ul>
             <ul id="slideNav" class="side-nav fixed">
                 <!-- categories -->
@@ -60,6 +60,7 @@
                 <div>The content was got from <a href="http://www.talkenglish.com">www.talkenglish.com</a></div>
             </div>
         </div>
+        <audio id="audioPlayer"></audio>
     </main>
     <!-- Modal Structure -->
     <div id="modalLesson" class="modal modal-fixed-footer">
@@ -67,7 +68,7 @@
             <div id="lessonContent"></div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            <a class=" modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
         </div>
     </div>
     <div id="modalAbout" class="modal modal-fixed-footer">
@@ -78,7 +79,7 @@
             <div>The content was got from <a href="http://www.talkenglish.com">www.talkenglish.com</a></div>
         </div>
         <div class="modal-footer">
-            <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+            <a class=" modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
         </div>
     </div>
     <!-- templates -->
@@ -87,11 +88,11 @@
         <li class="no-padding category-item">
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header">{{title}}<i class="material-icons">arrow_drop_down</i></a>
+                    <a class="collapsible-header waves-effect">{{title}}<i class="material-icons">arrow_drop_down</i></a>
                     <div class="collapsible-body">
                         <ul>
                             {{#each sections}}
-                            <li class="section-item"><a href="#">{{title}}</a></li>
+                            <li class="section-item waves-effect"><a>{{title}}</a></li>
                             {{/each}}
                         </ul>
                     </div>
@@ -110,7 +111,7 @@
         <div class="row">
             {{#each lessons}}
             <div class="col s6 m4 l3">
-                <div class="lesson-item card-panel modal-trigger" data-target="modalLesson" data-lesson="{{lessonIndex}}">{{title}}</div>
+                <div class="lesson-item card-panel modal-trigger waves-effect waves-teal" data-target="modalLesson" data-lesson="{{lessonIndex}}">{{title}}</div>
             </div>
             {{/each}}
         </div>
