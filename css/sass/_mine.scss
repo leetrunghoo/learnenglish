@@ -3,7 +3,6 @@ html {
     font-size: 16px;
 }
 
-header,
 main,
 footer {
     padding-left: 280px;
@@ -13,7 +12,26 @@ footer {
 }
 
 a {
-    color: #0277bd;
+    color: color("light-blue", "darken-3");
+}
+
+nav {
+    background-color: color("light-blue", "darken-3");
+    a {
+        i.material-icons {
+            font-size: 2rem;
+        }
+    }
+    .brand-logo {
+        font-size: 1.8rem;
+        @media #{$large-and-up} {
+            padding-left: 300px;
+        }
+    }
+}
+
+.navbar-fixed {
+    z-index: 997;
 }
 
 #slideNav {
@@ -22,10 +40,10 @@ a {
         &.active {
             background-color: #e0e0e0;
         }
-        // @media only screen and (max-width: 992px) {
+        @media #{$medium-and-down} {
             height: 56px;
             line-height: 56px;
-        // }
+        }
         padding: 0 5px;
         .material-icons {
             margin-right: 0.5rem;
@@ -60,37 +78,18 @@ a {
 
 #lessonContent {
     h1 {
-        font-size: 2em;
+        font-size: 1.5em;
     }
     a {
         line-height: 1.8em;
         &.playingAudio {
-            color: #b71c1c;
+            color: color("red", "darken-4");
         }
     }
 }
 
 #audioPlayback {
     display: none;
-}
-
-
-/** override materialize **/
-
-nav {
-    height: 56px;
-            line-height: 56px;
-    a {
-        i.material-icons {
-            font-size: 2rem;
-        }
-    }
-    .brand-logo {
-        font-size: 1.8rem;
-        @media #{$large-and-up} {
-            padding-left: 20px;
-        }
-    }
 }
 
 .modal {
