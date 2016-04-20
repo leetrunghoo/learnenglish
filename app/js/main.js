@@ -45,13 +45,20 @@ function loadFont(fontName) {
         $('li.section-item').click(function() {
             $('.section-item').removeClass('selected');
             $(this).addClass('selected');
+            $('.button-collapse').sideNav('hide'); // Hide sideNav
+
             var sectionIndex = $(this).index();
             var cateIndex = $(this).parents('.category-item').index();
             $('#mainContent').html(sectionTpl(data.categories[cateIndex].sections[sectionIndex]));
-            // Hide sideNav
-            $('.button-collapse').sideNav('hide');
+            $('.masonry').masonry({
+                // use outer width of grid-sizer for columnWidth
+                itemSelector: '.grid-item',
+                // do not use .grid-sizer in layout
+                columnWidth: '.grid-sizer',
+                percentPosition: true
+            });
         });
-
+        $('li.section-item:nth-child(10)').click()
     });
 
     $(document).on('click', '.lesson-item', function() {

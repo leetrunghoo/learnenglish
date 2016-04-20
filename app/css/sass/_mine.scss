@@ -98,3 +98,32 @@ nav {
         max-height: 90%;
     }
 }
+
+$xlarge-and-up: "only screen and (min-width : #{$large-screen-up})" !default;
+
+/** masonry layout **/
+
+.masonry-container {
+    width: 100%;
+    padding: 0 0 0 20px;
+    .masonry {
+        width: 100%;
+        > div {
+            width: 100%;
+            padding-right: 20px;
+            box-sizing: border-box;
+            width: 50%;
+            margin-bottom: 20px;
+            @media #{$large-and-up} {
+                width: 33.3%;
+            }
+            @media #{$xlarge-and-up} {
+                width: 25%;
+            }
+            > div {
+                width: 100%;
+                margin: 0;
+            }
+        }
+    }
+}

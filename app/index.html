@@ -110,18 +110,23 @@
                 <span>{{description}}</span>
             </div>
         </div>
-        <div class="row">
-            {{#each lessons}}
-            <div class="col s6 m4 l3">
-                <div class="lesson-item card-panel modal-trigger waves-effect waves-teal" data-target="modalLesson" data-lesson="{{lessonIndex}}">{{title}}</div>
+        <div class="masonry-container">
+            <div class="masonry">
+                <div class="grid-sizer"></div>
+                {{#each lessons}}
+                <div class="grid-item">
+                    <div class="lesson-item card-panel modal-trigger waves-effect waves-teal" data-target="modalLesson" data-lesson="{{lessonIndex}}">
+                    {{title}}</div>
+                </div>
+                {{/each}}
             </div>
-            {{/each}}
         </div>
     </script>
     <!-- js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/lib/materialize.min.js"></script>
+    <script src="https://npmcdn.com/masonry-layout@4.0/dist/masonry.pkgd.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
