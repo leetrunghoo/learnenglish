@@ -3,8 +3,8 @@ var request = require('request'); // for making HTTP calls
 var cheerio = require('cheerio'); // jQuery for the server, helps us traverse the DOM and extract data
 var mkdirp = require('mkdirp'); // make dir
 var getDirName = require('path').dirname; // get dir name by dest param
-var _ = require('lodash'); // for processing array 
 var breakTime = 100; // break time when scraping many links
+var flagCrawlerSound = false;
 
 // make a http request to get the html, then using scraperLogic to handle
 function scraper(url, scraperLogic) {
@@ -143,7 +143,7 @@ function scraperLogic_listLessons(html) {
                             var dest = 'app/data/listLessons.json';
                             saveFile(dest, JSON.stringify(result, null, 4), function(err) {
                                 //scraping list of lessons
-                                // scrapingLessons(arrLessons);
+                                scrapingLessons(arrLessons);
                             });
                         } else {
                             loopCategory(++i);
@@ -203,18 +203,14 @@ function scrapingLessons(arrLessons) {
             scrapingLesson(lesson, function(arrSoundLinks) {
                 console.log('----------done scraping lessonIndex ', lesson.lessonIndex);
 
-                //concat array of links
+                //concat array of sound links
                 if (arrSoundLinks.length > 0) {
                     sounds.data = sounds.data.concat(arrSoundLinks);
                 }
 
                 // store list of sound links after finish looping
                 if (index === arrLessons.length - 1) {
-                    console.log('============sounds length: ', sounds.data.length);
-                    sounds.data = _.union(sounds.data);
-                    console.log('============sounds length after union: ', sounds.data.length);
-
-                    if (sounds.data.length > 0) {
+                    if (flagCrawlerSound && sounds.data.length > 0) {
                         var dest = 'app/data/listSounds.json';
                         saveFile(dest, JSON.stringify(sounds, null, 4), function(err) {});
                     }
@@ -235,17 +231,19 @@ function scrapingLesson(lesson, callback) {
         lessonsContent.html = $('#GridView1 td').html() || '<h1>' + lesson.title + '</h1>' + $('.content td:first-child').html();
 
         // get sounds link
-        var arrLinks = []
-        $('#GridView1 a').each(function(i, a) {
-            var linkSound = $(this).attr('href');
-            if (linkSound.indexOf('mp3') > -1) {
-                arrLinks.push({
-                    text: $(this).text(),
-                    link: linkSound
-                });
-                // console.log(linkSound);
-            }
-        });
+        var arrLinks = [];
+        if (flagCrawlerSound) {
+            $('#GridView1 a').each(function(i, a) {
+                var linkSound = $(this).attr('href');
+                if (linkSound.indexOf('mp3') > -1) {
+                    arrLinks.push({
+                        text: $(this).text(),
+                        link: linkSound
+                    });
+                    // console.log(linkSound);
+                }
+            });
+        }
 
         var dest = 'app/data/lessons/' + lesson.lessonIndex + '.json';
         saveFile(dest, JSON.stringify(lessonsContent, null, 4), function(err) {
