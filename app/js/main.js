@@ -1,14 +1,3 @@
-// load font
-function loadFont(fontName) {
-    fontName = fontName.replace(/\s+/g, '+');
-    var linkFont = document.createElement('link');
-    linkFont.rel = 'stylesheet';
-    linkFont.type = 'text/css';
-    linkFont.href = 'https://fonts.googleapis.com/css?family=' + fontName + ':100,400';
-    document.getElementsByTagName('head')[0].appendChild(linkFont);
-}
-// loadFont('Roboto');
-
 (function() {
     'use strict';
 
@@ -22,17 +11,7 @@ function loadFont(fontName) {
         $('.playingAudio').removeClass('playingAudio');
     };
 
-    $('.modal-trigger').leanModal({
-        dismissible: true, // Modal can be dismissed by clicking outside of the modal
-        opacity: .5, // Opacity of modal background
-        in_duration: 300, // Transition in duration
-        out_duration: 200, // Transition out duration
-        ready: function() { // Callback for Modal open
-        },
-        complete: function() { // Callback for Modal close
-            audioPlayer.pause();
-        }
-    });
+    $('.modal-trigger').leanModal();
 
     $.getJSON('data/listLessons.json', function(data) {
         $('#slideNav').html(sideBarTpl(data));
@@ -58,16 +37,22 @@ function loadFont(fontName) {
                 percentPosition: true
             });
         });
-        $('li.section-item:nth-child(10)').click()
+        // $('li.section-item:nth-child(10)').click()
     });
 
     $(document).on('click', '.lesson-item', function() {
-        $('#modalLesson').openModal();
+        $('#modalLesson').openModal({
+            complete: function() { // Callback for Modal close
+                audioPlayer.pause();
+            }
+        });
+        $('#lessonContent').empty();
         $('#modalLesson .modal-content').scrollTop(0);
         var lessonIndex = $(this).data('lesson');
         $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
             $('#lessonTitle').text(lesson.title);
             $('#lessonContent').html(lesson.html);
+            $('#lessonContent table').addClass('striped');
         });
     });
     $(document).on('click', 'a', function(e) {
@@ -81,3 +66,43 @@ function loadFont(fontName) {
     });
 
 })();
+
+// load font
+function loadFont(fontName) {
+    fontName = fontName.replace(/\s+/g, '+');
+    var linkFont = document.createElement('link');
+    linkFont.rel = 'stylesheet';
+    linkFont.type = 'text/css';
+    linkFont.href = 'https://fonts.googleapis.com/css?family=' + fontName + ':100,400';
+    document.getElementsByTagName('head')[0].appendChild(linkFont);
+}
+// loadFont('Roboto');
+
+// These functions for Quiz question in Listening category. The code was got from talkenglish.com
+function showHide(elementid) {
+    if (document.getElementById(elementid).style.display == 'none') { document.getElementById(elementid).style.display = ''; } else { document.getElementById(elementid).style.display = 'none'; }
+}
+
+function CheckScore() {
+    for (var i = 0; i < 4; i++) {
+        if (MyForm.Question1[i].checked) {
+            var Ques1UserAnswer = MyForm.Question1[i].value;
+        }
+        if (MyForm.Question2[i].checked) {
+            var Ques2UserAnswer = MyForm.Question2[i].value;
+        }
+        if (MyForm.Question3[i].checked) {
+            var Ques3UserAnswer = MyForm.Question3[i].value;
+        }
+        if (MyForm.Question4[i].checked) {
+            var Ques4UserAnswer = MyForm.Question4[i].value;
+        }
+    }
+    var Score = 0;
+    var CorrectAnswers = MyForm.CorrectAnswers.value;
+    if (Ques1UserAnswer == CorrectAnswers.substr(0, 1)) Score++;
+    if (Ques2UserAnswer == CorrectAnswers.substr(1, 1)) Score++;
+    if (Ques3UserAnswer == CorrectAnswers.substr(2, 1)) Score++;
+    if (Ques4UserAnswer == CorrectAnswers.substr(3, 1)) Score++;
+    ScoreText.innerHTML = "<font size=2>Your Score is: " + Score + " /4 </font><br />";
+}

@@ -56,18 +56,24 @@
     <main id="mainContent">
         <div class="row">
             <div class="col s12">
-                <h5>Hello!</h5>
-                <div>This is a web app for learning English that I made for personal using and I would like to share it to everyone.</div>
-                <div>Author: Trung Ho <a href="https://leetrunghoo.com">https://leetrunghoo.com</a></div>
-                <div>The content was got from <a href="http://www.talkenglish.com">www.talkenglish.com</a></div>
+                <h5>Let's learn English!</h5>
+                <br/>
+                <p>Instruction:</p>
+                <p class="hide-on-med-and-down">On the left is the lesson's category.</p>
+                <p class="hide-on-large-and-up">Click the menu icon on the top left to select the lesson's category, then select the lesson.</p>
+                <p>When a lesson is opened, try clicking on any links to listen how to speak of that sentence.</p>
             </div>
         </div>
+        <!-- for playing a sound -->
         <audio id="audioPlayer"></audio>
     </main>
     <!-- Modal Structure -->
     <div id="modalLesson" class="modal modal-fixed-footer">
         <div class="modal-content">
-            <div id="lessonContent"></div>
+            <!-- #MyForm is for validating Quiz in Listening category -->
+            <form id="MyForm">
+                <div id="lessonContent"></div>
+            </form>
         </div>
         <div class="modal-footer">
             <a class=" modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
@@ -76,15 +82,17 @@
     <div id="modalAbout" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h5>Hello!</h5>
-            <div>This is a web app for learning English that I made for personal using and I would like to share it to everyone.</div>
-            <div>Author: Trung Ho <a href="https://leetrunghoo.com">leetrunghoo.com</a></div>
-            <div>The content was got from <a href="http://www.talkenglish.com">www.talkenglish.com</a></div>
+            <p>This is a web app for learning English that I made for personal using. I would like to share it to everyone, hope it helps.</p>
+            <p>The content was got from <a href="http://www.talkenglish.com">www.talkenglish.com</a></p>
+            <p>Author: Trung Ho (<a href="https://leetrunghoo.com">https://leetrunghoo.com</a>)</p>
+            <p>By the way, this is an open source project, feel free to contact me <a title="email" href="mailto:leetrunghoo@gmail.com?Subject=Hello%20Trung" target="_blank">leetrunghoo@gmail.com</a></p>
         </div>
         <div class="modal-footer">
             <a class=" modal-action modal-close waves-effect waves-teal btn-flat">Close</a>
         </div>
     </div>
     <!-- templates -->
+    <!-- template for sidebar -->
     <script id="sideBarTpl" type="text/x-handlebars-template">
         {{#each categories}}
         <li class="no-padding category-item">
@@ -94,7 +102,10 @@
                     <div class="collapsible-body">
                         <ul>
                             {{#each sections}}
+                            {{#if hidden}}
+                            {{^}}
                             <li class="section-item waves-effect waves-blue"><a>{{title}}</a></li>
+                            {{/if}}
                             {{/each}}
                         </ul>
                     </div>
@@ -103,6 +114,7 @@
         </li>
         {{/each}}
     </script>
+    <!-- template for section -->
     <script id="sectionTpl" type="text/x-handlebars-template">
         <div class="row">
             <div class="col s12">
@@ -112,11 +124,11 @@
         </div>
         <div class="masonry-container">
             <div class="masonry">
-                // <div class="grid-sizer"></div>
+                <!-- <div class="grid-sizer"></div> -->
                 {{#each lessons}}
                 <div class="grid-item">
                     <div class="lesson-item card-panel modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson="{{lessonIndex}}">
-                    {{title}}</div>
+                        {{title}}</div>
                 </div>
                 {{/each}}
             </div>
