@@ -1,6 +1,6 @@
 {
   "name": "Learn English",
-  "short_name": "learnEnglish",
+  "short_name": "Learn English",
   "icons": [{
         "src": "img/touch/icon-128x128.png",
         "sizes": "128x128",
@@ -20,6 +20,6 @@
       }],
   "start_url": "/index.html",
   "display": "standalone",
-  "background_color": "#3E4EB8",
+  "background_color": "#0277bd",
   "theme_color": "#0277bd"
 }
