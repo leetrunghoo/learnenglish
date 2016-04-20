@@ -78,7 +78,7 @@
       background-color: rgba(76, 175, 80, 0.70);
     }
     &.waves-blue .waves-ripple {
-      background-color: color("light-blue", "lighten-3");
+      background-color: rgba(color("light-blue", "lighten-3"), 0.7);
     }
     &.waves-teal .waves-ripple {
       background-color: rgba(0, 150, 136, 0.70);
