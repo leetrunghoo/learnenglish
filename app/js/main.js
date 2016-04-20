@@ -54,7 +54,7 @@ function loadFont(fontName) {
                 // use outer width of grid-sizer for columnWidth
                 itemSelector: '.grid-item',
                 // do not use .grid-sizer in layout
-                columnWidth: '.grid-sizer',
+                columnWidth: '.grid-item',
                 percentPosition: true
             });
         });
@@ -62,11 +62,12 @@ function loadFont(fontName) {
     });
 
     $(document).on('click', '.lesson-item', function() {
+        $('#modalLesson').openModal();
+        $('#modalLesson .modal-content').scrollTop(0);
         var lessonIndex = $(this).data('lesson');
         $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
             $('#lessonTitle').text(lesson.title);
             $('#lessonContent').html(lesson.html);
-            $('#modalLesson').openModal();
         });
     });
     $(document).on('click', 'a', function(e) {

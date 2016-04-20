@@ -38,7 +38,7 @@ nav {
     width: 280px;
     .collapsible-header {
         &.active {
-            background-color: #e0e0e0;
+            background-color: color("grey", "lighten-2");
         }
         @media #{$medium-and-down} {
             height: 56px;
@@ -53,7 +53,7 @@ nav {
     .collapsible-body li.section-item {
         display: block;
         &.selected {
-            background-color: #eee;
+            background-color: color("light-blue", "lighten-5");
             color: $sidenav-font-color;
         }
         a {
