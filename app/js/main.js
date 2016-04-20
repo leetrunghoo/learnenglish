@@ -54,6 +54,8 @@
         var lessonIndex = $(this).data('lesson');
         $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
             $('#lessonTitle').text(lesson.title);
+            // remove ad
+            lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
             $('#lessonContent').html(lesson.html);
             $('#lessonContent table').addClass('striped');
         });
