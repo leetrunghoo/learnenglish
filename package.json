@@ -1,13 +1,13 @@
 {
-  "name": "crawler",
-  "version": "0.0.1",
-  "description": "Simple crawler runs on nodejs",
-  "homepage": "https://crawler.leetrunghoo.com",
+  "name": "Learn English",
+  "version": "0.1",
+  "description": "A web app for learning English and the content was scraped by a simple crawler runs on nodejs",
+  "homepage": "https://leetrunghoo.com",
   "author": "Trung Ho",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/leetrunghoo/crawler"
+    "url": "https://github.com/leetrunghoo/learnenglish"
   },
   "devDependencies": {
     "request": "latest",
