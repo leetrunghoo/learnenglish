@@ -95,6 +95,10 @@ h3 {
             color: color("red", "darken-4");
         }
     }
+    .lesson-index {
+        margin-right: 0 !important;
+        max-width: inherit !important;
+    }
 }
 
 #audioPlayback {
