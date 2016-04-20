@@ -56,11 +56,10 @@
     <main id="mainContent">
         <div class="row">
             <div class="col s12">
-                <h5>Let's learn English!</h5>
-                <br/>
+                <h1>Let's learn English!</h1>
                 <p>Instruction:</p>
-                <p class="hide-on-med-and-down">On the left is the lesson's category.</p>
-                <p class="hide-on-large-and-up">Click the menu icon on the top left to select the lesson's category, then select the lesson.</p>
+                <p class="hide-on-med-and-down">Sidebar on the left is the lesson's category.</p>
+                <p class="hide-on-large-only">Click the menu icon on the top left to view the lesson's category.</p>
                 <p>When a lesson is opened, try clicking on any links to listen how to speak of that sentence.</p>
             </div>
         </div>
@@ -118,8 +117,8 @@
     <script id="sectionTpl" type="text/x-handlebars-template">
         <div class="row">
             <div class="col s12">
-                <h5>{{title}}</h5>
-                <span>{{description}}</span>
+                <h1>{{title}}</h1>
+                <div id="sectionDesc">{{description}}</div>
             </div>
         </div>
         <div class="masonry-container">
