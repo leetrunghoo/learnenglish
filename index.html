@@ -94,7 +94,7 @@
                     <div class="collapsible-body">
                         <ul>
                             {{#each sections}}
-                            <li class="section-item waves-effect"><a>{{title}}</a></li>
+                            <li class="section-item waves-effect waves-blue"><a>{{title}}</a></li>
                             {{/each}}
                         </ul>
                     </div>
@@ -112,10 +112,10 @@
         </div>
         <div class="masonry-container">
             <div class="masonry">
-                <div class="grid-sizer"></div>
+                // <div class="grid-sizer"></div>
                 {{#each lessons}}
                 <div class="grid-item">
-                    <div class="lesson-item card-panel modal-trigger waves-effect waves-teal" data-target="modalLesson" data-lesson="{{lessonIndex}}">
+                    <div class="lesson-item card-panel modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson="{{lessonIndex}}">
                     {{title}}</div>
                 </div>
                 {{/each}}
