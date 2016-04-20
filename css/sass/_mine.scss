@@ -11,6 +11,10 @@ footer {
     }
 }
 
+body {
+    background-color: color("grey", "lighten-4");
+}
+
 a {
     color: color("light-blue", "darken-3");
 }
