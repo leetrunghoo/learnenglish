@@ -56,7 +56,7 @@ h3 {
         &.active {
             background-color: color("grey", "lighten-2");
         }
-        @media #{$medium-and-down} {
+        @media #{$small-and-down} {
             height: 56px;
             line-height: 56px;
         }

@@ -25,7 +25,7 @@ function scraperLogic_listLessons(html) {
     var $ = cheerio.load(html);
 
     var result = {
-        description: 'List of lessons of talkenglish.com, it was scraped from http://www.talkenglish.com/lessonindex.aspx for personal using',
+        description: 'List of lessons of talkenglish.com, it was scraped from http://www.talkenglish.com/lessonindex.aspx for personal use',
         categories: []
     };
     var arrLessons = []; // arrLessons will be used to scrape lessons' content later
