@@ -28,7 +28,10 @@
 
             var sectionIndex = $(this).index();
             var cateIndex = $(this).parents('.category-item').index();
-            $('#mainContent').html(sectionTpl(data.categories[cateIndex].sections[sectionIndex]));
+            var sectionData = data.categories[cateIndex].sections[sectionIndex];
+            $('#mainContent').html(sectionTpl(sectionData));
+            $('#sectionDesc').html(sectionData.description);
+            $('body,html').scrollTop(0);
             $('.masonry').masonry({
                 // use outer width of grid-sizer for columnWidth
                 itemSelector: '.grid-item',
