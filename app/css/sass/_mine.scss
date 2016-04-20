@@ -124,6 +124,8 @@ h3 {
     max-height: 80%;
     @media #{$medium-and-down} {
         width: 90%;
+        height: 85%;
+        max-height: 85%;
     }
 }
 
