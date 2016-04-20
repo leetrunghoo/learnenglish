@@ -1,10 +1,10 @@
 {
-  "version": "1.0.0",
+  "version": "0.1",
   "name": "Learn English",
   "launch_path": "/index.html",
   "description": "This is a web app for learning English that I made for personal using and I would like to share it to everyone.",
   "icons": {
-    "128": "/images/touch/icon-128x128.png"
+    "128": "/img/touch/icon-128x128.png"
   },
   "developer": {
     "name": "Trung Ho",

@@ -14,43 +14,47 @@
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="Learn English">
-    <link rel="icon" sizes="192x192" href="images/touch/chrome-touch-icon-192x192.png">
+    <link rel="icon" sizes="192x192" href="img/touch/chrome-touch-icon-192x192.png">
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="Web Starter Kit">
-    <link rel="apple-touch-icon" href="images/touch/apple-touch-icon.png">
+    <link rel="apple-touch-icon" href="img/touch/apple-touch-icon.png">
     <!-- Tile icon for Win8 (144x144 + tile color) -->
-    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileImage" content="img/touch/ms-touch-icon-144x144-precomposed.png">
     <meta name="msapplication-TileColor" content="#0277bd">
     <!-- Color the status bar on mobile devices -->
     <meta name="theme-color" content="#0277bd">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- css -->
-    <link type="text/css" rel="stylesheet" href="styles/main.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
 </head>
 
 <body class="grey lighten-4">
     <!-- Add your site or app content here -->
-    <header>
-        <nav class=" light-blue darken-3">
-            <ul class="left">
-                <li>
-                    <a data-activates="slideNav" class="button-collapse">
-                        <i class="small material-icons">menu</i>
-                    </a>
-                </li>
-            </ul>
-            <a class="brand-logo">Learn English</a>
-            <ul class="right">
-                <li><a href="#modalAbout" class="modal-trigger"><i class="material-icons">info_outline</i></a></li>
-            </ul>
-            <ul id="slideNav" class="side-nav fixed">
-                <!-- categories -->
-            </ul>
+    <header class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <ul class="left">
+                    <li>
+                        <a data-activates="slideNav" class="button-collapse">
+                            <i class="small material-icons">menu</i>
+                        </a>
+                    </li>
+                </ul>
+                <a class="brand-logo">Learn English</a>
+                <ul class="right">
+                    <li><a href="#modalAbout" class="modal-trigger"><i class="material-icons">info_outline</i></a></li>
+                </ul>
+            </div>
         </nav>
     </header>
+    
+    <ul id="slideNav" class="side-nav fixed">
+        <!-- categories & sections -->
+    </ul>
+
     <main id="mainContent">
         <div class="row">
             <div class="col s12">
@@ -62,6 +66,7 @@
         </div>
         <audio id="audioPlayer"></audio>
     </main>
+
     <!-- Modal Structure -->
     <div id="modalLesson" class="modal modal-fixed-footer">
         <div class="modal-content">
@@ -119,8 +124,8 @@
     <!-- js -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="scripts/lib/materialize.min.js"></script>
-    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="js/lib/materialize.min.js"></script>
+    <script type="text/javascript" src="js/main.js"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
     (function(i, s, o, g, r, a, m) {
