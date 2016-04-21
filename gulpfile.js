@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 
 
 /**
- * Wait for jekyll-build, then launch the Server
+ * Launch the Server
  */
 gulp.task('browser-sync', function() {
     browserSync.init({
@@ -83,10 +83,5 @@ gulp.task('scripts', function() {
 gulp.task('default', ['styles', 'scripts', 'browser-sync'], function() {
     gulp.watch('app/js/*.js', ['scripts']); 
     gulp.watch('app/css/**/*.scss', ['styles']);
-    gulp.watch(['app/*.html',
-        'app/img/**',
-        '_layouts/**',
-        '_includes/**'
-    ], ['jekyll-build']);
-    gulp.watch(['app/data/**/*.json, app/*.html, app/css/main.min.css, app/js/min/*.js']).on('change', browserSync.reload);
+    gulp.watch(['app/data/**/*.json', 'app/*.html', 'app/css/main.css', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
 });
