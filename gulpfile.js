@@ -18,7 +18,7 @@ gulp.task('browser-sync', function() {
         },
         online: true, // Will not attempt to determine your network status, assumes you're ONLINE.
         port: 8080,
-        startPath: "/index.html",
+        startPath: "/",
         ghostMode: false, // Clicks, Scrolls & Form inputs on any device will be mirrored to all others.
         notify: {
             styles: {
