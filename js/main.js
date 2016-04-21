@@ -1,7 +1,6 @@
-
 // run 'gulp scripts' to set lessonsData 
 var lessonsDataJson;
- 
+
 (function() {
     'use strict';
 
@@ -17,7 +16,39 @@ var lessonsDataJson;
         $('.playingAudio').removeClass('playingAudio');
     };
 
-    $('.modal-trigger').leanModal();
+    // http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+    // Opera 8.0+
+    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
+    // Firefox 1.0+
+    var isFirefox = typeof InstallTrigger !== 'undefined';
+    // At least Safari 3+: "[object HTMLElementConstructor]"
+    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
+    // Internet Explorer 6-11
+    var isIE = /*@cc_on!@*/ false || !!document.documentMode;
+    // Edge 20+
+    var isEdge = !isIE && !!window.StyleMedia;
+    // Chrome 1+
+    var isChrome = !!window.chrome && !!window.chrome.webstore;
+    // Blink engine detection
+    var isBlink = (isChrome || isOpera) && !!window.CSS;
+    window.browser = {
+        isOpera: isOpera,
+        isFirefox: isFirefox,
+        isSafari: isSafari,
+        isIE: isIE,
+        isEdge: isEdge,
+        isChrome: isChrome,
+        isBlink: isBlink,
+    }
+
+    var modalAnimation_duration = 0;
+    if (browser.isOpera || browser.isFirefox || browser.isSafari || browser.isEdge || browser.isChrome || browser.isBlink) {
+        modalAnimation_duration = 200;
+    }
+    $('.modal-trigger').leanModal({
+        in_duration: modalAnimation_duration,
+        out_duration: modalAnimation_duration
+    });
 
     $('#slideNav').html(sideBarTpl(lessonsDataJson));
 
@@ -49,6 +80,8 @@ var lessonsDataJson;
 
     $(document).on('click', '.lesson-item', function() {
         $('#modalLesson').openModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration,
             complete: function() { // Callback for Modal close
                 audioPlayer.pause();
             }
@@ -61,7 +94,11 @@ var lessonsDataJson;
             // remove ad
             lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
             $('#lessonContent').html(lesson.html);
-            $('#lessonContent table').addClass('striped');
+            $('#lessonContent table').each(function(i, ele) {
+                if ($(this).attr('border') === '1') {
+                    $(this).addClass('borderTable');
+                }
+            })
         });
     });
     $(document).on('click', 'a', function(e) {
