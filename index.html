@@ -33,8 +33,6 @@
     <meta property="og:image" content="https://learnenglish.leetrunghoo.com/img/touch/icon-128x128.png">
     <meta property="og:description" content="This is a web app for learning English that I made for personal use. I would like to share it to everyone, hope it helps.">
     <link rel="shortcut icon" href="https://learnenglish.leetrunghoo.com/img/touch/icon-128x128.png">
-    <!--Import Google Icon Font-->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- css -->
     <link type="text/css" rel="stylesheet" href="css/main.css" media="screen,projection" />
 </head>
@@ -47,13 +45,13 @@
                 <ul class="left">
                     <li>
                         <a data-activates="slideNav" class="button-collapse">
-                            <i class="small material-icons">menu</i>
+                            <i class="icon-menu"></i>
                         </a>
                     </li>
                 </ul>
                 <a class="brand-logo">Learn English</a>
                 <ul class="right">
-                    <li><a href="#modalAbout" class="modal-trigger"><i class="material-icons">info_outline</i></a></li>
+                    <li><a href="#modalAbout" class="modal-trigger"><span class="icon-info"></span></a></li>
                 </ul>
             </div>
         </nav>
@@ -105,7 +103,7 @@
         <li class="no-padding category-item">
             <ul class="collapsible collapsible-accordion">
                 <li>
-                    <a class="collapsible-header waves-effect">{{title}}<i class="material-icons">arrow_drop_down</i></a>
+                    <a class="collapsible-header waves-effect"><span class="icon-dropdown"></span><span>{{title}}</span></a>
                     <div class="collapsible-body">
                         <ul>
                             {{#each sections}} {{#if hidden}} {{^}}
