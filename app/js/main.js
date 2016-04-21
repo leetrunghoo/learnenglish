@@ -1,3 +1,7 @@
+
+// run 'gulp scripts' to set lessonsData 
+var lessonsDataJson;
+ 
 (function() {
     'use strict';
 
@@ -15,35 +19,33 @@
 
     $('.modal-trigger').leanModal();
 
-    $.getJSON('data/listLessons.json', function(data) {
-        $('#slideNav').html(sideBarTpl(data));
+    $('#slideNav').html(sideBarTpl(lessonsDataJson));
 
-        // Initialize collapse button
-        $(".button-collapse").sideNav();
-        // Initialize collapsible (uncomment the line below if you use the dropdown variation)
-        $('.collapsible').collapsible();
+    // Initialize collapse button
+    $(".button-collapse").sideNav();
+    // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+    $('.collapsible').collapsible();
 
-        $('li.section-item').click(function() {
-            $('.section-item').removeClass('selected');
-            $(this).addClass('selected');
-            $('.button-collapse').sideNav('hide'); // Hide sideNav
+    $('li.section-item').click(function() {
+        $('.section-item').removeClass('selected');
+        $(this).addClass('selected');
+        $('.button-collapse').sideNav('hide'); // Hide sideNav
 
-            var sectionIndex = $(this).index();
-            var cateIndex = $(this).parents('.category-item').index();
-            var sectionData = data.categories[cateIndex].sections[sectionIndex];
-            $('#mainContent').html(sectionTpl(sectionData));
-            $('#sectionDesc').html(sectionData.description);
-            $('body,html').scrollTop(0);
-            $('.masonry').masonry({
-                // use outer width of grid-sizer for columnWidth
-                itemSelector: '.grid-item',
-                // do not use .grid-sizer in layout
-                columnWidth: '.grid-item',
-                percentPosition: true
-            });
+        var sectionIndex = $(this).index();
+        var cateIndex = $(this).parents('.category-item').index();
+        var sectionData = lessonsDataJson.categories[cateIndex].sections[sectionIndex];
+        $('#mainContent').html(sectionTpl(sectionData));
+        $('#sectionDesc').html(sectionData.description);
+        $('body,html').scrollTop(0);
+        $('.masonry').masonry({
+            // use outer width of grid-sizer for columnWidth
+            itemSelector: '.grid-item',
+            // do not use .grid-sizer in layout
+            columnWidth: '.grid-item',
+            percentPosition: true
         });
-        // $('li.section-item:nth-child(10)').click()
     });
+    // $('li.section-item:nth-child(10)').click()
 
     $(document).on('click', '.lesson-item', function() {
         $('#modalLesson').openModal({

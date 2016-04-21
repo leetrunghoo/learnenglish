@@ -19,6 +19,8 @@
     "gulp-sass": "^2.3.0",
     "gulp-ruby-sass": "^2.0.6",
     "gulp-uglify": "^1.5.3",
+    "gulp-jsonminify": "^1.0.0",
+    "gulp-replace": "latest",
     "lodash": "latest",
     "mkdirp": "latest",
     "request": "latest"
