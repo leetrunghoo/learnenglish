@@ -28,9 +28,10 @@
     <!-- Open graph -->
     <meta property="og:title" content="Learn English">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://learnenglish.leetrunghoo.com/">
-    <meta property="og:image" content="https://learnenglish.leetrunghoo.com/img/touch/icon-128x128.png">
+    <!-- <meta property="og:url" content="https://learnenglish.leetrunghoo.com/"> -->
+    <meta property="og:image" content="img/touch/icon-128x128.png">
     <meta property="og:description" content="This is a web app for learning English that I made for personal use. I would like to share it to everyone, hope it helps.">
+    <link rel="shortcut icon" href="https://learnenglish.leetrunghoo.com/img/touch/icon-128x128.png">
     <!--Import Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- css -->
@@ -137,13 +138,14 @@
         </div>
     </script>
     <!-- js -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
+    <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script async type="text/javascript" src="js/main.js"></script>
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
     <script>
+    var gaId = (location.href.indexOf('learnenglish.leetrunghoo') > -1) ? 'UA-73537086-2' : 'UA-73537086-1';
     (function(i, s, o, g, r, a, m) {
         i['GoogleAnalyticsObject'] = r;
         i[r] = i[r] || function() {
@@ -155,7 +157,8 @@
         a.src = g;
         m.parentNode.insertBefore(a, m)
     })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-73537086-1', 'auto');
+    ga('create', gaId, 'auto');
+    ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the reports
     ga('send', 'pageview');
     </script>
 </body>
