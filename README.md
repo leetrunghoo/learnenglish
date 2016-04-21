@@ -7,4 +7,4 @@ This is a web app for learning English that I made for personal use. I would lik
 
 ## License
 
-Learn English created by Trung Ho (<https://leetrunghoo.com>), and released under MIT license.
+Learn English is created by Trung Ho (<https://leetrunghoo.com>), and released under MIT license.
