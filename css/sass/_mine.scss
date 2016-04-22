@@ -94,6 +94,10 @@ h3 {
         font-size: 16px;
         cursor: pointer;
     }
+    .lesson-index {
+        margin-right: 0 !important;
+        max-width: inherit !important;
+    }
 }
 
 #lessonContent {
@@ -103,11 +107,6 @@ h3 {
             color: color("red", "darken-4");
         }
     }
-}
-
-.lesson-index {
-    margin-right: 0 !important;
-    max-width: inherit !important;
 }
 
 #audioPlayback {
