@@ -53,6 +53,10 @@ h3 {
 #slideNav {
     width: 280px;
     .collapsible-header {
+        > * {
+            display: inline-block;
+            vertical-align: middle;
+        }
         &.active {
             background-color: color("grey", "lighten-2");
         }
@@ -99,10 +103,11 @@ h3 {
             color: color("red", "darken-4");
         }
     }
-    .lesson-index {
-        margin-right: 0 !important;
-        max-width: inherit !important;
-    }
+}
+
+.lesson-index {
+    margin-right: 0 !important;
+    max-width: inherit !important;
 }
 
 #audioPlayback {
@@ -112,21 +117,50 @@ h3 {
 #modalAbout {
     height: 50%;
     max-height: 50%;
-    @media #{$small-and-down} {
-        height: 80%;
-        max-height: 80%;
-        width: 90%;
-    }
 }
 
 #modalLesson {
     height: 80%;
     max-height: 80%;
-    @media #{$medium-and-down} {
-        width: 90%;
-        height: 85%;
-        max-height: 85%;
+}
+
+@media #{$small-and-down} {
+    #modalLesson,
+    #modalAbout {
+        top: 0 !important;
+        height: 100%;
+        width: 100%;
+        max-height: 100%;
     }
+}
+
+
+/** icons **/
+
+*[class^="icon-"] {
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    position: relative;
+    width: 1em;
+    height: 1em;
+    font-size: 2em;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.icon-menu {
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'>\a <path d='M0 0h24v24H0z' fill='none'/>\a <path fill='white' d='M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z'/>\a</svg>")
+}
+
+.icon-info {
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'>\a <path d='M0 0h24v24H0z' fill='none'/>\a <path fill='white' d='M11 17h2v-6h-2v6zm1-15C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zM11 9h2V7h-2v2z'/>\a</svg>")
+}
+
+.icon-dropdown {
+    background-image: url("data:image/svg+xml;charset=UTF-8,<svg xmlns='http://www.w3.org/2000/svg' height='24' viewBox='0 0 24 24' width='24'>\a <path d='M7 10l5 5 5-5z'/>\a <path d='M0 0h24v24H0z' fill='none'/>\a</svg>");
+    font-size: 1.5em;
+    opacity: .7
 }
 
 $xlarge-and-up: "only screen and (min-width : #{$large-screen-up})" !default;
