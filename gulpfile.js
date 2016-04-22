@@ -1,16 +1,18 @@
 var gulp = require('gulp'),
     fs = require('fs'),
     browserSync = require('browser-sync').create(),
-    // sass = require('gulp-sass'),
+    // sass = require('gulp-sass'), // has error when complie scss
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-clean-css'),
     rename = require('gulp-rename'),
     uglify = require('gulp-uglify'),
     jsonminify = require('gulp-jsonminify'),
-    replace = require('gulp-replace');
+    replace = require('gulp-replace'),
+    uncss = require('gulp-uncss'),
+    htmlmin = require('gulp-htmlmin');
 
-var lessonData = JSON.parse(fs.readFileSync('app/data/listLessons.min.json'));
+var lessonData = fs.readFileSync('app/data/listLessons.min.json') ? JSON.parse(fs.readFileSync('app/data/listLessons.min.json')) : '';
 
 // run below command to deploy folder 'app' to gh-pages branch
 // git subtree push --prefix app origin gh-pages
@@ -41,29 +43,40 @@ gulp.task('browser-sync', function() {
 });
 
 /**
- * Compile files from sass
+ * Compile sass
  */
 gulp.task('styles', function() {
-    return sass('app/css/main.scss', { style: 'compressed' })
+    return sass('app/css/main.scss', { style: 'compact' })
         .on('error', sass.logError)
         .pipe(autoprefixer({ browsers: ['last 2 versions', 'Firefox ESR', 'safari 5', 'ie 9', 'opera 12.1'] }))
-        .pipe(minifycss())
         // .pipe(rename({suffix: '.min'}))
         .pipe(gulp.dest('app/css'));
 });
 
+/**
+ * Remove unused then minify css
+ */
+gulp.task('uncss', ['styles'], function() {
+    return gulp.src(['app/css/main.css'])
+        .pipe(uncss({
+            html: ['app/main.html'],
+            ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\.waves/]
+        }))
+        .pipe(minifycss())
+        .pipe(gulp.dest('app/css'));
+});
 
-// currently, not use
-// gulp.task('uncss', ['styles'], function() {
-//   return gulp.src(['app/css/main.css'])
-//         .pipe(uncss({
-//           html: [
-//             'https://learnenglish.leetrunghoo.com'
-//           ]
-//         }))
-//         .pipe(gulp.dest('app/css'));
-// });
-
+/**
+ * Compile sass, remove unused css then inline css to index.html
+ */
+gulp.task('html', ['uncss'], function() {
+    var css = fs.readFileSync('app/css/main.css');
+    return gulp.src(['app/main.html'])
+        .pipe(replace('/**inlinecss**/', css))
+        // .pipe(htmlmin({collapseWhitespace: true})) // no need to minify html
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('app'));
+});
 
 /**
  * bind data to main.js then minify it
@@ -71,9 +84,6 @@ gulp.task('styles', function() {
 gulp.task('scripts', function() {
     return gulp.src(['app/js/*.js'])
         .pipe(replace('var lessonsDataJson', 'var lessonsDataJson=' + JSON.stringify(lessonData)))
-        // .pipe(concat('scripts.js'))
-        // .pipe(gulp.dest('app/js'))
-        // .pipe(rename('scripts.min.js'))
         .pipe(uglify())
         .pipe(rename({
             suffix: '.min'
@@ -96,8 +106,9 @@ gulp.task('minifyjson', function() {
  * Watch scss files for changes & recompile
  * Watch files, reload BrowserSync
  */
-gulp.task('default', ['styles', 'scripts', 'browser-sync'], function() {
+gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch('app/js/*.js', ['scripts']);
-    gulp.watch('app/css/**/*.scss', ['styles']);
-    gulp.watch(['app/data/**/*.json', 'app/*.html', 'app/css/main.css', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
+    // css will be inline in index.html so when the css is changed -> build index.html
+    gulp.watch('app/css/**/*.scss', ['html']);
+    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
 });
