@@ -60,7 +60,7 @@ gulp.task('uncss', ['styles'], function() {
     return gulp.src(['app/css/main.css'])
         .pipe(uncss({
             html: ['app/main.html'],
-            ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\.waves/]
+            ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\#lessonContent/, /^\.waves/]
         }))
         .pipe(minifycss())
         .pipe(gulp.dest('app/css'));
