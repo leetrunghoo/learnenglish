@@ -3,7 +3,12 @@ This is a web app for learning English that I made for personal use. I would lik
 
 ## About the project:
 - Firsly I need the content for my web app so I wrote a simple crawler/scraper runs on nodejs to scrape the data from <http://www.talkenglish.com>
-- I want to keep this project simple so currently I'm just using Jquery, Materializecss, Masonry and Handlebar for building the web app.
+- I want to keep this project simple so currently I'm just using: 
+	- Jquery
+	- Materializecss (CSS framework) 
+	- Masonry (for Masonry Layout)
+	- Handlebar (html template)
+	- Gulp (automating tasks while deleloping)
 
 ## How to run
 
