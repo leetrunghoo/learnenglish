@@ -1,4 +1,4 @@
-// run 'gulp scripts' to set lessonsData 
+// run 'gulp scripts' to set lessonsData to lessonsDataJson
 var lessonsDataJson;
 
 (function() {
@@ -39,7 +39,7 @@ var lessonsDataJson;
         isEdge: isEdge,
         isChrome: isChrome,
         isBlink: isBlink,
-    }
+    };
 
     var modalAnimation_duration = 0;
     if (browser.isOpera || browser.isFirefox || browser.isSafari || browser.isEdge || browser.isChrome || browser.isBlink) {
@@ -98,7 +98,7 @@ var lessonsDataJson;
                 if ($(this).attr('border') === '1') {
                     $(this).addClass('borderTable');
                 }
-            })
+            });
         });
     });
     $(document).on('click', 'a', function(e) {
@@ -126,22 +126,27 @@ function loadFont(fontName) {
 
 // These functions for Quiz question in Listening category. The code was got from talkenglish.com
 function showHide(elementid) {
-    if (document.getElementById(elementid).style.display == 'none') { document.getElementById(elementid).style.display = ''; } else { document.getElementById(elementid).style.display = 'none'; }
+    if (document.getElementById(elementid).style.display == 'none') {
+        document.getElementById(elementid).style.display = '';
+    } else {
+        document.getElementById(elementid).style.display = 'none';
+    }
 }
 
 function CheckScore() {
+    var Ques1UserAnswer, Ques2UserAnswer, Ques3UserAnswer, Ques4UserAnswer;
     for (var i = 0; i < 4; i++) {
         if (MyForm.Question1[i].checked) {
-            var Ques1UserAnswer = MyForm.Question1[i].value;
+            Ques1UserAnswer = MyForm.Question1[i].value;
         }
         if (MyForm.Question2[i].checked) {
-            var Ques2UserAnswer = MyForm.Question2[i].value;
+            Ques2UserAnswer = MyForm.Question2[i].value;
         }
         if (MyForm.Question3[i].checked) {
-            var Ques3UserAnswer = MyForm.Question3[i].value;
+            Ques3UserAnswer = MyForm.Question3[i].value;
         }
         if (MyForm.Question4[i].checked) {
-            var Ques4UserAnswer = MyForm.Question4[i].value;
+            Ques4UserAnswer = MyForm.Question4[i].value;
         }
     }
     var Score = 0;
