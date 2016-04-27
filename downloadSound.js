@@ -2,7 +2,7 @@ var fs = require('fs'); // for writing file
 var http = require('http'); // make simple http request
 var mkdirp = require('mkdirp'); // make dir
 var getDirName = require('path').dirname; // get dir name by dest param
-var _ = require('lodash'); // for processing array 
+var _ = require('lodash'); // for processing array
 
 function download(url, dest, cb) {
     mkdirp(getDirName(dest), function(err) {
@@ -23,7 +23,7 @@ function download(url, dest, cb) {
             if (cb) cb(err.message);
         });
     });
-};
+}
 
 // read file then download
 fs.readFile('app/data/listSounds.json', 'utf8', function(err, data) {

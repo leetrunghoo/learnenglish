@@ -56,9 +56,7 @@ function scraperLogic_listLessons(html) {
                 var $sections = $('.list-page-wrapper div:first-child > div a');
                 console.log('number of sections of sub cate speaking ', $sections.length);
 
-                loopSection(0, $sections);
-
-                function loopSection(sectionIndex, $sections) {
+                var loopSection = function(sectionIndex, $sections) {
                     var $eleSection = $sections.eq(sectionIndex);
                     var link = $eleSection.attr('href');
                     var section = {
@@ -97,6 +95,8 @@ function scraperLogic_listLessons(html) {
                         }
                     });
                 };
+                
+                loopSection(0, $sections);
             });
         }
     }
@@ -113,13 +113,8 @@ function scraperLogic_listLessons(html) {
                 sections: []
             };
             var $sections = $category.children('.treeview-menu').children('li');
-            if (i === 1) { // listening category => start with second section
-                loopSection(1, $sections);
-            } else {
-                loopSection(0, $sections);
-            }
 
-            function loopSection(sectionIndex, $sections) {
+            var loopSection = function(sectionIndex, $sections) {
                 var $eleSection = $sections.eq(sectionIndex);
                 console.log('scraping Section ', $eleSection.children('a').text());
 
@@ -153,6 +148,12 @@ function scraperLogic_listLessons(html) {
                     }
                 });
             };
+
+            if (i === 1) { // listening category => start with second section
+                loopSection(1, $sections);
+            } else {
+                loopSection(0, $sections);
+            }
         } else {
             if (i < $categories.length - 1) {
                 loopCategory(++i);
@@ -168,7 +169,7 @@ function scrapingSection(cateIndex, sectionIndex, section, callback) {
         var $ = cheerio.load(html);
         var $lessons = $('.list-page-wrapper table div.list-page > div > div a');
         if ($lessons.length === 0) {
-            $lessons = $('.list-page-wrapper div:first-child > div a')
+            $lessons = $('.list-page-wrapper div:first-child > div a');
         }
         console.log('number of lessons: ', $lessons.length);
         $lessons.each(function(iii, a) {
@@ -192,7 +193,7 @@ function scrapingLessons(arrLessons) {
     var sounds = {
         description: 'List of sounds link of lessons',
         data: []
-    }
+    };
     runScraping(0);
 
     function runScraping(index) {
@@ -256,7 +257,7 @@ function saveFile(dest, data, callback) {
     mkdirp(getDirName(dest), function(err) {
         if (err) {
             console.log('>>>>>>>>> error while write file ', dest);
-            callback(err)
+            callback(err);
         }
         fs.writeFile(dest, data, function(err) {
             console.log(dest + ' is successfully written!');
