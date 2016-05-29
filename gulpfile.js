@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     replace = require('gulp-replace'),
     uncss = require('gulp-uncss'),
     htmlmin = require('gulp-htmlmin');
+    swPrecache = require('sw-precache');
 
 var lessonData = fs.readFileSync('app/data/listLessons.min.json') ? JSON.parse(fs.readFileSync('app/data/listLessons.min.json')) : '';
 
@@ -22,6 +23,7 @@ var lessonData = fs.readFileSync('app/data/listLessons.min.json') ? JSON.parse(f
  */
 gulp.task('browser-sync', function() {
     browserSync.init({
+        // https: true,
         server: {
             baseDir: 'app'
         },
@@ -73,7 +75,7 @@ gulp.task('html', ['uncss'], function() {
     var css = fs.readFileSync('app/css/main.css');
     return gulp.src(['app/main.html'])
         .pipe(replace('/**inlinecss**/', css))
-        // .pipe(htmlmin({collapseWhitespace: true})) // no need to minify html
+        .pipe(htmlmin({ collapseWhitespace: true })) // no need to minify html
         .pipe(rename('index.html'))
         .pipe(gulp.dest('app'));
 });
@@ -108,7 +110,35 @@ gulp.task('minifyjson', function() {
  */
 gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch('app/js/*.js', ['scripts']);
-    // css will be inline in index.html so when the css is changed -> build index.html
+    // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
     gulp.watch('app/css/**/*.scss', ['html']);
     gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
+});
+
+gulp.task('generate-service-worker', function() {
+    var rootDir = 'app';
+
+    swPrecache.write('app/sw.js', {
+        staticFileGlobs: [
+            rootDir + '/index.html',
+            rootDir + '/data/lessons/*.json',
+            rootDir + '/img/touch/icon-128x128.png',
+            rootDir + '/js/min/main.min.js'
+        ],
+        stripPrefix: rootDir,
+        handleFetch: true,
+        runtimeCaching: [{
+            urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\//,
+            handler: 'cacheFirst'
+        }, {
+            urlPattern: /^https:\/\/www\.google-analytics\.com\//,
+            handler: 'cacheFirst'
+        }]
+    }, function(error, serviceWorkerString) {
+        if (!error) {
+            gulp.src('app/sw.js')
+                .pipe(uglify())
+                .pipe(gulp.dest('app'));
+        }
+    });
 });
