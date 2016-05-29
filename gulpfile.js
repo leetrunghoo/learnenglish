@@ -133,6 +133,12 @@ gulp.task('generate-service-worker', function() {
         }, {
             urlPattern: /^https:\/\/www\.google-analytics\.com\//,
             handler: 'cacheFirst'
+        }, {
+            urlPattern: /^https:\/\/ajax\.cloudflare\.com\//,
+            handler: 'cacheFirst'
+        }, {
+            urlPattern: /^https:\/\/learnenglish\.leetrunghoo\.com\/cdn-cgi/,
+            handler: 'cacheFirst'
         }]
     }, function(error, serviceWorkerString) {
         if (!error) {
