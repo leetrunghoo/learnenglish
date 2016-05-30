@@ -1,17 +1,23 @@
-// run 'gulp scripts' to set lessonsData to lessonsDataJson
+// run 'gulp scripts' to set lessonsData to var 'lessonsDataJson'
 var lessonsDataJson;
 
 (function() {
     'use strict';
 
+    // Handlebars template
     var sideBarTpl_raw = $("#sideBarTpl").html();
     var sideBarTpl = Handlebars.compile(sideBarTpl_raw);
     var sectionTpl_raw = $("#sectionTpl").html();
     var sectionTpl = Handlebars.compile(sectionTpl_raw);
-
-    var audioPlayer = document.getElementById("audioPlayer");
+    // create audio wo/ src
+    var audioPlayer = new Audio();
     audioPlayer.onended = function() {
         $('.playingAudio').removeClass('playingAudio');
+    };
+    audioPlayer.onerror = function(err) {
+        // play fail => try 1 more time
+        console.log('fail playing, try again ', err);
+        audioPlayer.play();
     };
 
     // http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
@@ -99,6 +105,8 @@ var lessonsDataJson;
             });
         });
     });
+
+    // handle playing voice
     $(document).on('click', 'a', function(e) {
         if (e.target.href && e.target.href.indexOf('.mp3') > -1) {
             e.preventDefault();
