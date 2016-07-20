@@ -10,13 +10,10 @@ var gulp = require('gulp'),
     jsonminify = require('gulp-jsonminify'),
     replace = require('gulp-replace'),
     uncss = require('gulp-uncss'),
-    htmlmin = require('gulp-htmlmin');
+    htmlmin = require('gulp-htmlmin'),
     swPrecache = require('sw-precache');
 
 var lessonData = fs.readFileSync('app/data/listLessons.min.json') ? JSON.parse(fs.readFileSync('app/data/listLessons.min.json')) : '';
-
-// run below command to deploy folder 'app' to gh-pages branch
-// git subtree push --prefix app origin gh-pages
 
 /**
  * Launch the Server
@@ -115,6 +112,9 @@ gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
 });
 
+/**
+ * generate service worker (sw.js) and minify it
+ */
 gulp.task('generate-service-worker', function() {
     var rootDir = 'app';
 
@@ -138,7 +138,7 @@ gulp.task('generate-service-worker', function() {
             handler: 'cacheFirst'
         }, {
             urlPattern: /^https:\/\/learnenglish\.leetrunghoo\.com\/cdn-cgi/,
-            handler: 'fastest'
+            handler: 'networkFirst'
         }]
     }, function(error, serviceWorkerString) {
         if (!error) {
@@ -148,3 +148,7 @@ gulp.task('generate-service-worker', function() {
         }
     });
 });
+
+
+// run below command to deploy folder 'app' to gh-pages branch
+// git subtree push --prefix app origin gh-pages
