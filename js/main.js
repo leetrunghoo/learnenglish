@@ -15,39 +15,14 @@ var lessonsDataJson;
         $('.playingAudio').removeClass('playingAudio');
     };
     audioPlayer.onerror = function(err) {
-        // play fail => try 1 more time
+        // play fail => try again
         console.log('fail playing, try again ', err);
         audioPlayer.play();
     };
 
-    // http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
-    // Opera 8.0+
-    var isOpera = (!!window.opr && !!opr.addons) || !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0;
-    // Firefox 1.0+
-    var isFirefox = typeof InstallTrigger !== 'undefined';
-    // At least Safari 3+: "[object HTMLElementConstructor]"
-    var isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0;
-    // Internet Explorer 6-11
-    var isIE = /*@cc_on!@*/ false || !!document.documentMode;
-    // Edge 20+
-    var isEdge = !isIE && !!window.StyleMedia;
-    // Chrome 1+
-    var isChrome = !!window.chrome && !!window.chrome.webstore;
-    // Blink engine detection
-    var isBlink = (isChrome || isOpera) && !!window.CSS;
-    window.browser = {
-        isOpera: isOpera,
-        isFirefox: isFirefox,
-        isSafari: isSafari,
-        isIE: isIE,
-        isEdge: isEdge,
-        isChrome: isChrome,
-        isBlink: isBlink,
-    };
-
-    var modalAnimation_duration = 0;
-    if (browser.isOpera || browser.isFirefox || browser.isSafari || browser.isEdge || browser.isChrome || browser.isBlink) {
-        modalAnimation_duration = 200;
+    var modalAnimation_duration = 200;
+    if (window.innerWidth <= 768) {     // no animation on mobile
+        modalAnimation_duration = 0;
     }
     $('.modal-trigger').leanModal({
         in_duration: modalAnimation_duration,
@@ -81,7 +56,7 @@ var lessonsDataJson;
             percentPosition: true
         });
     });
-    // $('li.section-item:nth-child(10)').click()
+    // $('li.section-item:nth-child(10)').click() // for testing UI
 
     $(document).on('click', '.lesson-item', function() {
         $('#modalLesson').openModal({

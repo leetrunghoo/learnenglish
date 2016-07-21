@@ -67,29 +67,13 @@
     </header>
     <ul id="slideNav" class="side-nav fixed">
         <!-- categories & sections -->
-        <!-- bind dumb html for uncss -->
-        <li class="no-padding category-item" style="display: none">
-            <ul class="collapsible collapsible-accordion">
-                <li>
-                    <a class="collapsible-header waves-effect"><span class="icon-dropdown"></span><span></span></a>
-                    <div class="collapsible-body">
-                        <ul>
-                            <li class="section-item waves-effect waves-blue">
-                                <a></a>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-            </ul>
-        </li>
+        <!--html_sidebar_category-->
     </ul>
     <main id="mainContent">
         <div class="row">
             <div class="col s12">
-                <p class="center-align">
-                    <img src="img/icon/android-chrome-192x192.png" width="96" alt="logo" data-activates="slideNav" class="button-collapse hide-on-large-only" />
-                    <img src="img/icon/android-chrome-192x192.png" width="96" alt="logo" class="hide-on-med-and-down" />
-                </p>
+                <div class="logo-img valign button-collapse hide-on-large-only" data-activates="slideNav"></div>
+                <div class="logo-img valign hide-on-med-and-down"></div>
                 <h2 class="center-align">Let's learn English!</h2>
                 <p>Instruction:</p>
                 <p class="hide-on-med-and-down">Sidebar on the left is the lesson's category.</p>
@@ -146,7 +130,7 @@
                     <a class="collapsible-header waves-effect"><span class="icon-dropdown"></span><span>{{title}}</span></a>
                     <div class="collapsible-body">
                         <ul>
-                            {{#each sections}} {{#if hidden}} {{^}}
+                            {{#each sections}} {{#if hidden}} {{else}}
                             <li class="section-item waves-effect waves-blue"><a>{{title}}</a></li>
                             {{/if}} {{/each}}
                         </ul>
@@ -199,12 +183,6 @@
     ga('create', gaId, 'auto');
     ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the reports
     ga('send', 'pageview');
-
-    // if ('serviceWorker' in navigator) {
-    //     navigator.serviceWorker.register('sw.js').then(function() {
-    //         console.log("Service Worker Registered");
-    //     });
-    // }
 
     /* 
      *   Servive Worker
