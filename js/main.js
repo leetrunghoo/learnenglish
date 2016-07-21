@@ -54,11 +54,12 @@ var lessonsDataJson;
         out_duration: modalAnimation_duration
     });
 
+    // load data to side bar
     $('#slideNav').html(sideBarTpl(lessonsDataJson));
 
     // Initialize collapse button
     $(".button-collapse").sideNav();
-    // Initialize collapsible (uncomment the line below if you use the dropdown variation)
+    // Initialize collapsible (lessons' category)
     $('.collapsible').collapsible();
 
     $('li.section-item').click(function() {
