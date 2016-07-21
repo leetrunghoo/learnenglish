@@ -53,12 +53,38 @@ gulp.task('styles', function() {
 });
 
 /**
+ * build index.html
+ */
+gulp.task('indexHtml', function() {
+    var cateHtml = '';
+    for (var i = 0; i < lessonData.categories.length; i++) {
+        var cate = lessonData.categories[i];
+        cateHtml += 
+            '<li class="no-padding category-item">'+
+                '<ul class="collapsible collapsible-accordion">'+
+                    '<li>'+
+                        '<a class="collapsible-header waves-effect"><span class="icon-dropdown"></span><span>'+cate.title+'</span></a>'+
+                        '<div class="collapsible-body"><ul>'+
+                            '<li class="section-item waves-effect waves-blue"><a></a></li>'+
+                        '</ul></div>'+
+                    '</li>'+
+                '</ul>'+
+            '</li>'
+    }
+    return gulp.src(['app/main.html'])
+        .pipe(replace('<!--html_sidebar_category-->', cateHtml))
+        // .pipe(htmlmin({ collapseWhitespace: true })) // no need to minify html
+        .pipe(rename('index.html'))
+        .pipe(gulp.dest('app'));
+});
+
+/**
  * Remove unused then minify css
  */
-gulp.task('uncss', ['styles'], function() {
+gulp.task('uncss', ['styles', 'indexHtml'], function() {
     return gulp.src(['app/css/main.css'])
         .pipe(uncss({
-            html: ['app/main.html'],
+            html: ['app/index.html'],
             ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\#slideNav/, /^\#mainContent/, /^\#lessonContent/, /^\.waves/]
         }))
         .pipe(minifycss())
@@ -70,10 +96,8 @@ gulp.task('uncss', ['styles'], function() {
  */
 gulp.task('html', ['uncss'], function() {
     var css = fs.readFileSync('app/css/main.css');
-    return gulp.src(['app/main.html'])
+    return gulp.src(['app/index.html'])
         .pipe(replace('/**inlinecss**/', css))
-        .pipe(htmlmin({ collapseWhitespace: true })) // no need to minify html
-        .pipe(rename('index.html'))
         .pipe(gulp.dest('app'));
 });
 
@@ -122,7 +146,6 @@ gulp.task('generate-service-worker', function() {
         staticFileGlobs: [
             rootDir + '/index.html',
             rootDir + '/data/lessons/*.json',
-            rootDir + '/img/icon/android-chrome-192x192.png',
             rootDir + '/js/min/main.min.js'
         ],
         stripPrefix: rootDir,
