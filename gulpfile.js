@@ -122,7 +122,7 @@ gulp.task('generate-service-worker', function() {
         staticFileGlobs: [
             rootDir + '/index.html',
             rootDir + '/data/lessons/*.json',
-            rootDir + '/img/touch/icon-128x128.png',
+            rootDir + '/img/icon/android-chrome-192x192.png',
             rootDir + '/js/min/main.min.js'
         ],
         stripPrefix: rootDir,
