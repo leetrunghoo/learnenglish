@@ -108,7 +108,7 @@ gulp.task('minifyjson', function() {
 gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch('app/js/*.js', ['scripts']);
     // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
-    gulp.watch('app/css/**/*.scss', ['html']);
+    gulp.watch(['app/css/**/*.scss', 'app/main.html',], ['html']);
     gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
 });
 
