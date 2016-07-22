@@ -10,23 +10,23 @@ var lessonsDataJson;
     var sectionTpl_raw = $("#sectionTpl").html();
     var sectionTpl = Handlebars.compile(sectionTpl_raw);
     // Get the voice select element.
-    var chkUseRobot = document.getElementById("chkUseRobot");
+    var chkUseVirtual = document.getElementById("chkUseVirtual");
     var inputGroupSpeed = document.getElementById('groupSpeed');
     var selectVoice = document.getElementById('voice');
 
     // get/set default setting
-    var useRobotVoice = localStorage.getItem('useRobotVoice');
-    if (useRobotVoice === 'true') {
-        chkUseRobot.checked = true;
+    var useVirtualVoice = localStorage.getItem('useVirtualVoice');
+    if (useVirtualVoice === 'true') {
+        chkUseVirtual.checked = true;
         selectVoice.disabled = false;
         $('input[type = radio][name = groupSpeed]').attr('disabled', false);
     } else {
-        chkUseRobot.checked = false;
-        localStorage.setItem('useRobotVoice', false);
+        chkUseVirtual.checked = false;
+        localStorage.setItem('useVirtualVoice', false);
     }
-    $('#chkUseRobot').change(function() {
-        localStorage.setItem('useRobotVoice', chkUseRobot.checked);
-        if (!chkUseRobot.checked) {
+    $('#chkUseVirtual').change(function() {
+        localStorage.setItem('useVirtualVoice', chkUseVirtual.checked);
+        if (!chkUseVirtual.checked) {
             selectVoice.disabled = true;
             $('input[type = radio][name = groupSpeed]').attr('disabled', true);
         } else {
@@ -46,18 +46,6 @@ var lessonsDataJson;
     $(selectVoice).change(function() {
         localStorage.setItem('voiceValue', selectVoice.value);
     });
-
-    // create audio wo/ src
-    var audioPlayer = new Audio();
-    var text2Speak = '';
-    audioPlayer.onended = function() {
-        $('.playingAudio').removeClass('playingAudio');
-    };
-    audioPlayer.onerror = function(err) {
-        // play fail => try again
-        console.log('fail playing, try using Robot voice ', err);
-        speak(text2Speak);
-    };
 
     var modalAnimation_duration = 200;
     if (window.innerWidth <= 768) { // no animation on mobile
@@ -121,6 +109,21 @@ var lessonsDataJson;
         });
     });
 
+    // create audio wo/ src
+    var audioPlayer = new Audio();
+    var playingStatus = false;
+    var text2Speak = '';
+    audioPlayer.onloadeddata = function() {
+        playingStatus = true;
+    };
+    audioPlayer.onended = function() {
+        $('.playingAudio').removeClass('playingAudio');
+    };
+    audioPlayer.onerror = function(err) {
+        // play fail => try again
+        console.log('fail playing, try using Virtual voice ', err);
+    };
+
     // handle playing voice
     $(document).on('click', 'a', function(e) {
         if (e.target.href && e.target.href.indexOf('.mp3') > -1) {
@@ -129,12 +132,25 @@ var lessonsDataJson;
             $(this).addClass('playingAudio');
             stopSpeaking();
             text2Speak = $(this).text();
-            if (chkUseRobot.checked) {
+            if (chkUseVirtual.checked) {
                 // use Web Speech Api to speak
                 speak(text2Speak);
             } else {
                 audioPlayer.src = e.target.href;
                 audioPlayer.play();
+                playingStatus = false;
+                setTimeout(function() {
+                    if (!playingStatus && !chkUseVirtual.checked) {
+                        console.info('Could not get the audio file, should use Virtual Voice instead');
+                        var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Virtual Voice</div>');
+                        $toastContent.click(function() {
+                            speak(text2Speak);
+                            $('#chkUseVirtual').click();
+                        });
+                        Materialize.toast($toastContent, 5000);
+                    }
+                }, 5000);
+
             }
         }
     });

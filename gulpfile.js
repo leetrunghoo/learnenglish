@@ -85,7 +85,7 @@ gulp.task('uncss', ['styles', 'indexHtml'], function() {
     return gulp.src(['app/css/main.css'])
         .pipe(uncss({
             html: ['app/index.html'],
-            ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\#slideNav/, /^\#mainContent/, /^\#lessonContent/, /^\.waves/]
+            ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\#slideNav/, /^\#mainContent/, /^\#lessonContent/, /^\#toast-container/, /^\.toast/, /^\.waves/]
         }))
         .pipe(minifycss())
         .pipe(gulp.dest('app/css'));
