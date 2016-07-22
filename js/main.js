@@ -9,19 +9,56 @@ var lessonsDataJson;
     var sideBarTpl = Handlebars.compile(sideBarTpl_raw);
     var sectionTpl_raw = $("#sectionTpl").html();
     var sectionTpl = Handlebars.compile(sectionTpl_raw);
+    // Get the voice select element.
+    var selectVoice = document.getElementById('voice');
+    var inputVoiceRate = document.getElementById('voiceRate');
+    var chkUseRobot = document.getElementById("chkUseRobot");
+    // get/set default setting
+    var useRobotVoice = localStorage.getItem('useRobotVoice');
+    if (useRobotVoice === 'true') {
+        chkUseRobot.checked = true;
+    } else {
+        chkUseRobot.checked = false;
+    }
+    $('#chkUseRobot').change(function() {
+        localStorage.setItem('useRobotVoice', chkUseRobot.checked);
+        if (!chkUseRobot.checked) {
+            selectVoice.disabled = true;
+            inputVoiceRate.disabled = true;
+        } else {
+            selectVoice.disabled = false;
+            inputVoiceRate.disabled = false;
+        }
+    });
+
+    var voiceRateValue = localStorage.getItem('voiceRateValue') || 0.9;
+    inputVoiceRate.value = voiceRateValue;
+    $(inputVoiceRate).change(function() {
+        localStorage.setItem('voiceRateValue', inputVoiceRate.value);
+    });
+
+    $(selectVoice).change(function() {
+        localStorage.setItem('voiceValue', selectVoice.value);
+    });
+
+    var voiceValue = localStorage.getItem('voiceValue') || '';
+    $(selectVoice).change(function() {
+        localStorage.setItem('voiceValue', selectVoice.value);
+    });
     // create audio wo/ src
     var audioPlayer = new Audio();
+    var text2Speak = '';
     audioPlayer.onended = function() {
         $('.playingAudio').removeClass('playingAudio');
     };
     audioPlayer.onerror = function(err) {
         // play fail => try again
-        console.log('fail playing, try again ', err);
-        audioPlayer.play();
+        console.log('fail playing, try using Robot voice ', err);
+        speak(text2Speak);
     };
 
     var modalAnimation_duration = 200;
-    if (window.innerWidth <= 768) {     // no animation on mobile
+    if (window.innerWidth <= 768) { // no animation on mobile
         modalAnimation_duration = 0;
     }
     $('.modal-trigger').leanModal({
@@ -36,7 +73,7 @@ var lessonsDataJson;
     $(".button-collapse").sideNav();
     // Initialize collapsible (lessons' category)
     $('.collapsible').collapsible();
-
+    // click Section on sidebar to open list of lessons
     $('li.section-item').click(function() {
         $('.section-item').removeClass('selected');
         $(this).addClass('selected');
@@ -63,7 +100,7 @@ var lessonsDataJson;
             in_duration: modalAnimation_duration,
             out_duration: modalAnimation_duration,
             complete: function() { // Callback for Modal close
-                audioPlayer.pause();
+                stopSpeaking();
             }
         });
         $('#lessonContent').empty();
@@ -88,23 +125,107 @@ var lessonsDataJson;
             e.preventDefault();
             $('.playingAudio').removeClass('playingAudio');
             $(this).addClass('playingAudio');
-            audioPlayer.src = e.target.href;
-            audioPlayer.play();
+            stopSpeaking();
+            text2Speak = $(this).text();
+            if (chkUseRobot.checked) {
+                // use Web Speech Api to speak
+                speak(text2Speak);
+            } else {
+                audioPlayer.src = e.target.href;
+                audioPlayer.play();
+            }
         }
     });
 
+    function stopSpeaking() {
+        window.speechSynthesis.cancel();
+        audioPlayer.pause();
+    }
+
+
+    // Test whether browser supports Web Speech API
+    window.SpeechRecognition = window.SpeechRecognition ||
+        window.webkitSpeechRecognition ||
+        null;
+    if (window.SpeechRecognition === null) {
+        console.info("This browser doesn't support Web speech API");
+    } else {
+        window.recognizer = new window.SpeechRecognition();
+    }
+    // use Web Speeck Api to speak
+    function speak(text) {
+        // Create a new instance of SpeechSynthesisUtterance.
+        var msg = new SpeechSynthesisUtterance();
+        // Set the text.
+        msg.text = text;
+        // Set the attributes.
+        console.log(inputVoiceRate.value);
+        msg.rate = parseFloat(inputVoiceRate.value);
+        // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
+        if (selectVoice.value) {
+            msg.voice = speechSynthesis.getVoices().filter(function(voice) {
+                return voice.name == selectVoice.value;
+            })[0];
+        }
+        window.speechSynthesis.speak(msg);
+    }
+
+    // use Web Speeck Api to recognize voice
+    function listen(callback) {
+        if (window.SpeechRecognition) {
+            window.recognizer.onresult = function(event) {
+                if (event.results.length > 0) {
+                    console.log('recognize:', event.results);
+                    var text = event.results[0][0].transcript;
+                    if (callback) {
+                        console.log("---------------text recognized: " + text);
+                        callback(text);
+                    }
+                }
+            };
+            window.recognizer.start();
+        } else {
+            console.warn("This browser doesn't support Web Speech API");
+        }
+    }
+
+    // Fetch the list of voices and populate the voice options.
+    function loadVoices() {
+        // Fetch the available voices.
+        var voices = speechSynthesis.getVoices();
+        // Loop through each of the voices.
+        voices.forEach(function(voice, i) {
+            // Create a new option element.
+            var option = document.createElement('option');
+            // Set the options value and text.
+            if (voice.lang.indexOf('en') > -1) {
+                option.value = voice.name;
+                option.innerHTML = voice.name + ' (' + voice.lang + ')';
+                // Add the option to the voice selector.
+                selectVoice.appendChild(option);
+            }
+        });
+        // set default voice
+        if (voiceValue) {
+            for (var i, j = 0; i = selectVoice.options[j]; j++) {
+                if (i.value == voiceValue) {
+                    selectVoice.selectedIndex = j;
+                    break;
+                }
+            }
+        }
+    }
+
+    // Execute loadVoices.
+    loadVoices();
+
+    // Chrome loads voices asynchronously.
+    window.speechSynthesis.onvoiceschanged = function(e) {
+        loadVoices();
+    };
+
 })();
 
-// load font
-function loadFont(fontName) {
-    fontName = fontName.replace(/\s+/g, '+');
-    var linkFont = document.createElement('link');
-    linkFont.rel = 'stylesheet';
-    linkFont.type = 'text/css';
-    linkFont.href = 'https://fonts.googleapis.com/css?family=' + fontName + ':100,400';
-    document.getElementsByTagName('head')[0].appendChild(linkFont);
-}
-// loadFont('Roboto');
 
 // These functions for Quiz question in Listening category. The code was got from talkenglish.com
 function showHide(elementid) {
