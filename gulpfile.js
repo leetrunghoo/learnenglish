@@ -73,7 +73,7 @@ gulp.task('indexHtml', function() {
     }
     return gulp.src(['app/main.html'])
         .pipe(replace('<!--html_sidebar_category-->', cateHtml))
-        // .pipe(htmlmin({ collapseWhitespace: true })) // no need to minify html
+        // .pipe(htmlmin({ collapseWhitespace: true })) // no need to minify html(can't minify inline js), use Cloudfare 
         .pipe(rename('index.html'))
         .pipe(gulp.dest('app'));
 });

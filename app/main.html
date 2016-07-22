@@ -115,6 +115,23 @@
             <p>The content was got from <a href="http://www.talkenglish.com" target="_blank">www.talkenglish.com</a></p>
             <p>Author: Trung Ho (<a href="https://leetrunghoo.com" target="_blank">https://leetrunghoo.com</a>)</p>
             <p>By the way, this is an open source project, feel free to contact me <a title="email" href="mailto:leetrunghoo@gmail.com?Subject=Hello%20Trung" target="_blank">leetrunghoo@gmail.com</a></p>
+            <hr/>
+            <p>Setting:</p>
+            <p>
+                <div class="switch">
+                    <label>
+                        Use Robot voice
+                        <input type="checkbox" name="chkUseRobot" id="chkUseRobot">
+                        <span class="lever"></span>
+                    </label>
+                </div>
+            </p>
+            <p class="range-field">
+                <label for="voiceRate">Speaking speed (slow <-> normal)</label>
+                <input disabled type="range" min="0.5" max="1" step="0.1" name="voiceRate" id="voiceRate" value="0.9">
+            </p>
+            <label for="voice">Select which voice to hear</label>
+            <select disabled name="voice" id="voice" class="browser-default"></select>
         </div>
         <div class="modal-footer">
             <a class=" modal-action modal-close waves-effect waves-blue btn-flat">Close</a>
