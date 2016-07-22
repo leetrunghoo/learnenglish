@@ -23,6 +23,10 @@ label {
     color: color("grey", "darken-4");
 }
 
+[type=radio]:not(:checked)+label {
+    padding-left: 25px;
+}
+
 
 nav {
     background-color: color("light-blue", "darken-3");

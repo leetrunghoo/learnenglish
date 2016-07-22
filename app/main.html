@@ -127,8 +127,21 @@
                 </div>
             </p>
             <p class="range-field">
-                <label for="voiceRate">Speaking speed (slow <-> normal)</label>
-                <input disabled type="range" min="0.5" max="1" step="0.1" name="voiceRate" id="voiceRate" value="0.9">
+                <label for="voiceRate">Speaking speed:</label>
+                <div class="row">
+                    <div class="col s4">
+                        <input disabled name="groupSpeed" type="radio" id="rSlow" value="0.6" />
+                        <label for="rSlow">Slow</label>
+                    </div>
+                    <div class="col s4">
+                        <input disabled name="groupSpeed" type="radio" id="rNormal" value="0.8" checked />
+                        <label for="rNormal">Normal</label>
+                    </div>
+                    <div class="col s4">
+                        <input disabled name="groupSpeed" type="radio" id="rFast" value="1" />
+                        <label for="rFast">Fast</label>
+                    </div>
+                </div>
             </p>
             <label for="voice">Select which voice to hear</label>
             <select disabled name="voice" id="voice" class="browser-default"></select>

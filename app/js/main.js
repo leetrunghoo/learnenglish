@@ -10,41 +10,43 @@ var lessonsDataJson;
     var sectionTpl_raw = $("#sectionTpl").html();
     var sectionTpl = Handlebars.compile(sectionTpl_raw);
     // Get the voice select element.
-    var selectVoice = document.getElementById('voice');
-    var inputVoiceRate = document.getElementById('voiceRate');
     var chkUseRobot = document.getElementById("chkUseRobot");
+    var inputGroupSpeed = document.getElementById('groupSpeed');
+    var selectVoice = document.getElementById('voice');
+
     // get/set default setting
     var useRobotVoice = localStorage.getItem('useRobotVoice');
     if (useRobotVoice === 'true') {
         chkUseRobot.checked = true;
+        selectVoice.disabled = false;
+        $('input[type = radio][name = groupSpeed]').attr('disabled', false);
     } else {
         chkUseRobot.checked = false;
+        localStorage.setItem('useRobotVoice', false);
     }
     $('#chkUseRobot').change(function() {
         localStorage.setItem('useRobotVoice', chkUseRobot.checked);
         if (!chkUseRobot.checked) {
             selectVoice.disabled = true;
-            inputVoiceRate.disabled = true;
+            $('input[type = radio][name = groupSpeed]').attr('disabled', true);
         } else {
             selectVoice.disabled = false;
-            inputVoiceRate.disabled = false;
+            $('input[type = radio][name = groupSpeed]').attr('disabled', false);
         }
     });
 
-    var voiceRateValue = localStorage.getItem('voiceRateValue') || 0.9;
-    inputVoiceRate.value = voiceRateValue;
-    $(inputVoiceRate).change(function() {
-        localStorage.setItem('voiceRateValue', inputVoiceRate.value);
-    });
-
-    $(selectVoice).change(function() {
-        localStorage.setItem('voiceValue', selectVoice.value);
+    var voiceSpeedId = localStorage.getItem('voiceSpeedId') || 'rNormal';
+    document.getElementById(voiceSpeedId).checked = true;
+    $('input[type = radio][name = groupSpeed]').change(function() {
+        voiceSpeedId = this.id;
+        localStorage.setItem('voiceSpeedId', voiceSpeedId);
     });
 
     var voiceValue = localStorage.getItem('voiceValue') || '';
     $(selectVoice).change(function() {
         localStorage.setItem('voiceValue', selectVoice.value);
     });
+
     // create audio wo/ src
     var audioPlayer = new Audio();
     var text2Speak = '';
@@ -159,8 +161,7 @@ var lessonsDataJson;
         // Set the text.
         msg.text = text;
         // Set the attributes.
-        console.log(inputVoiceRate.value);
-        msg.rate = parseFloat(inputVoiceRate.value);
+        msg.rate = parseFloat($('input[name="groupSpeed"]:checked').val());
         // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
         if (selectVoice.value) {
             msg.voice = speechSynthesis.getVoices().filter(function(voice) {
@@ -214,6 +215,7 @@ var lessonsDataJson;
                 }
             }
         }
+        localStorage.setItem('voiceValue', selectVoice.value);
     }
 
     // Execute loadVoices.
