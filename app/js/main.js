@@ -111,17 +111,17 @@ var lessonsDataJson;
 
     // create audio wo/ src
     var audioPlayer = new Audio();
-    var playingStatus = false;
     var text2Speak = '';
+    var timeoutCheckingNetwork;
     audioPlayer.onloadeddata = function() {
-        playingStatus = true;
+        clearTimeout(timeoutCheckingNetwork);
     };
     audioPlayer.onended = function() {
         $('.playingAudio').removeClass('playingAudio');
     };
     audioPlayer.onerror = function(err) {
         // play fail => try again
-        console.log('fail playing, try using Virtual voice ', err);
+        console.log('fail playing, try using Web Speech ', err);
     };
 
     // handle playing voice
@@ -131,6 +131,7 @@ var lessonsDataJson;
             $('.playingAudio').removeClass('playingAudio');
             $(this).addClass('playingAudio');
             stopSpeaking();
+            clearTimeout(timeoutCheckingNetwork);
             text2Speak = $(this).text();
             if (chkUseVirtual.checked) {
                 // use Web Speech Api to speak
@@ -138,18 +139,18 @@ var lessonsDataJson;
             } else {
                 audioPlayer.src = e.target.href;
                 audioPlayer.play();
-                playingStatus = false;
-                setTimeout(function() {
-                    if (!playingStatus && !chkUseVirtual.checked) {
-                        console.info('Could not get the audio file, should use Virtual Voice instead');
-                        var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Virtual Voice</div>');
+                // wait 3s for loading audio file, if it failed, try to use Web Speech
+                timeoutCheckingNetwork = setTimeout(function() {
+                    if (!chkUseVirtual.checked) {
+                        console.info('Could not get the audio file, should use Web Speech instead');
+                        var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Web Speech</div>');
                         $toastContent.click(function() {
                             speak(text2Speak);
                             $('#chkUseVirtual').click();
                         });
                         Materialize.toast($toastContent, 5000);
                     }
-                }, 5000);
+                }, 3000);
 
             }
         }

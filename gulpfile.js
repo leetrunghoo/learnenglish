@@ -59,16 +59,16 @@ gulp.task('indexHtml', function() {
     var cateHtml = '';
     for (var i = 0; i < lessonData.categories.length; i++) {
         var cate = lessonData.categories[i];
-        cateHtml += 
-            '<li class="no-padding category-item">'+
-                '<ul class="collapsible collapsible-accordion">'+
-                    '<li>'+
-                        '<a class="collapsible-header waves-effect"><span class="icon-dropdown"></span><span>'+cate.title+'</span></a>'+
-                        '<div class="collapsible-body"><ul>'+
-                            '<li class="section-item waves-effect waves-blue"><a></a></li>'+
-                        '</ul></div>'+
-                    '</li>'+
-                '</ul>'+
+        cateHtml +=
+            '<li class="no-padding category-item">' +
+            '<ul class="collapsible collapsible-accordion">' +
+            '<li>' +
+            '<a class="collapsible-header waves-effect"><span class="icon-dropdown"></span><span>' + cate.title + '</span></a>' +
+            '<div class="collapsible-body"><ul>' +
+            '<li class="section-item waves-effect waves-blue"><a></a></li>' +
+            '</ul></div>' +
+            '</li>' +
+            '</ul>' +
             '</li>'
     }
     return gulp.src(['app/main.html'])
@@ -124,19 +124,6 @@ gulp.task('minifyjson', function() {
 });
 
 /**
- * Default task, running just `gulp` will compile the sass,
- * launch BrowserSync & watch files.
- * Watch scss files for changes & recompile
- * Watch files, reload BrowserSync
- */
-gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
-    gulp.watch('app/js/*.js', ['scripts']);
-    // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
-    gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
-    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
-});
-
-/**
  * generate service worker (sw.js) and minify it
  */
 gulp.task('generate-service-worker', function() {
@@ -170,6 +157,20 @@ gulp.task('generate-service-worker', function() {
                 .pipe(gulp.dest('app'));
         }
     });
+});
+
+/**
+ * Default task, running just `gulp` will compile the sass,
+ * launch BrowserSync & watch files.
+ * Watch scss files for changes & recompile
+ * Watch files => generate sw.js => reload BrowserSync
+ */
+gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
+    gulp.watch('app/js/*.js', ['scripts']);
+    // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
+    gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
+    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
+    gulp.watch(['app/sw.js']).on('change', browserSync.reload);
 });
 
 
