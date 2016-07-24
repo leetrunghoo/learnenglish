@@ -23,7 +23,7 @@ label {
     color: color("grey", "darken-4");
 }
 
-[type=radio]:not(:checked)+label {
+[type=radio]:checked+label, [type=radio]:not(:checked)+label {
     padding-left: 25px;
 }
 

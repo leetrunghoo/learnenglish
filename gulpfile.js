@@ -148,7 +148,7 @@ gulp.task('generate-service-worker', function() {
             handler: 'cacheFirst'
         }, {
             urlPattern: /^https:\/\/learnenglish\.leetrunghoo\.com\/cdn-cgi/,
-            handler: 'cacheFirst'
+            handler: 'fastest'
         }]
     }, function(error, serviceWorkerString) {
         if (!error) {
