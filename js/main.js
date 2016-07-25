@@ -112,9 +112,8 @@ var lessonsDataJson;
     // create audio wo/ src
     var audioPlayer = new Audio();
     var text2Speak = '';
-    var timeoutCheckingNetwork;
     audioPlayer.onloadeddata = function() {
-        clearTimeout(timeoutCheckingNetwork);
+        clearTimeout(window.timeoutCheckingNetwork);
     };
     audioPlayer.onended = function() {
         $('.playingAudio').removeClass('playingAudio');
@@ -122,6 +121,8 @@ var lessonsDataJson;
     audioPlayer.onerror = function(err) {
         // play fail => try again
         console.log('fail playing, try using Web Speech ', err);
+        clearTimeout(window.timeoutCheckingNetwork);
+        askToUseWebSpeech();
     };
 
     // handle playing voice
@@ -131,7 +132,7 @@ var lessonsDataJson;
             $('.playingAudio').removeClass('playingAudio');
             $(this).addClass('playingAudio');
             stopSpeaking();
-            clearTimeout(timeoutCheckingNetwork);
+            clearTimeout(window.timeoutCheckingNetwork);
             text2Speak = $(this).text();
             if (chkUseVirtual.checked) {
                 // use Web Speech Api to speak
@@ -140,17 +141,7 @@ var lessonsDataJson;
                 audioPlayer.src = e.target.href;
                 audioPlayer.play();
                 // wait 3s for loading audio file, if it failed, try to use Web Speech
-                timeoutCheckingNetwork = setTimeout(function() {
-                    if (!chkUseVirtual.checked) {
-                        console.info('Could not get the audio file, should use Web Speech instead');
-                        var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Web Speech</div>');
-                        $toastContent.click(function() {
-                            speak(text2Speak);
-                            $('#chkUseVirtual').click();
-                        });
-                        Materialize.toast($toastContent, 5000);
-                    }
-                }, 3000);
+                window.timeoutCheckingNetwork = setTimeout(askToUseWebSpeech, 3000);
 
             }
         }
@@ -159,6 +150,21 @@ var lessonsDataJson;
     function stopSpeaking() {
         window.speechSynthesis.cancel();
         audioPlayer.pause();
+    }
+
+    // show toast that ask to use Web Speech when can't get audio file
+    function askToUseWebSpeech() {
+        if (!chkUseVirtual.checked) {
+            console.info('Could not get the audio file, should use Web Speech instead');
+            var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Web Speech</div>');
+            $toastContent.click(function() {
+                $('#toast-container').hide();
+                speak(text2Speak);
+                $('#chkUseVirtual').click();
+            });
+            $('#toast-container').show();
+            Materialize.toast($toastContent, 5000);
+        }
     }
 
 
