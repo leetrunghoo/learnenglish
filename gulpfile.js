@@ -169,8 +169,9 @@ gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch('app/js/*.js', ['scripts']);
     // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
     gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
-    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']).on('change', browserSync.reload);
-});
+    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
+    gulp.watch(['app/sw.js']).on('change', browserSync.reload);
+}); 
 
 
 // run below command to deploy folder 'app' to gh-pages branch
