@@ -117,7 +117,7 @@ var lessonsDataJson;
         }
         $('#modalListen .listen-voice').addClass('disabled');
         $('#recordTitle').text('Listening...');
-        $('#listenResult').text('');
+        $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
         listen(function(text) {
             $('#recordTitle').text('Result');
             $('#listenResult').text(text);
@@ -183,17 +183,7 @@ var lessonsDataJson;
         }
     }
 
-
-    // Test whether browser supports Web Speech API
-    window.SpeechRecognition = window.SpeechRecognition ||
-        window.webkitSpeechRecognition ||
-        null;
-    if (window.SpeechRecognition === null) {
-        console.info("This browser doesn't support Web speech API");
-    } else {
-        window.recognizer = new window.SpeechRecognition();
-    }
-    // use Web Speeck Api to speak
+    // use Web Speech Api to speak
     function speak(text) {
         // Create a new instance of SpeechSynthesisUtterance.
         var msg = new SpeechSynthesisUtterance();
@@ -211,12 +201,23 @@ var lessonsDataJson;
         window.speechSynthesis.speak(msg);
     }
 
+    // Test whether browser supports Web Speech API
+    window.SpeechRecognition = window.SpeechRecognition ||
+        window.webkitSpeechRecognition ||
+        null;
+    if (window.SpeechRecognition === null) {
+        console.info("This browser doesn't support Web speech API");
+        // hide voice-to-text feature
+        $('.listen-voice').hide();
+    } else {
+        window.recognizer = new window.SpeechRecognition();
+    }
     // use Web Speeck Api to recognize voice
     function listen(callback) {
         if (window.SpeechRecognition) {
+            //fired everytime user stops speaking.
             window.recognizer.onresult = function(event) {
                 if (event.results.length > 0) {
-                    console.log('recognize:', event.results);
                     var text = event.results[0][0].transcript;
                     if (callback) {
                         console.log("---------------text recognized: " + text);
@@ -224,7 +225,14 @@ var lessonsDataJson;
                     }
                 }
             };
-            window.recognizer.start();
+            //fired when recognization is stopped manually or automatically.
+            window.recognizer.onend = function() {
+                window.flagListening = false;
+            }
+            if (!window.flagListening) {
+                window.recognizer.start();
+                window.flagListening = true;
+            }
         } else {
             console.warn("This browser doesn't support Web Speech API");
         }
