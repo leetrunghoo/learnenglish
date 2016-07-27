@@ -171,7 +171,7 @@ gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
     gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
     gulp.watch(['app/sw.js']).on('change', browserSync.reload);
-}); 
+});
 
 
 // run below command to deploy folder 'app' to gh-pages branch

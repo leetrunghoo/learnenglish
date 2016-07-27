@@ -1,6 +1,6 @@
 {
   "name": "learnEnglish",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A web app for learning English and the content was scraped by a simple crawler runs on nodejs",
   "homepage": "https://learnenglish.leetrunghoo.com",
   "author": "Trung Ho",

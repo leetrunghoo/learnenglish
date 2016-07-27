@@ -91,7 +91,7 @@
         <div class="masonry-container" style="display: none">
             <div class="masonry">
                 <div class="grid-item">
-                    <div class="lesson-item card-panel modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson=""></div>
+                    <div class="lesson-item card-panel hoverable modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson=""></div>
                 </div>
             </div>
         </div>
@@ -105,7 +105,22 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a class=" modal-action modal-close waves-effect waves-blue btn-flat">Close</a>
+            <a class="modal-action waves-effect waves-blue btn-flat modal-trigger left listen-voice" href="#modalListen">Practise</a>
+            <a class="modal-action modal-close waves-effect waves-blue btn-flat">Close</a>
+        </div>
+    </div>
+    <div id="modalListen" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <div class="row col s12">
+                <h5 id="recordTitle">Listening...</h5>
+            </div>
+            <div id="listenResult" class="row col s12">
+                <span class="grey-text lighter-2">Speak whatever you like :D</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="waves-effect waves-blue btn btn-flat left listen-voice disabled">Again</a>
+            <a class="modal-action modal-close waves-effect waves-blue btn-flat">Close</a>
         </div>
     </div>
     <div id="modalAbout" class="modal modal-fixed-footer">
@@ -183,7 +198,7 @@
                 <!-- <div class="grid-sizer"></div> -->
                 {{#each lessons}}
                 <div class="grid-item">
-                    <div class="lesson-item card-panel modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson="{{lessonIndex}}">
+                    <div class="lesson-item card-panel hoverable modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson="{{lessonIndex}}">
                         {{title}}</div>
                 </div>
                 {{/each}}
@@ -230,11 +245,12 @@
         (window.location.protocol === 'https:' || isLocalhost)) {
         navigator.serviceWorker.register('sw.js')
             .then(function(registration) {
-                console.log("Service Worker Registered");
+                console.log("Service Worker Registered", registration);
                 // Check to see if there's an updated version of service-worker.js with
                 // new files to cache:
                 // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-registration-update-method
                 if (typeof registration.update === 'function') {
+                    console.log("Update Service Worker");
                     registration.update();
                 }
 
@@ -244,11 +260,12 @@
                     // and there's no need to prompt for a reload at that point.
                     // So check here to see if the page is already controlled,
                     // i.e. whether there's an existing service worker.
+                    console.log('onupdatefound',navigator.serviceWorker.controller);
                     if (navigator.serviceWorker.controller) {
                         // The updatefound event implies that registration.installing is set:
                         // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
                         var installingWorker = registration.installing;
-
+console.log('installingWorker.state',installingWorker.state);
                         installingWorker.onstatechange = function() {
                             switch (installingWorker.state) {
                                 case 'installed':
@@ -256,6 +273,7 @@
                                     // fresh content will have been added to the cache.
                                     // It's the perfect time to display a 'New content is
                                     // available; please refresh.' message in the page's interface.
+                                    console.log('New content is available; please refresh.');
                                     break;
 
                                 case 'redundant':

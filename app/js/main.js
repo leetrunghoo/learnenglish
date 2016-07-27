@@ -106,6 +106,22 @@ var lessonsDataJson;
                     $(this).addClass('borderTable');
                 }
             });
+
+        });
+    });
+
+    $('.listen-voice').click(function() {
+        var $this = $(this);
+        if ($this.hasClass('disabled')) {
+            return;
+        }
+        $('#modalListen .listen-voice').addClass('disabled');
+        $('#recordTitle').text('Listening...');
+        $('#listenResult').text('');
+        listen(function(text) {
+            $('#recordTitle').text('Result');
+            $('#listenResult').text(text);
+            $('#modalListen .listen-voice').removeClass('disabled');
         });
     });
 
@@ -187,6 +203,7 @@ var lessonsDataJson;
         msg.rate = parseFloat($('input[name="groupSpeed"]:checked').val());
         // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
         if (selectVoice.value) {
+            console.log(selectVoice.value);
             msg.voice = speechSynthesis.getVoices().filter(function(voice) {
                 return voice.name == selectVoice.value;
             })[0];
