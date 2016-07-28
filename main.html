@@ -105,7 +105,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a class="modal-action waves-effect waves-blue btn-flat modal-trigger left listen-voice" href="#modalListen">Practise</a>
+            <a id="btnPractise" class="modal-action waves-effect waves-blue btn-flat modal-trigger left listen-voice" href="#modalListen">Practise</a>
             <a class="modal-action waves-effect waves-blue btn-flat modal-close">Close</a>
         </div>
     </div>
@@ -119,8 +119,8 @@
             </div>
         </div>
         <div class="modal-footer">
-            <a class="modal-action waves-effect waves-blue btn-flat left listen-voice disabled">Again</a>
-            <a class="modal-action waves-effect waves-blue btn-flat modal-close ">Close</a>
+            <a id="btnAgain" class="modal-action waves-effect waves-blue btn-flat left listen-voice">Again</a>
+            <a id="btnCloseModalListen" class="modal-action waves-effect waves-blue btn-flat ">Close</a>
         </div>
     </div>
     <div id="modalAbout" class="modal modal-fixed-footer">
@@ -273,7 +273,8 @@ console.log('installingWorker.state',installingWorker.state);
                                     // fresh content will have been added to the cache.
                                     // It's the perfect time to display a 'New content is
                                     // available; please refresh.' message in the page's interface.
-                                    console.log('New content is available; please refresh.');
+                                    console.log('New version is available, please refresh to update.');
+                                    Materialize.toast('New version is available, please refresh to update.', 3000);
                                     break;
 
                                 case 'redundant':

@@ -110,19 +110,32 @@ var lessonsDataJson;
         });
     });
 
-    $('.listen-voice').click(function() {
-        var $this = $(this);
-        if ($this.hasClass('disabled')) {
-            return;
+    $('#btnPractise').click(function() {
+        startListen();
+    });
+    $('#btnAgain').click(function() {
+        if ($(this).text() === 'Stop') {
+            stopListen();
+        } else { // listen again
+            startListen();
         }
-        $('#modalListen .listen-voice').addClass('disabled');
+    });
+
+    function startListen() {
+        $('#btnAgain').text('Stop');
         $('#recordTitle').text('Listening...');
         $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
         listen(function(text) {
             $('#recordTitle').text('Result');
             $('#listenResult').text(text);
-            $('#modalListen .listen-voice').removeClass('disabled');
+            $('#btnAgain').text('Again');
         });
+    }
+
+
+    $('#btnCloseModalListen').click(function() {
+        $('#modalListen').closeModal();
+        stopListen();
     });
 
     // create audio wo/ src
@@ -211,6 +224,7 @@ var lessonsDataJson;
         $('.listen-voice').hide();
     } else {
         window.recognizer = new window.SpeechRecognition();
+        window.recognizer.continuous = false;
     }
     // use Web Speeck Api to recognize voice
     function listen(callback) {
@@ -236,6 +250,10 @@ var lessonsDataJson;
         } else {
             console.warn("This browser doesn't support Web Speech API");
         }
+    }
+
+    function stopListen() {
+        window.recognizer.stop();
     }
 
     // Fetch the list of voices and populate the voice options.
@@ -274,39 +292,39 @@ var lessonsDataJson;
         loadVoices();
     };
 
+
+    // These functions for Quiz question in Listening category. The code was got from talkenglish.com
+    function showHide(elementid) {
+        if (document.getElementById(elementid).style.display == 'none') {
+            document.getElementById(elementid).style.display = '';
+        } else {
+            document.getElementById(elementid).style.display = 'none';
+        }
+    }
+
+    function CheckScore() {
+        var Ques1UserAnswer, Ques2UserAnswer, Ques3UserAnswer, Ques4UserAnswer;
+        for (var i = 0; i < 4; i++) {
+            if (MyForm.Question1[i].checked) {
+                Ques1UserAnswer = MyForm.Question1[i].value;
+            }
+            if (MyForm.Question2[i].checked) {
+                Ques2UserAnswer = MyForm.Question2[i].value;
+            }
+            if (MyForm.Question3[i].checked) {
+                Ques3UserAnswer = MyForm.Question3[i].value;
+            }
+            if (MyForm.Question4[i].checked) {
+                Ques4UserAnswer = MyForm.Question4[i].value;
+            }
+        }
+        var Score = 0;
+        var CorrectAnswers = MyForm.CorrectAnswers.value;
+        if (Ques1UserAnswer == CorrectAnswers.substr(0, 1)) Score++;
+        if (Ques2UserAnswer == CorrectAnswers.substr(1, 1)) Score++;
+        if (Ques3UserAnswer == CorrectAnswers.substr(2, 1)) Score++;
+        if (Ques4UserAnswer == CorrectAnswers.substr(3, 1)) Score++;
+        ScoreText.innerHTML = "<font size=2>Your Score is: " + Score + " /4 </font><br />";
+    }
+
 })();
-
-
-// These functions for Quiz question in Listening category. The code was got from talkenglish.com
-function showHide(elementid) {
-    if (document.getElementById(elementid).style.display == 'none') {
-        document.getElementById(elementid).style.display = '';
-    } else {
-        document.getElementById(elementid).style.display = 'none';
-    }
-}
-
-function CheckScore() {
-    var Ques1UserAnswer, Ques2UserAnswer, Ques3UserAnswer, Ques4UserAnswer;
-    for (var i = 0; i < 4; i++) {
-        if (MyForm.Question1[i].checked) {
-            Ques1UserAnswer = MyForm.Question1[i].value;
-        }
-        if (MyForm.Question2[i].checked) {
-            Ques2UserAnswer = MyForm.Question2[i].value;
-        }
-        if (MyForm.Question3[i].checked) {
-            Ques3UserAnswer = MyForm.Question3[i].value;
-        }
-        if (MyForm.Question4[i].checked) {
-            Ques4UserAnswer = MyForm.Question4[i].value;
-        }
-    }
-    var Score = 0;
-    var CorrectAnswers = MyForm.CorrectAnswers.value;
-    if (Ques1UserAnswer == CorrectAnswers.substr(0, 1)) Score++;
-    if (Ques2UserAnswer == CorrectAnswers.substr(1, 1)) Score++;
-    if (Ques3UserAnswer == CorrectAnswers.substr(2, 1)) Score++;
-    if (Ques4UserAnswer == CorrectAnswers.substr(3, 1)) Score++;
-    ScoreText.innerHTML = "<font size=2>Your Score is: " + Score + " /4 </font><br />";
-}
