@@ -1,3 +1,83 @@
+/* Google Analytics: change UA-XXXXX-X to be your site's ID */
+var gaId = (location.href.indexOf('learnenglish.leetrunghoo') > -1) ? 'UA-73537086-2' : 'UA-73537086-1';
+(function(i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r;
+    i[r] = i[r] || function() {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date();
+    a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m)
+})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+ga('create', gaId, 'auto');
+ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the reports
+ga('send', 'pageview');
+
+/* 
+ *   Servive Worker
+ */
+var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
+    // [::1] is the IPv6 localhost address.
+    window.location.hostname === '[::1]' ||
+    // 127.0.0.1/8 is considered localhost for IPv4.
+    window.location.hostname.match(
+        /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+    )
+);
+
+if ('serviceWorker' in navigator &&
+    (window.location.protocol === 'https:' || isLocalhost)) {
+    navigator.serviceWorker.register('sw.js')
+        .then(function(registration) {
+            console.log("Service Worker Registered", registration);
+            // Check to see if there's an updated version of service-worker.js with
+            // new files to cache:
+            // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-registration-update-method
+            if (typeof registration.update === 'function') {
+                console.log("Update Service Worker");
+                registration.update();
+            }
+
+            // updatefound is fired if service-worker.js changes.
+            registration.onupdatefound = function() {
+                // updatefound is also fired the very first time the SW is installed,
+                // and there's no need to prompt for a reload at that point.
+                // So check here to see if the page is already controlled,
+                // i.e. whether there's an existing service worker.
+                console.log('onupdatefound', navigator.serviceWorker.controller);
+                if (navigator.serviceWorker.controller) {
+                    // The updatefound event implies that registration.installing is set:
+                    // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
+                    var installingWorker = registration.installing;
+                    console.log('installingWorker.state', installingWorker.state);
+                    installingWorker.onstatechange = function() {
+                        switch (installingWorker.state) {
+                            case 'installed':
+                                // At this point, the old content will have been purged and the
+                                // fresh content will have been added to the cache.
+                                // It's the perfect time to display a 'New content is
+                                // available; please refresh.' message in the page's interface.
+                                console.log('New version is available, please refresh to update.');
+                                Materialize.toast('New version is available, please refresh to update.', 3000);
+                                break;
+
+                            case 'redundant':
+                                throw new Error('The installing ' +
+                                    'service worker became redundant.');
+
+                            default:
+                                // Ignore
+                        }
+                    };
+                }
+            };
+        }).catch(function(e) {
+            console.error('Error during service worker registration:', e);
+        });
+}
+
 // run 'gulp scripts' to set lessonsData to var 'lessonsDataJson'
 var lessonsDataJson;
 
@@ -34,19 +114,18 @@ var lessonsDataJson;
             $('input[type = radio][name = groupSpeed]').attr('disabled', false);
         }
     });
-
     var voiceSpeedId = localStorage.getItem('voiceSpeedId') || 'rNormal';
     document.getElementById(voiceSpeedId).checked = true;
     $('input[type = radio][name = groupSpeed]').change(function() {
         voiceSpeedId = this.id;
         localStorage.setItem('voiceSpeedId', voiceSpeedId);
     });
-
     var voiceValue = localStorage.getItem('voiceValue') || '';
     $(selectVoice).change(function() {
         localStorage.setItem('voiceValue', selectVoice.value);
     });
 
+    // config modal
     var modalAnimation_duration = 200;
     if (window.innerWidth <= 768) { // no animation on mobile
         modalAnimation_duration = 0;
@@ -111,7 +190,14 @@ var lessonsDataJson;
     });
 
     $('#btnPractise').click(function() {
-        startListen();
+        $('#modalListen').openModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration,
+            complete: function() { // Callback for Modal close
+                stopListen();
+                startListen();
+            }
+        });
     });
     $('#btnAgain').click(function() {
         if ($(this).text() === 'Stop') {

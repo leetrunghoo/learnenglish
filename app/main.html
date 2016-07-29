@@ -105,7 +105,7 @@
             </form>
         </div>
         <div class="modal-footer">
-            <a id="btnPractise" class="modal-action waves-effect waves-blue btn-flat modal-trigger left listen-voice" href="#modalListen">Practise</a>
+            <a id="btnPractise" class="modal-action waves-effect waves-blue btn-flat left listen-voice">Practise</a>
             <a class="modal-action waves-effect waves-blue btn-flat modal-close">Close</a>
         </div>
     </div>
@@ -198,8 +198,7 @@
                 <!-- <div class="grid-sizer"></div> -->
                 {{#each lessons}}
                 <div class="grid-item">
-                    <div class="lesson-item card-panel hoverable modal-trigger waves-effect waves-blue" data-target="modalLesson" data-lesson="{{lessonIndex}}">
-                        {{title}}</div>
+                    <div class="lesson-item card-panel hoverable waves-effect waves-blue" data-lesson="{{lessonIndex}}">{{title}}</div>
                 </div>
                 {{/each}}
             </div>
@@ -211,87 +210,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
     <script async type="text/javascript" src="js/min/main.min.js"></script>
-    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
-    <script>
-    var gaId = (location.href.indexOf('learnenglish.leetrunghoo') > -1) ? 'UA-73537086-2' : 'UA-73537086-1';
-    (function(i, s, o, g, r, a, m) {
-        i['GoogleAnalyticsObject'] = r;
-        i[r] = i[r] || function() {
-            (i[r].q = i[r].q || []).push(arguments)
-        }, i[r].l = 1 * new Date();
-        a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0];
-        a.async = 1;
-        a.src = g;
-        m.parentNode.insertBefore(a, m)
-    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', gaId, 'auto');
-    ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the reports
-    ga('send', 'pageview');
-
-    /* 
-     *   Servive Worker
-     */
-    var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
-        // [::1] is the IPv6 localhost address.
-        window.location.hostname === '[::1]' ||
-        // 127.0.0.1/8 is considered localhost for IPv4.
-        window.location.hostname.match(
-            /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-        )
-    );
-
-    if ('serviceWorker' in navigator &&
-        (window.location.protocol === 'https:' || isLocalhost)) {
-        navigator.serviceWorker.register('sw.js')
-            .then(function(registration) {
-                console.log("Service Worker Registered", registration);
-                // Check to see if there's an updated version of service-worker.js with
-                // new files to cache:
-                // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-registration-update-method
-                if (typeof registration.update === 'function') {
-                    console.log("Update Service Worker");
-                    registration.update();
-                }
-
-                // updatefound is fired if service-worker.js changes.
-                registration.onupdatefound = function() {
-                    // updatefound is also fired the very first time the SW is installed,
-                    // and there's no need to prompt for a reload at that point.
-                    // So check here to see if the page is already controlled,
-                    // i.e. whether there's an existing service worker.
-                    console.log('onupdatefound',navigator.serviceWorker.controller);
-                    if (navigator.serviceWorker.controller) {
-                        // The updatefound event implies that registration.installing is set:
-                        // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
-                        var installingWorker = registration.installing;
-console.log('installingWorker.state',installingWorker.state);
-                        installingWorker.onstatechange = function() {
-                            switch (installingWorker.state) {
-                                case 'installed':
-                                    // At this point, the old content will have been purged and the
-                                    // fresh content will have been added to the cache.
-                                    // It's the perfect time to display a 'New content is
-                                    // available; please refresh.' message in the page's interface.
-                                    console.log('New version is available, please refresh to update.');
-                                    Materialize.toast('New version is available, please refresh to update.', 3000);
-                                    break;
-
-                                case 'redundant':
-                                    throw new Error('The installing ' +
-                                        'service worker became redundant.');
-
-                                default:
-                                    // Ignore
-                            }
-                        };
-                    }
-                };
-            }).catch(function(e) {
-                console.error('Error during service worker registration:', e);
-            });
-    }
-    </script>
 </body>
 
 </html>

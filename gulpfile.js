@@ -136,7 +136,7 @@ gulp.task('generate-service-worker', function() {
             rootDir + '/js/min/main.min.js'
         ],
         stripPrefix: rootDir,
-        handleFetch: true,
+        handleFetch: true, //false in development builds, to ensure that features like live reload still work
         runtimeCaching: [{
             urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\//,
             handler: 'cacheFirst'
