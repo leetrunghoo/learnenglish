@@ -152,11 +152,18 @@ var lessonsDataJson;
         var cateIndex = $(this).parents('.category-item').index();
         loadSection(cateIndex, sectionIndex);
     });
-    // $('li.section-item:nth-child(10)').click() // for testing UI
 
     $(document).on('click', '.lesson-item', function() {
         var lessonIndex = $(this).data('lesson');
         loadLesson(lessonIndex);
+    });
+
+    $('#btnCloseModalLesson').click(function() {
+        $('#modalLesson').closeModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration
+        });
+        localStorage.removeItem('lessonIndex');
     });
 
     $('#btnPractise').click(function() {
@@ -183,8 +190,6 @@ var lessonsDataJson;
     var savedLessonIndex = localStorage.getItem('lessonIndex');
     if (savedCateIndex) {
         var $cateItem = $('#slideNav > .category-item:eq(' + savedCateIndex + ') > ul > li');
-        console.log('savedCateIndex', $cateItem);
-        console.log('savedSectionIndex', savedSectionIndex);
         $cateItem.addClass('active');
         $cateItem.find('a').addClass('active');
         $cateItem.find('.collapsible-body').show();
@@ -192,7 +197,7 @@ var lessonsDataJson;
             $cateItem.find('.section-item:eq(' + savedSectionIndex + ')').addClass('selected');
             loadSection(savedCateIndex, savedSectionIndex);
             if (savedLessonIndex) {
-                // loadLesson(savedLessonIndex);
+                loadLesson(savedLessonIndex);
             }
         }
 
@@ -252,7 +257,10 @@ var lessonsDataJson;
 
 
     $('#btnCloseModalListen').click(function() {
-        $('#modalListen').closeModal();
+        $('#modalListen').closeModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration
+        });
         stopListen();
     });
 
