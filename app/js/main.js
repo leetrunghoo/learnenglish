@@ -150,43 +150,13 @@ var lessonsDataJson;
 
         var sectionIndex = $(this).index();
         var cateIndex = $(this).parents('.category-item').index();
-        var sectionData = lessonsDataJson.categories[cateIndex].sections[sectionIndex];
-        $('#mainContent').html(sectionTpl(sectionData));
-        $('#sectionDesc').html(sectionData.description);
-        $('body,html').scrollTop(0);
-        $('.masonry').masonry({
-            // use outer width of grid-sizer for columnWidth
-            itemSelector: '.grid-item',
-            // do not use .grid-sizer in layout
-            columnWidth: '.grid-item',
-            percentPosition: true
-        });
+        loadSection(cateIndex, sectionIndex);
     });
     // $('li.section-item:nth-child(10)').click() // for testing UI
 
     $(document).on('click', '.lesson-item', function() {
-        $('#modalLesson').openModal({
-            in_duration: modalAnimation_duration,
-            out_duration: modalAnimation_duration,
-            complete: function() { // Callback for Modal close
-                stopSpeaking();
-            }
-        });
-        $('#lessonContent').empty();
-        $('#modalLesson .modal-content').scrollTop(0);
         var lessonIndex = $(this).data('lesson');
-        $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
-            $('#lessonTitle').text(lesson.title);
-            // remove ad
-            lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
-            $('#lessonContent').html(lesson.html);
-            $('#lessonContent table').each(function(i, ele) {
-                if ($(this).attr('border') === '1') {
-                    $(this).addClass('borderTable');
-                }
-            });
-
-        });
+        loadLesson(lessonIndex);
     });
 
     $('#btnPractise').click(function() {
@@ -206,6 +176,68 @@ var lessonsDataJson;
             startListen();
         }
     });
+
+    // load previous openned lesson/section
+    var savedCateIndex = localStorage.getItem('cateIndex');
+    var savedSectionIndex = localStorage.getItem('sectionIndex');
+    var savedLessonIndex = localStorage.getItem('lessonIndex');
+    if (savedCateIndex) {
+        var $cateItem = $('#slideNav > .category-item:eq(' + savedCateIndex + ') > ul > li');
+        console.log('savedCateIndex', $cateItem);
+        console.log('savedSectionIndex', savedSectionIndex);
+        $cateItem.addClass('active');
+        $cateItem.find('a').addClass('active');
+        $cateItem.find('.collapsible-body').show();
+        if (savedSectionIndex) {
+            $cateItem.find('.section-item:eq(' + savedSectionIndex + ')').addClass('selected');
+            loadSection(savedCateIndex, savedSectionIndex);
+            if (savedLessonIndex) {
+                // loadLesson(savedLessonIndex);
+            }
+        }
+
+    }
+
+    function loadSection(cateIndex, sectionIndex) {
+        localStorage.setItem('cateIndex', cateIndex);
+        localStorage.setItem('sectionIndex', sectionIndex);
+        var sectionData = lessonsDataJson.categories[cateIndex].sections[sectionIndex];
+        $('#mainContent').html(sectionTpl(sectionData));
+        $('#sectionDesc').html(sectionData.description);
+        $('body,html').scrollTop(0);
+        $('.masonry').masonry({
+            // use outer width of grid-sizer for columnWidth
+            itemSelector: '.grid-item',
+            // do not use .grid-sizer in layout
+            columnWidth: '.grid-item',
+            percentPosition: true
+        });
+    }
+
+    function loadLesson(lessonIndex) {
+        $('#modalLesson').openModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration,
+            complete: function() { // Callback for Modal close
+                stopSpeaking();
+            }
+        });
+        $('#lessonContent').empty();
+        $('#modalLesson .modal-content').scrollTop(0);
+        $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
+            localStorage.setItem('lessonIndex', lessonIndex);
+            $('#lessonTitle').text(lesson.title);
+            // remove ad
+            lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
+            $('#lessonContent').html(lesson.html);
+            $('#lessonContent table').each(function(i, ele) {
+                if ($(this).attr('border') === '1') {
+                    $(this).addClass('borderTable');
+                }
+            });
+
+        });
+    }
 
     function startListen() {
         $('#btnAgain').text('Stop');
