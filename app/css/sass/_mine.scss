@@ -145,6 +145,12 @@ h3 {
     display: none;
 }
 
+#toast-container {
+    .toast {
+        background-color: color("grey", "darken-1");
+    }
+}
+
 .modal {
     .modal-content {
         -webkit-overflow-scrolling: touch;

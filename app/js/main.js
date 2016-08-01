@@ -32,6 +32,12 @@ if ('serviceWorker' in navigator &&
     navigator.serviceWorker.register('sw.js')
         .then(function(registration) {
             console.log("Service Worker Registered", registration);
+
+            if (!localStorage.getItem('informWorkOffline')) {
+                Materialize.toast('Now this website can work offline', 2000);
+                localStorage.setItem('informWorkOffline', 'already');
+            }
+
             // Check to see if there's an updated version of service-worker.js with
             // new files to cache:
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-registration-update-method
@@ -331,13 +337,15 @@ var lessonsDataJson;
     });
 
     function stopSpeaking() {
-        window.speechSynthesis.cancel();
+        if (window.speechSynthesis) {
+            window.speechSynthesis.cancel();
+        }
         audioPlayer.pause();
     }
 
     // show toast that ask to use Web Speech when can't get audio file
     function askToUseWebSpeech() {
-        if (!chkUseVirtual.checked) {
+        if (window.speechSynthesis && !chkUseVirtual.checked) {
             console.info('Could not get the audio file, should use Web Speech instead');
             var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Web Speech</div>');
             $toastContent.click(function() {
@@ -352,20 +360,21 @@ var lessonsDataJson;
 
     // use Web Speech Api to speak
     function speak(text) {
-        // Create a new instance of SpeechSynthesisUtterance.
-        var msg = new SpeechSynthesisUtterance();
-        // Set the text.
-        msg.text = text;
-        // Set the attributes.
-        msg.rate = parseFloat($('input[name="groupSpeed"]:checked').val());
-        // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
-        if (selectVoice.value) {
-            console.log(selectVoice.value);
-            msg.voice = speechSynthesis.getVoices().filter(function(voice) {
-                return voice.name == selectVoice.value;
-            })[0];
+        if (window.speechSynthesis) {
+            // Create a new instance of SpeechSynthesisUtterance.
+            var msg = new SpeechSynthesisUtterance();
+            // Set the text.
+            msg.text = text;
+            // Set the attributes.
+            msg.rate = parseFloat($('input[name="groupSpeed"]:checked').val());
+            // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
+            if (selectVoice.value) {
+                msg.voice = speechSynthesis.getVoices().filter(function(voice) {
+                    return voice.name == selectVoice.value;
+                })[0];
+            }
+            window.speechSynthesis.speak(msg);
         }
-        window.speechSynthesis.speak(msg);
     }
 
     // use Web Speeck Api to recognize voice
@@ -406,44 +415,53 @@ var lessonsDataJson;
     }
 
     function stopListen() {
-        window.recognizer.stop();
+        if (window.recognizer) {
+            window.recognizer.stop();
+        }
     }
 
     // Fetch the list of voices and populate the voice options.
     function loadVoices() {
-        $(selectVoice).empty();
-        // Fetch the available voices.
-        var voices = speechSynthesis.getVoices();
-        // Loop through each of the voices.
-        voices.forEach(function(voice, i) {
-            // Create a new option element.
-            var option = document.createElement('option');
-            // Set the options value and text.
-            if (voice.lang.indexOf('en') > -1) {
-                option.value = voice.name;
-                option.innerHTML = voice.name + ' (' + voice.lang + ')';
-                // Add the option to the voice selector.
-                selectVoice.appendChild(option);
-            }
-        });
-        // set default voice
-        if (voiceValue) {
+        if (window.speechSynthesis) {
+            $(selectVoice).empty();
+            // Fetch the available voices.
+            var voices = speechSynthesis.getVoices();
+            // Loop through each of the voices.
+            voices.forEach(function(voice, i) {
+                // Create a new option element.
+                var option = document.createElement('option');
+                // Set the options value and text.
+                if (voice.lang.indexOf('en') > -1) {
+                    option.value = voice.name;
+                    option.innerHTML = voice.name + ' (' + voice.lang + ')';
+                    // Add the option to the voice selector.
+                    selectVoice.appendChild(option);
+                }
+            });
+            // set default voice
             for (var i, j = 0; i = selectVoice.options[j]; j++) {
-                if (i.value == voiceValue) {
-                    selectVoice.selectedIndex = j;
-                    break;
+                if (voiceValue) {
+                    if (i.value == voiceValue) {
+                        selectVoice.selectedIndex = j;
+                        break;
+                    }
+                } else {
+                    if (i.value.toLowerCase().indexOf('google') > -1) {
+                        selectVoice.selectedIndex = j;
+                        break;
+                    }
                 }
             }
+            localStorage.setItem('voiceValue', selectVoice.value);
         }
-        localStorage.setItem('voiceValue', selectVoice.value);
     }
     // Execute loadVoices.
     loadVoices();
 
     // Chrome loads voices asynchronously.
-    // window.speechSynthesis.onvoiceschanged = function(e) {
-    //     loadVoices();
-    // };
+    window.speechSynthesis.onvoiceschanged = function(e) {
+        loadVoices();
+    };
 
 })();
 
