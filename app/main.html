@@ -134,36 +134,38 @@
             <p>The content was got from <a href="http://www.talkenglish.com" target="_blank">www.talkenglish.com</a></p>
             <p>Author: Trung Ho (<a href="https://leetrunghoo.com" target="_blank">https://leetrunghoo.com</a>)</p>
             <p>By the way, this is an open source project, feel free to contact me <a title="email" href="mailto:leetrunghoo@gmail.com?Subject=Hello%20Trung" target="_blank">leetrunghoo@gmail.com</a></p>
-            <hr/>
-            <p>Setting:</p>
-            <p>
-                <div class="switch">
-                    <label>
-                        Use Web Speech
-                        <input type="checkbox" name="chkUseVirtual" id="chkUseVirtual">
-                        <span class="lever"></span>
-                    </label>
-                </div>
-            </p>
-            <p class="range-field">
-                <label for="voiceRate">Speaking speed:</label>
-                <div class="row">
-                    <div class="col s4">
-                        <input disabled name="groupSpeed" type="radio" id="rSlow" value="0.6" />
-                        <label for="rSlow">Slow</label>
+            <div id="settingWebSpeech">
+                <hr/>
+                <p>Setting:</p>
+                <p>
+                    <div class="switch">
+                        <label>
+                            Use Web Speech
+                            <input type="checkbox" name="chkUseVirtual" id="chkUseVirtual">
+                            <span class="lever"></span>
+                        </label>
                     </div>
-                    <div class="col s4">
-                        <input disabled name="groupSpeed" type="radio" id="rNormal" value="0.8" checked />
-                        <label for="rNormal">Normal</label>
+                </p>
+                <p class="range-field">
+                    <label for="voiceRate">Speaking speed:</label>
+                    <div class="row">
+                        <div class="col s4">
+                            <input disabled name="groupSpeed" type="radio" id="rSlow" value="0.6" />
+                            <label for="rSlow">Slow</label>
+                        </div>
+                        <div class="col s4">
+                            <input disabled name="groupSpeed" type="radio" id="rNormal" value="0.8" checked />
+                            <label for="rNormal">Normal</label>
+                        </div>
+                        <div class="col s4">
+                            <input disabled name="groupSpeed" type="radio" id="rFast" value="1" />
+                            <label for="rFast">Fast</label>
+                        </div>
                     </div>
-                    <div class="col s4">
-                        <input disabled name="groupSpeed" type="radio" id="rFast" value="1" />
-                        <label for="rFast">Fast</label>
-                    </div>
-                </div>
-            </p>
-            <label for="voice">Select which voice to hear</label>
-            <select disabled name="voice" id="voice" class="browser-default"></select>
+                </p>
+                <label for="voice">Select which voice to hear</label>
+                <select disabled name="voice" id="voice" class="browser-default"></select>
+            </div>
         </div>
         <div class="modal-footer">
             <a class=" modal-action modal-close waves-effect waves-blue btn-flat">Close</a>
