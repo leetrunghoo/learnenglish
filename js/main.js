@@ -290,6 +290,10 @@ var lessonsDataJson;
         askToUseWebSpeech();
     };
 
+    if (!window.speechSynthesis) {
+        $('#settingWebSpeech').hide(); 
+    }
+
     $('#btnPractise').click(function() {
         stopListen();
         startListen();
