@@ -1,5 +1,6 @@
 {
     "description": "List of lessons of talkenglish.com, it was scraped from http://www.talkenglish.com/lessonindex.aspx for personal use",
+    "numberOfLessons": 916,
     "categories": [
         {
             "title": "English Speaking Basics",
@@ -1308,7 +1309,7 @@
                 },
                 {
                     "title": "Guys - Girls - and Sports II",
-                    "description": "Guys - Girls - Sports IIReview and study them as many times as you want.  ",
+                    "description": "Guys - Girls - Sports II section contains basic English lessons on Golf, Poker, Talking about Guys, Shopping, and Jewelry.Review and study them as many times as you want.  ",
                     "link": "http://www.talkenglish.com/speaking/regular/guysgirlssports2.aspx",
                     "lessons": [
                         {
@@ -4251,239 +4252,171 @@
                     "lessons": [
                         {
                             "lessonIndex": 765,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #01",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=100"
                         },
                         {
                             "lessonIndex": 766,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #02",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=101"
                         },
                         {
                             "lessonIndex": 767,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #03",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=102"
                         },
                         {
                             "lessonIndex": 768,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #04",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=103"
                         },
                         {
                             "lessonIndex": 769,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #05",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=104"
                         },
                         {
                             "lessonIndex": 770,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #06",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=105"
                         },
                         {
                             "lessonIndex": 771,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #07",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=106"
                         },
                         {
                             "lessonIndex": 772,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #08",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=107"
                         },
                         {
                             "lessonIndex": 773,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #09",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=108"
                         },
                         {
                             "lessonIndex": 774,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #10",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=109"
                         },
                         {
                             "lessonIndex": 775,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #11",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=110"
                         },
                         {
                             "lessonIndex": 776,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #12",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=111"
                         },
                         {
                             "lessonIndex": 777,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #13",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=112"
                         },
                         {
                             "lessonIndex": 778,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #14",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=113"
                         },
                         {
                             "lessonIndex": 779,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #15",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=114"
                         },
                         {
                             "lessonIndex": 780,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #16",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=115"
                         },
                         {
                             "lessonIndex": 781,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #17",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=116"
                         },
                         {
                             "lessonIndex": 782,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #18",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=117"
                         },
                         {
                             "lessonIndex": 783,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #19",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=118"
                         },
                         {
                             "lessonIndex": 784,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #20",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=119"
                         },
                         {
                             "lessonIndex": 785,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #21",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=120"
                         },
                         {
                             "lessonIndex": 786,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #22",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=121"
                         },
                         {
                             "lessonIndex": 787,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #23",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=122"
                         },
                         {
                             "lessonIndex": 788,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #24",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=123"
                         },
                         {
                             "lessonIndex": 789,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #25",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=124"
                         },
                         {
                             "lessonIndex": 790,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #26",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=125"
                         },
                         {
                             "lessonIndex": 791,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #27",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=126"
                         },
                         {
                             "lessonIndex": 792,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #28",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=127"
                         },
                         {
                             "lessonIndex": 793,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #29",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=128"
                         },
                         {
                             "lessonIndex": 794,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #30",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=129"
                         },
                         {
                             "lessonIndex": 795,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #31",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=130"
                         },
                         {
                             "lessonIndex": 796,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #32",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=131"
                         },
                         {
                             "lessonIndex": 797,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #33",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=132"
                         },
                         {
                             "lessonIndex": 798,
-                            "categoryIndex": 6,
-                            "sectionIndex": 1,
                             "title": "Basic Listening Lesson #34",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=133"
                         }
@@ -4496,239 +4429,171 @@
                     "lessons": [
                         {
                             "lessonIndex": 799,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #01",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=200"
                         },
                         {
                             "lessonIndex": 800,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #02",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=201"
                         },
                         {
                             "lessonIndex": 801,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #03",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=202"
                         },
                         {
                             "lessonIndex": 802,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #04",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=203"
                         },
                         {
                             "lessonIndex": 803,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #05",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=204"
                         },
                         {
                             "lessonIndex": 804,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #06",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=205"
                         },
                         {
                             "lessonIndex": 805,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #07",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=206"
                         },
                         {
                             "lessonIndex": 806,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #08",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=207"
                         },
                         {
                             "lessonIndex": 807,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #09",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=208"
                         },
                         {
                             "lessonIndex": 808,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #10",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=209"
                         },
                         {
                             "lessonIndex": 809,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #11",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=210"
                         },
                         {
                             "lessonIndex": 810,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #12",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=211"
                         },
                         {
                             "lessonIndex": 811,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #13",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=212"
                         },
                         {
                             "lessonIndex": 812,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #14",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=213"
                         },
                         {
                             "lessonIndex": 813,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #15",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=214"
                         },
                         {
                             "lessonIndex": 814,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #16",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=215"
                         },
                         {
                             "lessonIndex": 815,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #17",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=216"
                         },
                         {
                             "lessonIndex": 816,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #18",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=217"
                         },
                         {
                             "lessonIndex": 817,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #19",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=218"
                         },
                         {
                             "lessonIndex": 818,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #20",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=219"
                         },
                         {
                             "lessonIndex": 819,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #21",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=220"
                         },
                         {
                             "lessonIndex": 820,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #22",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=221"
                         },
                         {
                             "lessonIndex": 821,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #23",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=222"
                         },
                         {
                             "lessonIndex": 822,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #24",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=223"
                         },
                         {
                             "lessonIndex": 823,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #25",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=224"
                         },
                         {
                             "lessonIndex": 824,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #26",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=225"
                         },
                         {
                             "lessonIndex": 825,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #27",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=226"
                         },
                         {
                             "lessonIndex": 826,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #28",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=227"
                         },
                         {
                             "lessonIndex": 827,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #29",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=228"
                         },
                         {
                             "lessonIndex": 828,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #30",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=229"
                         },
                         {
                             "lessonIndex": 829,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #31",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=230"
                         },
                         {
                             "lessonIndex": 830,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #32",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=231"
                         },
                         {
                             "lessonIndex": 831,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #33",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=232"
                         },
                         {
                             "lessonIndex": 832,
-                            "categoryIndex": 6,
-                            "sectionIndex": 2,
                             "title": "Intermediate Listening Lesson #34",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=233"
                         }
@@ -4741,239 +4606,171 @@
                     "lessons": [
                         {
                             "lessonIndex": 833,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #01",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=300"
                         },
                         {
                             "lessonIndex": 834,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #02",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=301"
                         },
                         {
                             "lessonIndex": 835,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #03",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=302"
                         },
                         {
                             "lessonIndex": 836,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #04",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=303"
                         },
                         {
                             "lessonIndex": 837,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #05",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=304"
                         },
                         {
                             "lessonIndex": 838,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #06",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=305"
                         },
                         {
                             "lessonIndex": 839,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #07",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=306"
                         },
                         {
                             "lessonIndex": 840,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #08",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=307"
                         },
                         {
                             "lessonIndex": 841,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #09",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=308"
                         },
                         {
                             "lessonIndex": 842,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #10",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=309"
                         },
                         {
                             "lessonIndex": 843,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #11",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=310"
                         },
                         {
                             "lessonIndex": 844,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #12",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=311"
                         },
                         {
                             "lessonIndex": 845,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #13",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=312"
                         },
                         {
                             "lessonIndex": 846,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #14",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=313"
                         },
                         {
                             "lessonIndex": 847,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #15",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=314"
                         },
                         {
                             "lessonIndex": 848,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #16",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=315"
                         },
                         {
                             "lessonIndex": 849,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #17",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=316"
                         },
                         {
                             "lessonIndex": 850,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #18",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=317"
                         },
                         {
                             "lessonIndex": 851,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #19",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=318"
                         },
                         {
                             "lessonIndex": 852,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #20",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=319"
                         },
                         {
                             "lessonIndex": 853,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #21",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=320"
                         },
                         {
                             "lessonIndex": 854,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #22",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=321"
                         },
                         {
                             "lessonIndex": 855,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #23",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=322"
                         },
                         {
                             "lessonIndex": 856,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #24",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=323"
                         },
                         {
                             "lessonIndex": 857,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #25",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=324"
                         },
                         {
                             "lessonIndex": 858,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #26",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=325"
                         },
                         {
                             "lessonIndex": 859,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #27",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=326"
                         },
                         {
                             "lessonIndex": 860,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #28",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=327"
                         },
                         {
                             "lessonIndex": 861,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #29",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=328"
                         },
                         {
                             "lessonIndex": 862,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #30",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=329"
                         },
                         {
                             "lessonIndex": 863,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #31",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=330"
                         },
                         {
                             "lessonIndex": 864,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #32",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=331"
                         },
                         {
                             "lessonIndex": 865,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #33",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=332"
                         },
                         {
                             "lessonIndex": 866,
-                            "categoryIndex": 6,
-                            "sectionIndex": 3,
                             "title": "Advanced Listening Lesson #34",
                             "link": "http://www.talkenglish.com/listening/lessonlisten.aspx?ALID=333"
                         }
@@ -4987,371 +4784,271 @@
             "sections": [
                 {
                     "title": "Pronunciation Lessons",
-                    "description": "Pronunciation is very difficult to correct if you have been speaking English for a long time. As you know, practice does not make perfect, it makes permanent. That means if you practice incorrectly, it will become permanent. You need to correct this problem before moving forward because having bad pronunciation is one of the most difficult aspects of speaking to someone who does not speak English well.The pronunciation lessons provided here are American English pronunciation and will provide you with an explanation, instruction, and audio files to help you pronounce sounds correctly. If you don't have access to a native speaker to give you feedback, I encourage you to record and listen to yourself. Although it might be tedious, you'll be surprised at how helpful this actually is.",
+                    "description": "\r\nPronunciation is very difficult to correct if you have been speaking English for a long time. As you know, practice does not make perfect, it makes permanent. That means if you practice incorrectly, it will become permanent. You need to correct this problem before moving forward because having bad pronunciation is one of the most difficult aspects of speaking to someone who does not speak English well.\r\n\r\n\r\nThe pronunciation lessons provided here are American English pronunciation and will provide you with an explanation, instruction, and audio files to help you pronounce sounds correctly. If you don't have access to a native speaker to give you feedback, I encourage you to record and listen to yourself. Although it might be tedious, you'll be surprised at how helpful this actually is.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
                     "link": "http://www.talkenglish.com/extralessons/pronunciation.aspx",
                     "lessons": [
                         {
                             "lessonIndex": 867,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters B and P",
+                            "title": "Pronouncing the letters B and P\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=001"
                         },
                         {
                             "lessonIndex": 868,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters D and T",
+                            "title": "Pronouncing the letters D and T\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=002"
                         },
                         {
                             "lessonIndex": 869,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters G and K",
+                            "title": "Pronouncing the letters G and K\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=003"
                         },
                         {
                             "lessonIndex": 870,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters CH and J",
+                            "title": "Pronouncing the letters CH and J\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=004"
                         },
                         {
                             "lessonIndex": 871,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter H",
+                            "title": "Pronouncing the letter H\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=005"
                         },
                         {
                             "lessonIndex": 872,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters F and V",
+                            "title": "Pronouncing the letters F and V\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=006"
                         },
                         {
                             "lessonIndex": 873,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters S and Z",
+                            "title": "Pronouncing the letters S and Z\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=007"
                         },
                         {
                             "lessonIndex": 874,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letters M, N, and NG",
+                            "title": "Pronouncing the letters M, N, and NG\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=008"
                         },
                         {
                             "lessonIndex": 875,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter L",
+                            "title": "Pronouncing the letter L\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=009"
                         },
                         {
                             "lessonIndex": 876,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter R",
+                            "title": "Pronouncing the letter R\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=010"
                         },
                         {
                             "lessonIndex": 877,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter W",
+                            "title": "Pronouncing the letter W\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=011"
                         },
                         {
                             "lessonIndex": 878,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter Y",
+                            "title": "Pronouncing the letter Y\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=012"
                         },
                         {
                             "lessonIndex": 879,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the sound TH",
+                            "title": "Pronouncing the sound TH\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=013"
                         },
                         {
                             "lessonIndex": 880,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the sound SH",
+                            "title": "Pronouncing the sound SH\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=014"
                         },
                         {
                             "lessonIndex": 881,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing various sounds of the letter A",
+                            "title": "Pronouncing various sounds of the letter A\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=015"
                         },
                         {
                             "lessonIndex": 882,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing various sounds of the letter E",
+                            "title": "Pronouncing various sounds of the letter E\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=016"
                         },
                         {
                             "lessonIndex": 883,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter I",
+                            "title": "Pronouncing the letter I\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=017"
                         },
                         {
                             "lessonIndex": 884,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter O",
+                            "title": "Pronouncing the letter O\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=018"
                         },
                         {
                             "lessonIndex": 885,
-                            "categoryIndex": 7,
-                            "sectionIndex": 0,
-                            "title": "Pronouncing the letter U",
+                            "title": "Pronouncing the letter U\r\n",
                             "link": "http://www.talkenglish.com/lessondetails.aspx?ALID=019"
                         }
                     ]
                 },
                 {
                     "title": "English Grammar Basics",
-                    "description": "If you just started learning English, you first need to know some basic rules of the language. Developing a solid foundation in English grammar will not only help you create your own sentences correctly but will also make it easier to improve your communication skills in both spoken and written English.Study all the lessons below and incorporate your learning into your speaking and writing.",
+                    "description": "\r\nIf you just started learning English, you first need to know some basic rules of the language. Developing a solid foundation in English grammar will not only help you create your own sentences correctly but will also make it easier to improve your communication skills in both spoken and written English.\r\n\r\n\r\nStudy all the lessons below and incorporate your learning into your speaking and writing.\r\n\r\n\r\n\r\n\r\n\r\n\r\n",
                     "link": "http://www.talkenglish.com/grammar/grammar.aspx",
                     "lessons": [
                         {
                             "lessonIndex": 886,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Singular and Plural Nouns",
+                            "title": "Singular and Plural Nouns\r\n",
                             "link": "http://www.talkenglish.com/Grammar/singular-plural-nouns.aspx"
                         },
                         {
                             "lessonIndex": 887,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Count Nouns vs. Non-Count Nouns",
+                            "title": "Count Nouns vs. Non-Count Nouns\r\n",
                             "link": "http://www.talkenglish.com/Grammar/count-nouns.aspx"
                         },
                         {
                             "lessonIndex": 888,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Possessive Nouns",
+                            "title": "Possessive Nouns\r\n",
                             "link": "http://www.talkenglish.com/Grammar/possessive-nouns.aspx"
                         },
                         {
                             "lessonIndex": 889,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Pronouns",
+                            "title": "Pronouns\r\n",
                             "link": "http://www.talkenglish.com/Grammar/pronouns.aspx"
                         },
                         {
                             "lessonIndex": 890,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "'Be' Verbs",
+                            "title": "'Be' Verbs\r\n",
                             "link": "http://www.talkenglish.com/Grammar/be-verbs.aspx"
                         },
                         {
                             "lessonIndex": 891,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Action Verbs",
+                            "title": "Action Verbs\r\n",
                             "link": "http://www.talkenglish.com/Grammar/action-verbs.aspx"
                         },
                         {
                             "lessonIndex": 892,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Adjectives",
+                            "title": "Adjectives\r\n",
                             "link": "http://www.talkenglish.com/Grammar/adjectives.aspx"
                         },
                         {
                             "lessonIndex": 893,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Comparative and Superlative Adjectives",
+                            "title": "Comparative and Superlative Adjectives\r\n",
                             "link": "http://www.talkenglish.com/Grammar/comparative-superlative-adjectives.aspx"
                         },
                         {
                             "lessonIndex": 894,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Adverbs",
+                            "title": "Adverbs\r\n",
                             "link": "http://www.talkenglish.com/Grammar/adverbs.aspx"
                         },
                         {
                             "lessonIndex": 895,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Simple Tense",
+                            "title": "Simple Tense\r\n",
                             "link": "http://www.talkenglish.com/Grammar/simple-tense.aspx"
                         },
                         {
                             "lessonIndex": 896,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Progressive and Perfect Tense",
+                            "title": "Progressive and Perfect Tense\r\n",
                             "link": "http://www.talkenglish.com/Grammar/progressive-and-perfect-tense.aspx"
                         },
                         {
                             "lessonIndex": 897,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Perfect Progressive Tense",
+                            "title": "Perfect Progressive Tense\r\n",
                             "link": "http://www.talkenglish.com/Grammar/perfect-progressive-tense.aspx"
                         },
                         {
                             "lessonIndex": 898,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Irregular Verbs",
+                            "title": "Irregular Verbs\r\n",
                             "link": "http://www.talkenglish.com/Grammar/irregular-verbs.aspx"
                         },
                         {
                             "lessonIndex": 899,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Gerunds",
+                            "title": "Gerunds\r\n",
                             "link": "http://www.talkenglish.com/Grammar/gerunds.aspx"
                         },
                         {
                             "lessonIndex": 900,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Infinitives 1",
+                            "title": "Infinitives 1\r\n",
                             "link": "http://www.talkenglish.com/Grammar/infinitives-1.aspx"
                         },
                         {
                             "lessonIndex": 901,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Infinitives 2",
+                            "title": "Infinitives 2\r\n",
                             "link": "http://www.talkenglish.com/Grammar/infinitives-2.aspx"
                         },
                         {
                             "lessonIndex": 902,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Active Voice and Passive Voice",
+                            "title": "Active Voice and Passive Voice\r\n",
                             "link": "http://www.talkenglish.com/Grammar/active-passive-voice.aspx"
                         },
                         {
                             "lessonIndex": 903,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Indicative, Imperative, Subjunctive Mood",
+                            "title": "Indicative, Imperative, Subjunctive Mood\r\n",
                             "link": "http://www.talkenglish.com/Grammar/mood.aspx"
                         },
                         {
                             "lessonIndex": 904,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Auxiliary Verbs - 'Be,' 'Do,' 'Have'",
+                            "title": "Auxiliary Verbs - 'Be,' 'Do,' 'Have'\r\n",
                             "link": "http://www.talkenglish.com/Grammar/auxiliary-verbs-be-do-have.aspx"
                         },
                         {
                             "lessonIndex": 905,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Auxiliary Verbs - 'Will/Would,' 'Shall/Should'",
+                            "title": "Auxiliary Verbs - 'Will/Would,' 'Shall/Should'\r\n",
                             "link": "http://www.talkenglish.com/Grammar/auxiliary-verbs-will-would-shall-should.aspx"
                         },
                         {
                             "lessonIndex": 906,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Auxiliary Verbs - 'Can/Could,' 'May/Might/Must'",
+                            "title": "Auxiliary Verbs - 'Can/Could,' 'May/Might/Must'\r\n",
                             "link": "http://www.talkenglish.com/Grammar/auxiliary-verbs-can-could-may-might-must.aspx"
                         },
                         {
                             "lessonIndex": 907,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Prepositions - 'On,' 'At,' 'In'",
+                            "title": "Prepositions - 'On,' 'At,' 'In'\r\n",
                             "link": "http://www.talkenglish.com/Grammar/prepositions-on-at-in.aspx"
                         },
                         {
                             "lessonIndex": 908,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Prepositions - 'Of,' 'To,' 'For'",
+                            "title": "Prepositions - 'Of,' 'To,' 'For'\r\n",
                             "link": "http://www.talkenglish.com/Grammar/prepositions-of-to-for.aspx"
                         },
                         {
                             "lessonIndex": 909,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Prepositions - 'With,' 'Over,' 'By'",
+                            "title": "Prepositions - 'With,' 'Over,' 'By'\r\n",
                             "link": "http://www.talkenglish.com/Grammar/prepositions-with-over-by.aspx"
                         },
                         {
                             "lessonIndex": 910,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Conjunctions - Coordinating and Correlative",
+                            "title": "Conjunctions - Coordinating and Correlative\r\n",
                             "link": "http://www.talkenglish.com/Grammar/conjunctions-coordinating-correlative.aspx"
                         },
                         {
                             "lessonIndex": 911,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Conjunctions - Subordinating",
+                            "title": "Conjunctions - Subordinating\r\n",
                             "link": "http://www.talkenglish.com/Grammar/conjunctions-subordinating.aspx"
                         },
                         {
                             "lessonIndex": 912,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Conjunctive Adverbs",
+                            "title": "Conjunctive Adverbs\r\n",
                             "link": "http://www.talkenglish.com/Grammar/conjunctive-adverbs.aspx"
                         },
                         {
                             "lessonIndex": 913,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Articles - Indefinite and Definite",
+                            "title": "Articles - Indefinite and Definite\r\n",
                             "link": "http://www.talkenglish.com/Grammar/articles.aspx"
                         },
                         {
                             "lessonIndex": 914,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Interjections",
+                            "title": "Interjections\r\n",
                             "link": "http://www.talkenglish.com/Grammar/interjections.aspx"
                         },
                         {
                             "lessonIndex": 915,
-                            "categoryIndex": 7,
-                            "sectionIndex": 1,
-                            "title": "Capitalization",
+                            "title": "Capitalization\r\n",
                             "link": "http://www.talkenglish.com/Grammar/capitalization.aspx"
                         }
                     ]
                 },
                 {
                     "title": "English Vocabulary",
-                    "hidden": true,
-                    "description": "How many words do you need to know in English? This is a very common question and it varies depending on your goal. Because TalkEnglish.com focuses on speaking, the vocabulary presented in this section will be the most commonly used words in speaking.There are roughly 100,000 word-families in the English language.A native English speaking person knows between 10,000 (uneducated) to 20,000 (educated) word families.Professor Paul Nation found that a person needs to know 8,000-9,000 word families to enjoy reading a book.Studying heritage language learners reveal that a person with a vocabulary size of 2,500 passive word-families and 2,000 active word-families can speak a language fluently.Many people do not know what a heritage language learner is.  Let's say a person from Mexico moves to the US at the age of 5.  The person knows basic Spanish and is fluent for a 5 year old but eventually English will become dominant.  This person whose first language is Spanish actually does not know many Spanish words and must study Spanish to retain it.  Because they grew up for 5 years speaking Spanish, they are a different type of language learners.  This type of person is considered a heritage language learner.GOOD NEWS - If your goal is to speak English fluently, you are not required to study 10,000 words. 2,000 is enough to get you started.(adsbygoogle = window.adsbygoogle || []).push({});Here is another list of things to consider before studying vocabularyBefore studying vocabulary, understand the difference between each word in a word-family. By doing so, you will be able to understand how to use words more easily. A word-family is a grouping of words derived from the same base. For example, active, actively, activities, and activity are all in the same word-family.There is a difference between passive vocabulary and active vocabulary. Passive vocabulary is used in reading and listening, where you are receiving information. Active vocabulary is used in writing and speaking, where you are giving information. In reading, you have time to think. If you want to be fluent, you don't have time to think because the definition of fluent is to speak smoothly and easily.Your goal should be to increase the depth of your vocabulary knowledge instead of the breadth of your vocabulary knowledge. There are many English learners who know 8,000 words, but they cannot speak a single sentence. On the other hand, there are people who know only 2,000 words and they can speak fluently. The difference is how deeply you know a word. Knowing 10,000 words passively will not help you with speaking. Instead focus on learning the first 2,000 words deeply.Learning vocabulary by memorizing the definition in your native language is an inefficient way to learn words. Rather, reading is the best way to increase your vocabulary. Learn words by seeing the word in a sentence. You can look up words in a dictionary, but study them in sentences, not the word itself.The vocabulary words in the list below were created by extracting words from dialogs totaling more than 250,000 words. The only words to make it into the top 2,000 words were those that were present in 1) The British National Corpus top 3,000 words, 2) The Corpus of Contemporary American English top 5,000 words, and 3) The 3,000 most frequently spoken words from Longman Communication.If you had to choose the first 2,000 words to learn, the list below is very accurate.  The number next to the link is the actual number.Top 2000 English Vocabulary Words used in Speaking (2265)Out of the 2265 words in the list, a total of 1867 word families were present.Top 2000 Word Families (1867)The following is broken down by type of words. All the words in the following lists are in the list of 2000 words. The sum is greater than 2,000 because many words can be both a noun and a verb.Finally, before you start studying vocabulary, keep in mind that you will need to learn a lot more than 2,000 words.  However, studying the right 2,000 words in the proper depth will help you to become fluent in English much faster.(adsbygoogle = window.adsbygoogle || []).push({});",
+                    "description": "How many words do you need to know in English? This is a very common question and it varies depending on your goal. Because TalkEnglish.com focuses on speaking, the vocabulary presented in this section will be the most commonly used words in speaking.There are roughly 100,000 word-families in the English language.A native English speaking person knows between 10,000 (uneducated) to 20,000 (educated) word families.Professor Paul Nation found that a person needs to know 8,000-9,000 word families to enjoy reading a book.Studying heritage language learners reveal that a person with a vocabulary size of 2,500 passive word-families and 2,000 active word-families can speak a language fluently.Many people do not know what a heritage language learner is.  Let's say a person from Mexico moves to the US at the age of 5.  The person knows basic Spanish and is fluent for a 5 year old but eventually English will become dominant.  This person whose first language is Spanish actually does not know many Spanish words and must study Spanish to retain it.  Because they grew up for 5 years speaking Spanish, they are a different type of language learners.  This type of person is considered a heritage language learner.GOOD NEWS - If your goal is to speak English fluently, you are not required to study 10,000 words. 2,000 is enough to get you started.(adsbygoogle = window.adsbygoogle || []).push({});Here is another list of things to consider before studying vocabularyBefore studying vocabulary, understand the difference between each word in a word-family. By doing so, you will be able to understand how to use words more easily. A word-family is a grouping of words derived from the same base. For example, active, actively, activities, and activity are all in the same word-family.There is a difference between passive vocabulary and active vocabulary. Passive vocabulary is used in reading and listening, where you are receiving information. Active vocabulary is used in writing and speaking, where you are giving information. In reading, you have time to think. If you want to be fluent, you don't have time to think because the definition of fluent is to speak smoothly and easily.Your goal should be to increase the depth of your vocabulary knowledge instead of the breadth of your vocabulary knowledge. There are many English learners who know 8,000 words, but they cannot speak a single sentence. On the other hand, there are people who know only 2,000 words and they can speak fluently. The difference is how deeply you know a word. Knowing 10,000 words passively will not help you with speaking. Instead focus on learning the first 2,000 words deeply.Learning vocabulary by memorizing the definition in your native language is an inefficient way to learn words. Rather, reading is the best way to increase your vocabulary. Learn words by seeing the word in a sentence. You can look up words in a dictionary, but study them in sentences, not the word itself.The vocabulary words in the list below were created by extracting words from dialogs totaling more than 250,000 words. The only words to make it into the top 2,000 words were those that were present in 1) The British National Corpus top 3,000 words, 2) The Corpus of Contemporary American English top 5,000 words, and 3) The 3,000 most frequently spoken words from Longman Communication.Before you start studying, watch this video to learn how to study and improve your English Vocabulary.If you had to choose the first 2,000 words to learn, the list below is very accurate.  The number next to the link is the actual number.Top 2000 English Vocabulary Words used in Speaking (2265)Out of the 2265 words in the list, a total of 1867 word families were present.Top 2000 Word Families (1867)The following is broken down by type of words. All the words in the following lists are in the list of 2000 words. The sum is greater than 2,000 because many words can be both a noun and a verb.Finally, before you start studying vocabulary, keep in mind that you will need to learn a lot more than 2,000 words.  However, studying the right 2,000 words in the proper depth will help you to become fluent in English much faster.(adsbygoogle = window.adsbygoogle || []).push({});",
                     "link": "http://www.talkenglish.com/vocabulary/english-vocabulary.aspx",
                     "lessons": []
                 },
                 {
                     "title": "ESL Vocabulary Lessons",
-                    "hidden": true,
                     "description": "TalkEnglish.com identified the most common words that are used with over 2,000 most frequently used vocabulary words in spoken English and provided example sentences using that word.  Here are two example sentences using the word friend:“She talks to her best friend every day.”(best)“She has been a loyal friend for many years.”(loyal, real, trusted, true, faithful)The word that is being studied is always underlined.  The word that is commonly used with the word you are studying is always bolded.  The words in parentheses are other words that you can use in the same sentence.There are over 2000 lessons with many example sentences that will help you learn how to use each word easily and correctly.You may click on any word in the vocabulary page, or you can search by the following:Search by FrequencySearch by LetterSearch by Word(adsbygoogle = window.adsbygoogle || []).push({});",
                     "link": "http://www.talkenglish.com/how-to-use/example-sentences.aspx",
                     "lessons": []

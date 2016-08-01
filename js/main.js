@@ -16,7 +16,7 @@ ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the
 ga('send', 'pageview');
 
 /* 
- *   Servive Worker
+ *   using Servive Worker (sw.js)
  */
 var isLocalhost = Boolean(window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -36,7 +36,7 @@ if ('serviceWorker' in navigator &&
             // new files to cache:
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-registration-update-method
             if (typeof registration.update === 'function') {
-                console.log("Update Service Worker");
+                console.log("Updating Service Worker");
                 registration.update();
             }
 
@@ -59,8 +59,10 @@ if ('serviceWorker' in navigator &&
                                 // fresh content will have been added to the cache.
                                 // It's the perfect time to display a 'New content is
                                 // available; please refresh.' message in the page's interface.
-                                console.log('New version is available, please refresh to update.');
-                                Materialize.toast('New version is available, please refresh to update.', 3000);
+                                setTimeout(function() { // setTimeout to avoid message when refreshing
+                                    console.log('New version is available, please refresh to update.');
+                                    Materialize.toast('New version is available, please refresh to update.', 3000);
+                                }, 1000);
                                 break;
 
                             case 'redundant':
@@ -89,6 +91,121 @@ var lessonsDataJson;
     var sideBarTpl = Handlebars.compile(sideBarTpl_raw);
     var sectionTpl_raw = $("#sectionTpl").html();
     var sectionTpl = Handlebars.compile(sectionTpl_raw);
+
+    // config modal
+    var modalAnimation_duration = 200;
+    if (window.innerWidth <= 768) { // no animation on mobile
+        modalAnimation_duration = 0;
+    }
+    $('.modal-trigger').leanModal({
+        in_duration: modalAnimation_duration,
+        out_duration: modalAnimation_duration
+    });
+
+    // load data to side bar
+    $('#slideNav').html(sideBarTpl(lessonsDataJson));
+
+    // Initialize collapse button
+    $(".button-collapse").sideNav();
+    // Initialize collapsible (lessons' category)
+    $('.collapsible').collapsible();
+
+    // load previous openned lesson/section
+    var savedCateIndex = localStorage.getItem('cateIndex');
+    var savedSectionIndex = localStorage.getItem('sectionIndex');
+    var savedLessonIndex = localStorage.getItem('lessonIndex');
+    if (savedCateIndex) {
+        var $cateItem = $('#slideNav > .category-item:eq(' + savedCateIndex + ') > ul > li');
+        $cateItem.addClass('active');
+        $cateItem.find('a').addClass('active');
+        $cateItem.find('.collapsible-body').show();
+        if (savedSectionIndex) {
+            $cateItem.find('.section-item:eq(' + savedSectionIndex + ')').addClass('selected');
+            loadSection(savedCateIndex, savedSectionIndex);
+            if (savedLessonIndex) {
+                loadLesson(savedLessonIndex);
+            }
+        }
+    }
+
+    // click Section on sidebar to open list of lessons
+    $('li.section-item').click(function() {
+        $('.section-item').removeClass('selected');
+        $(this).addClass('selected');
+        $('.button-collapse').sideNav('hide'); // Hide sideNav
+
+        var sectionIndex = $(this).index();
+        var cateIndex = $(this).parents('.category-item').index();
+        loadSection(cateIndex, sectionIndex);
+    });
+
+    $(document).on('click', '.lesson-item', function() {
+        var lessonIndex = $(this).data('lesson');
+        loadLesson(lessonIndex);
+    });
+
+    $('#btnCloseModalLesson').click(function() {
+        $('#modalLesson').closeModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration
+        });
+        localStorage.removeItem('lessonIndex');
+    });
+
+    function loadSection(cateIndex, sectionIndex) {
+        localStorage.setItem('cateIndex', cateIndex);
+        localStorage.setItem('sectionIndex', sectionIndex);
+        var sectionData = lessonsDataJson.categories[cateIndex].sections[sectionIndex];
+        $('#mainContent').html(sectionTpl(sectionData));
+        $('#sectionDesc').html(sectionData.description);
+        $('body,html').scrollTop(0);
+        $('.masonry').masonry({
+            // use outer width of grid-sizer for columnWidth
+            itemSelector: '.grid-item',
+            // do not use .grid-sizer in layout
+            columnWidth: '.grid-item',
+            percentPosition: true
+        });
+    }
+
+    function loadLesson(lessonIndex) {
+        $('#modalLesson').openModal({
+            in_duration: modalAnimation_duration,
+            out_duration: modalAnimation_duration,
+            complete: function() { // Callback for Modal close
+                stopSpeaking();
+            }
+        });
+        $('#lessonContent').empty();
+        $('#modalLesson .modal-content').scrollTop(0);
+        $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
+            localStorage.setItem('lessonIndex', lessonIndex);
+            $('#lessonTitle').text(lesson.title);
+            if (lessonIndex <= 0) {
+                $('#btnPreviousLesson').hide();
+            }
+            var numberOfLessons = lessonsDataJson.numberOfLessons || 916;
+            if (lessonIndex >= numberOfLessons-1) {
+                $('#btnNextLesson').hide();
+            }
+            // remove ad
+            lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
+
+
+            $('#lessonContent').html(lesson.html);
+            $('#lessonContent table').each(function(i, ele) {
+                if ($(this).attr('border') === '1') {
+                    $(this).addClass('borderTable');
+                }
+            });
+
+        });
+    }
+
+    /**
+     *   Text-to-Speech & Speech-to-Text feature
+     **/
+
     // Get the voice select element.
     var chkUseVirtual = document.getElementById("chkUseVirtual");
     var inputGroupSpeed = document.getElementById('groupSpeed');
@@ -125,46 +242,34 @@ var lessonsDataJson;
         localStorage.setItem('voiceValue', selectVoice.value);
     });
 
-    // config modal
-    var modalAnimation_duration = 200;
-    if (window.innerWidth <= 768) { // no animation on mobile
-        modalAnimation_duration = 0;
+    // Test whether browser supports SpeechRecognition
+    window.SpeechRecognition = window.SpeechRecognition ||
+        window.webkitSpeechRecognition ||
+        null;
+    if (window.SpeechRecognition === null) {
+        console.info("This browser doesn't support Web speech API");
+        // hide voice-to-text feature
+        $('.listen-voice').hide();
+    } else {
+        window.recognizer = new window.SpeechRecognition();
+        window.recognizer.continuous = false;
     }
-    $('.modal-trigger').leanModal({
-        in_duration: modalAnimation_duration,
-        out_duration: modalAnimation_duration
-    });
 
-    // load data to side bar
-    $('#slideNav').html(sideBarTpl(lessonsDataJson));
-
-    // Initialize collapse button
-    $(".button-collapse").sideNav();
-    // Initialize collapsible (lessons' category)
-    $('.collapsible').collapsible();
-    // click Section on sidebar to open list of lessons
-    $('li.section-item').click(function() {
-        $('.section-item').removeClass('selected');
-        $(this).addClass('selected');
-        $('.button-collapse').sideNav('hide'); // Hide sideNav
-
-        var sectionIndex = $(this).index();
-        var cateIndex = $(this).parents('.category-item').index();
-        loadSection(cateIndex, sectionIndex);
-    });
-
-    $(document).on('click', '.lesson-item', function() {
-        var lessonIndex = $(this).data('lesson');
-        loadLesson(lessonIndex);
-    });
-
-    $('#btnCloseModalLesson').click(function() {
-        $('#modalLesson').closeModal({
-            in_duration: modalAnimation_duration,
-            out_duration: modalAnimation_duration
-        });
-        localStorage.removeItem('lessonIndex');
-    });
+    // create audio wo/ src
+    var audioPlayer = new Audio();
+    var text2Speak = '';
+    audioPlayer.onloadeddata = function() {
+        clearTimeout(window.timeoutCheckingNetwork);
+    };
+    audioPlayer.onended = function() {
+        $('.playingAudio').removeClass('playingAudio');
+    };
+    audioPlayer.onerror = function(err) {
+        // play fail => try again
+        console.log('fail playing, try using Web Speech ', err);
+        clearTimeout(window.timeoutCheckingNetwork);
+        askToUseWebSpeech();
+    };
 
     $('#btnPractise').click(function() {
         $('#modalListen').openModal({
@@ -184,78 +289,6 @@ var lessonsDataJson;
         }
     });
 
-    // load previous openned lesson/section
-    var savedCateIndex = localStorage.getItem('cateIndex');
-    var savedSectionIndex = localStorage.getItem('sectionIndex');
-    var savedLessonIndex = localStorage.getItem('lessonIndex');
-    if (savedCateIndex) {
-        var $cateItem = $('#slideNav > .category-item:eq(' + savedCateIndex + ') > ul > li');
-        $cateItem.addClass('active');
-        $cateItem.find('a').addClass('active');
-        $cateItem.find('.collapsible-body').show();
-        if (savedSectionIndex) {
-            $cateItem.find('.section-item:eq(' + savedSectionIndex + ')').addClass('selected');
-            loadSection(savedCateIndex, savedSectionIndex);
-            if (savedLessonIndex) {
-                loadLesson(savedLessonIndex);
-            }
-        }
-
-    }
-
-    function loadSection(cateIndex, sectionIndex) {
-        localStorage.setItem('cateIndex', cateIndex);
-        localStorage.setItem('sectionIndex', sectionIndex);
-        var sectionData = lessonsDataJson.categories[cateIndex].sections[sectionIndex];
-        $('#mainContent').html(sectionTpl(sectionData));
-        $('#sectionDesc').html(sectionData.description);
-        $('body,html').scrollTop(0);
-        $('.masonry').masonry({
-            // use outer width of grid-sizer for columnWidth
-            itemSelector: '.grid-item',
-            // do not use .grid-sizer in layout
-            columnWidth: '.grid-item',
-            percentPosition: true
-        });
-    }
-
-    function loadLesson(lessonIndex) {
-        $('#modalLesson').openModal({
-            in_duration: modalAnimation_duration,
-            out_duration: modalAnimation_duration,
-            complete: function() { // Callback for Modal close
-                stopSpeaking();
-            }
-        });
-        $('#lessonContent').empty();
-        $('#modalLesson .modal-content').scrollTop(0);
-        $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
-            localStorage.setItem('lessonIndex', lessonIndex);
-            $('#lessonTitle').text(lesson.title);
-            // remove ad
-            lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
-            $('#lessonContent').html(lesson.html);
-            $('#lessonContent table').each(function(i, ele) {
-                if ($(this).attr('border') === '1') {
-                    $(this).addClass('borderTable');
-                }
-            });
-
-        });
-    }
-
-    function startListen() {
-        $('#btnAgain').text('Stop');
-        $('#recordTitle').text('Listening...');
-        $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
-        listen(function(text) {
-            $('#recordTitle').text('Result');
-            $('#listenResult').text(text);
-            $('#btnAgain').text('Again');
-        });
-    }
-
-
     $('#btnCloseModalListen').click(function() {
         $('#modalListen').closeModal({
             in_duration: modalAnimation_duration,
@@ -263,22 +296,6 @@ var lessonsDataJson;
         });
         stopListen();
     });
-
-    // create audio wo/ src
-    var audioPlayer = new Audio();
-    var text2Speak = '';
-    audioPlayer.onloadeddata = function() {
-        clearTimeout(window.timeoutCheckingNetwork);
-    };
-    audioPlayer.onended = function() {
-        $('.playingAudio').removeClass('playingAudio');
-    };
-    audioPlayer.onerror = function(err) {
-        // play fail => try again
-        console.log('fail playing, try using Web Speech ', err);
-        clearTimeout(window.timeoutCheckingNetwork);
-        askToUseWebSpeech();
-    };
 
     // handle playing voice
     $(document).on('click', 'a', function(e) {
@@ -332,7 +349,6 @@ var lessonsDataJson;
         msg.rate = parseFloat($('input[name="groupSpeed"]:checked').val());
         // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
         if (selectVoice.value) {
-            console.log(selectVoice.value);
             msg.voice = speechSynthesis.getVoices().filter(function(voice) {
                 return voice.name == selectVoice.value;
             })[0];
@@ -340,18 +356,6 @@ var lessonsDataJson;
         window.speechSynthesis.speak(msg);
     }
 
-    // Test whether browser supports Web Speech API
-    window.SpeechRecognition = window.SpeechRecognition ||
-        window.webkitSpeechRecognition ||
-        null;
-    if (window.SpeechRecognition === null) {
-        console.info("This browser doesn't support Web speech API");
-        // hide voice-to-text feature
-        $('.listen-voice').hide();
-    } else {
-        window.recognizer = new window.SpeechRecognition();
-        window.recognizer.continuous = false;
-    }
     // use Web Speeck Api to recognize voice
     function listen(callback) {
         if (window.SpeechRecognition) {
@@ -360,7 +364,7 @@ var lessonsDataJson;
                 if (event.results.length > 0) {
                     var text = event.results[0][0].transcript;
                     if (callback) {
-                        console.log("---------------text recognized: " + text);
+                        console.log("---text recognized: " + text);
                         callback(text);
                     }
                 }
@@ -376,6 +380,17 @@ var lessonsDataJson;
         } else {
             console.warn("This browser doesn't support Web Speech API");
         }
+    }
+
+    function startListen() {
+        $('#btnAgain').text('Stop');
+        $('#recordTitle').text('Listening...');
+        $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
+        listen(function(text) {
+            $('#recordTitle').text('Result');
+            $('#listenResult').text(text);
+            $('#btnAgain').text('Again');
+        });
     }
 
     function stopListen() {
@@ -419,7 +434,9 @@ var lessonsDataJson;
     };
 
 
-    // These functions for Quiz question in Listening category. The code was got from talkenglish.com
+    /** 
+     *   These functions for Quiz question in Listening category. The code was got from talkenglish.com
+     **/
     function showHide(elementid) {
         if (document.getElementById(elementid).style.display == 'none') {
             document.getElementById(elementid).style.display = '';
