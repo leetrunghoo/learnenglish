@@ -26,6 +26,7 @@ function scraperLogic_listLessons(html) {
 
     var result = {
         description: 'List of lessons of talkenglish.com, it was scraped from http://www.talkenglish.com/lessonindex.aspx for personal use',
+        numberOfLessons: 0,
         categories: []
     };
     var arrLessons = []; // arrLessons will be used to scrape lessons' content later
@@ -53,7 +54,7 @@ function scraperLogic_listLessons(html) {
             // need to scrape each category speaking to get list section, except last category: 'special topics'
             scraper(cateLink, function(html) {
                 var $ = cheerio.load(html);
-                var $sections = $('.list-page-wrapper div:first-child > div a');
+                var $sections = $('.list-page-wrapper div > div > a');
                 console.log('number of sections of sub cate speaking ', $sections.length);
 
                 var loopSection = function(sectionIndex, $sections) {
@@ -69,7 +70,9 @@ function scraperLogic_listLessons(html) {
                     scrapingSection(cateIndex, sectionIndex, section, function(sectionEdited) {
                         console.log('----------scraped Section:', sectionEdited.title);
                         // arrLessons will be used to scrape lessons' content later
-                        arrLessons = arrLessons.concat(sectionEdited.lessons);
+                        // JSON.parse(JSON.stringify()) to avoid reference
+                        var arrAdditionLessons = JSON.parse(JSON.stringify(sectionEdited.lessons));
+                        arrLessons = arrLessons.concat(arrAdditionLessons);
 
                         // delete unnecessary attr
                         for (var iii = 0; iii < sectionEdited.lessons.length; iii++) {
@@ -95,7 +98,7 @@ function scraperLogic_listLessons(html) {
                         }
                     });
                 };
-                
+
                 loopSection(0, $sections);
             });
         }
@@ -128,16 +131,27 @@ function scraperLogic_listLessons(html) {
                     console.log('----------scraped Section:', sectionEdited.title);
                     category.sections.push(sectionEdited);
                     // arrLessons will be used to scrape lessons' content later
-                    arrLessons = arrLessons.concat(sectionEdited.lessons);
+                    // JSON.parse(JSON.stringify()) to avoid reference
+                    var arrAdditionLessons = JSON.parse(JSON.stringify(sectionEdited.lessons));
+                    arrLessons = arrLessons.concat(arrAdditionLessons);
+
+                    // delete unnecessary attr
+                    for (var iii = 0; iii < sectionEdited.lessons.length; iii++) {
+                        delete sectionEdited.lessons[iii].categoryIndex;
+                        delete sectionEdited.lessons[iii].sectionIndex;
+                    }
 
                     if (sectionIndex === $sections.length - 1) { // the end of looping section
                         result.categories.push(category);
                         cateIndex++;
                         if (i === 4) { // the end of looping category => save file
+                            result.numberOfLessons = lessonIndex;
                             // store the files
                             var dest = 'app/data/listLessons.json';
                             saveFile(dest, JSON.stringify(result, null, 4), function(err) {
-                                //scraping list of lessons
+                                /**
+                                 *   scraping list of lessons
+                                 **/
                                 scrapingLessons(arrLessons);
                             });
                         } else {
@@ -167,9 +181,9 @@ function scrapingSection(cateIndex, sectionIndex, section, callback) {
     console.log('section.link', section.link);
     scraper(section.link, function(html) {
         var $ = cheerio.load(html);
-        var $lessons = $('.list-page-wrapper table div.list-page > div > div a');
+        var $lessons = $('.list-page-wrapper div:first-child > div a');
         if ($lessons.length === 0) {
-            $lessons = $('.list-page-wrapper div:first-child > div a');
+            $lessons = $('.list-page-wrapper table div.steps-learn > a');
         }
         console.log('number of lessons: ', $lessons.length);
         $lessons.each(function(iii, a) {
