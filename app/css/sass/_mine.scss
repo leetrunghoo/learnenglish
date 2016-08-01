@@ -133,6 +133,14 @@ h3 {
     }
 }
 
+#btnPreviousLesson, #btnNextLesson {
+    display: none;
+    height: 2rem;
+    line-height: 2rem;
+    text-transform: initial;
+    padding: 0 0.5rem;
+}
+
 #audioPlayback {
     display: none;
 }
