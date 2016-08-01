@@ -114,6 +114,7 @@ var lessonsDataJson;
     var savedCateIndex = localStorage.getItem('cateIndex');
     var savedSectionIndex = localStorage.getItem('sectionIndex');
     var savedLessonIndex = localStorage.getItem('lessonIndex');
+    var currentLessonIndex;
     if (savedCateIndex) {
         var $cateItem = $('#slideNav > .category-item:eq(' + savedCateIndex + ') > ul > li');
         $cateItem.addClass('active');
@@ -144,12 +145,21 @@ var lessonsDataJson;
         loadLesson(lessonIndex);
     });
 
+    $('#btnPreviousLesson').click(function() {
+        loadLesson(--currentLessonIndex);
+    });
+
+    $('#btnNextLesson').click(function() {
+        loadLesson(++currentLessonIndex);
+    });
+
     $('#btnCloseModalLesson').click(function() {
         $('#modalLesson').closeModal({
             in_duration: modalAnimation_duration,
             out_duration: modalAnimation_duration
         });
         localStorage.removeItem('lessonIndex');
+        stopSpeaking();
     });
 
     function loadSection(cateIndex, sectionIndex) {
@@ -169,24 +179,26 @@ var lessonsDataJson;
     }
 
     function loadLesson(lessonIndex) {
+        stopSpeaking();
+        $('#btnPreviousLesson').hide();
+        $('#btnNextLesson').hide();
+
         $('#modalLesson').openModal({
             in_duration: modalAnimation_duration,
-            out_duration: modalAnimation_duration,
-            complete: function() { // Callback for Modal close
-                stopSpeaking();
-            }
+            out_duration: modalAnimation_duration
         });
         $('#lessonContent').empty();
         $('#modalLesson .modal-content').scrollTop(0);
         $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
+            currentLessonIndex = lessonIndex;
             localStorage.setItem('lessonIndex', lessonIndex);
             $('#lessonTitle').text(lesson.title);
-            if (lessonIndex <= 0) {
-                $('#btnPreviousLesson').hide();
+            if (lessonIndex > 0) {
+                $('#btnPreviousLesson').show();
             }
             var numberOfLessons = lessonsDataJson.numberOfLessons || 916;
-            if (lessonIndex >= numberOfLessons-1) {
-                $('#btnNextLesson').hide();
+            if (lessonIndex < numberOfLessons - 1) {
+                $('#btnNextLesson').show();
             }
             // remove ad
             lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
@@ -239,6 +251,7 @@ var lessonsDataJson;
     });
     var voiceValue = localStorage.getItem('voiceValue') || '';
     $(selectVoice).change(function() {
+        voiceValue = selectVoice.value;
         localStorage.setItem('voiceValue', selectVoice.value);
     });
 
@@ -272,13 +285,11 @@ var lessonsDataJson;
     };
 
     $('#btnPractise').click(function() {
+        stopListen();
+        startListen();
         $('#modalListen').openModal({
             in_duration: modalAnimation_duration,
-            out_duration: modalAnimation_duration,
-            complete: function() { // Callback for Modal close
-                stopListen();
-                startListen();
-            }
+            out_duration: modalAnimation_duration
         });
     });
     $('#btnAgain').click(function() {
@@ -349,6 +360,7 @@ var lessonsDataJson;
         msg.rate = parseFloat($('input[name="groupSpeed"]:checked').val());
         // If a voice has been selected, find the voice and set the utterance instance's voice attribute.
         if (selectVoice.value) {
+            console.log(selectVoice.value);
             msg.voice = speechSynthesis.getVoices().filter(function(voice) {
                 return voice.name == selectVoice.value;
             })[0];
@@ -399,6 +411,7 @@ var lessonsDataJson;
 
     // Fetch the list of voices and populate the voice options.
     function loadVoices() {
+        $(selectVoice).empty();
         // Fetch the available voices.
         var voices = speechSynthesis.getVoices();
         // Loop through each of the voices.
@@ -424,50 +437,48 @@ var lessonsDataJson;
         }
         localStorage.setItem('voiceValue', selectVoice.value);
     }
-
     // Execute loadVoices.
     loadVoices();
 
     // Chrome loads voices asynchronously.
-    window.speechSynthesis.onvoiceschanged = function(e) {
-        loadVoices();
-    };
-
-
-    /** 
-     *   These functions for Quiz question in Listening category. The code was got from talkenglish.com
-     **/
-    function showHide(elementid) {
-        if (document.getElementById(elementid).style.display == 'none') {
-            document.getElementById(elementid).style.display = '';
-        } else {
-            document.getElementById(elementid).style.display = 'none';
-        }
-    }
-
-    function CheckScore() {
-        var Ques1UserAnswer, Ques2UserAnswer, Ques3UserAnswer, Ques4UserAnswer;
-        for (var i = 0; i < 4; i++) {
-            if (MyForm.Question1[i].checked) {
-                Ques1UserAnswer = MyForm.Question1[i].value;
-            }
-            if (MyForm.Question2[i].checked) {
-                Ques2UserAnswer = MyForm.Question2[i].value;
-            }
-            if (MyForm.Question3[i].checked) {
-                Ques3UserAnswer = MyForm.Question3[i].value;
-            }
-            if (MyForm.Question4[i].checked) {
-                Ques4UserAnswer = MyForm.Question4[i].value;
-            }
-        }
-        var Score = 0;
-        var CorrectAnswers = MyForm.CorrectAnswers.value;
-        if (Ques1UserAnswer == CorrectAnswers.substr(0, 1)) Score++;
-        if (Ques2UserAnswer == CorrectAnswers.substr(1, 1)) Score++;
-        if (Ques3UserAnswer == CorrectAnswers.substr(2, 1)) Score++;
-        if (Ques4UserAnswer == CorrectAnswers.substr(3, 1)) Score++;
-        ScoreText.innerHTML = "<font size=2>Your Score is: " + Score + " /4 </font><br />";
-    }
+    // window.speechSynthesis.onvoiceschanged = function(e) {
+    //     loadVoices();
+    // };
 
 })();
+
+/** 
+ *   These functions for Quiz question in Listening category. The code was got from talkenglish.com
+ **/
+function showHide(elementid) {
+    if (document.getElementById(elementid).style.display == 'none') {
+        document.getElementById(elementid).style.display = '';
+    } else {
+        document.getElementById(elementid).style.display = 'none';
+    }
+}
+
+function CheckScore() {
+    var Ques1UserAnswer, Ques2UserAnswer, Ques3UserAnswer, Ques4UserAnswer;
+    for (var i = 0; i < 4; i++) {
+        if (MyForm.Question1[i].checked) {
+            Ques1UserAnswer = MyForm.Question1[i].value;
+        }
+        if (MyForm.Question2[i].checked) {
+            Ques2UserAnswer = MyForm.Question2[i].value;
+        }
+        if (MyForm.Question3[i].checked) {
+            Ques3UserAnswer = MyForm.Question3[i].value;
+        }
+        if (MyForm.Question4[i].checked) {
+            Ques4UserAnswer = MyForm.Question4[i].value;
+        }
+    }
+    var Score = 0;
+    var CorrectAnswers = MyForm.CorrectAnswers.value;
+    if (Ques1UserAnswer == CorrectAnswers.substr(0, 1)) Score++;
+    if (Ques2UserAnswer == CorrectAnswers.substr(1, 1)) Score++;
+    if (Ques3UserAnswer == CorrectAnswers.substr(2, 1)) Score++;
+    if (Ques4UserAnswer == CorrectAnswers.substr(3, 1)) Score++;
+    ScoreText.innerHTML = "<font size=2>Your Score is: " + Score + " /4 </font><br />";
+}
