@@ -130,7 +130,7 @@
     <div id="modalAbout" class="modal modal-fixed-footer">
         <div class="modal-content">
             <h5>Hello!</h5>
-            <p>This is a web app for learning English that I made for personal use. I would like to share it to everyone, hope it helps.</p>
+            <p>This is a progressive web app for learning English that I made for personal use. I would like to share it to everyone, hope it helps.</p>
             <p>The content was got from <a href="http://www.talkenglish.com" target="_blank">www.talkenglish.com</a></p>
             <p>Author: Trung Ho (<a href="https://leetrunghoo.com" target="_blank">https://leetrunghoo.com</a>)</p>
             <p>By the way, this is an open source project, feel free to contact me <a title="email" href="mailto:leetrunghoo@gmail.com?Subject=Hello%20Trung" target="_blank">leetrunghoo@gmail.com</a></p>
@@ -216,6 +216,24 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script async type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/masonry/4.0.0/masonry.pkgd.min.js"></script>
     <script async type="text/javascript" src="js/min/main.min.js"></script>
+    <script type="text/javascript">
+    /* Google Analytics: change UA-XXXXX-X to be your site's ID */
+    var gaId = (location.href.indexOf('learnenglish.leetrunghoo') > -1) ? 'UA-73537086-2' : 'UA-73537086-1';
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+            m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    ga('create', gaId, 'auto');
+    ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the reports
+    ga('send', 'pageview');
+    </script>
 </body>
 
 </html>

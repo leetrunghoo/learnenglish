@@ -1,20 +1,3 @@
-/* Google Analytics: change UA-XXXXX-X to be your site's ID */
-var gaId = (location.href.indexOf('learnenglish.leetrunghoo') > -1) ? 'UA-73537086-2' : 'UA-73537086-1';
-(function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-        (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-        m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-})(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-ga('create', gaId, 'auto');
-ga('require', 'linkid', 'linkid.js'); // Enable enhanced link attribution in the reports
-ga('send', 'pageview');
-
 /* 
  *   using Servive Worker (sw.js)
  */
@@ -34,7 +17,7 @@ if ('serviceWorker' in navigator &&
             console.log("Service Worker Registered", registration);
 
             if (!localStorage.getItem('informWorkOffline')) {
-                Materialize.toast('Now this website can work offline', 2000);
+                Materialize.toast('Now this website can work offline', 3000);
                 localStorage.setItem('informWorkOffline', 'already');
             }
 
