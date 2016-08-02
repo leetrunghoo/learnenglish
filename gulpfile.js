@@ -151,9 +151,6 @@ gulp.task('generate-service-worker', function() {
             urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\//,
             handler: 'cacheFirst'
         }, {
-            urlPattern: /^https:\/\/www\.google-analytics\.com\//,
-            handler: 'networkFirst'
-        }, {
             urlPattern: /^https:\/\/ajax\.cloudflare\.com\//,
             handler: 'cacheFirst'
         }, {
