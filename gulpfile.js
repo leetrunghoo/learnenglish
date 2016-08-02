@@ -1,7 +1,6 @@
 var gulp = require('gulp'),
     fs = require('fs'),
     browserSync = require('browser-sync').create(),
-    // sass = require('gulp-sass'), // has error when complie scss
     sass = require('gulp-ruby-sass'),
     autoprefixer = require('gulp-autoprefixer'),
     minifycss = require('gulp-clean-css'),
@@ -11,9 +10,19 @@ var gulp = require('gulp'),
     replace = require('gulp-replace'),
     uncss = require('gulp-uncss'),
     htmlmin = require('gulp-htmlmin'),
-    swPrecache = require('sw-precache');
+    swPrecache = require('sw-precache'),
+    argv = require('yargs').argv;
 
-var lessonData = fs.readFileSync('app/data/listLessons.min.json') ? JSON.parse(fs.readFileSync('app/data/listLessons.min.json')) : '';
+var lessonData = '';
+try {
+    lessonData = JSON.parse(fs.readFileSync('app/data/listLessons.min.json'));
+} catch (e) {
+    if (e.code === 'ENOENT') {
+        console.log('File listLessons.min.json not found!');
+    } else {
+        throw e;
+    }
+}
 
 /**
  * Launch the Server
@@ -105,7 +114,7 @@ gulp.task('html', ['uncss'], function() {
  * bind data to main.js then minify it
  */
 gulp.task('scripts', function() {
-    return gulp.src(['app/js/*.js'])
+    return gulp.src(['app/js/main.js'])
         .pipe(replace('var lessonsDataJson', 'var lessonsDataJson=' + JSON.stringify(lessonData)))
         .pipe(uglify())
         .pipe(rename({
@@ -114,8 +123,8 @@ gulp.task('scripts', function() {
         .pipe(gulp.dest('app/js/min'));
 });
 
-gulp.task('minifyjson', function() {
-    return gulp.src(['app/data/*.json'])
+gulp.task('jsonminify', function() {
+    return gulp.src(['app/data/listLessons.json'])
         .pipe(jsonminify())
         .pipe(rename({
             suffix: '.min'
@@ -128,7 +137,8 @@ gulp.task('minifyjson', function() {
  */
 gulp.task('generate-service-worker', function() {
     var rootDir = 'app';
-
+    var flagProduction = (argv.production) ? true : false;
+    console.log("flagProduction", flagProduction);
     swPrecache.write('app/sw.js', {
         staticFileGlobs: [
             rootDir + '/index.html',
@@ -136,7 +146,7 @@ gulp.task('generate-service-worker', function() {
             rootDir + '/js/min/main.min.js'
         ],
         stripPrefix: rootDir,
-        handleFetch: true, //false in development builds, to ensure that features like live reload still work
+        handleFetch: flagProduction, //false in development builds, to ensure that features like live reload still work
         runtimeCaching: [{
             urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\//,
             handler: 'cacheFirst'
@@ -160,8 +170,8 @@ gulp.task('generate-service-worker', function() {
 });
 
 /**
- * Default task, running just `gulp` will compile the sass,
- * launch BrowserSync & watch files.
+ * Default task, running just `gulp` or 'gulp --production' when you want service worker cache all fetch 
+ * compile scss, minify files, launch BrowserSync & watch files.
  * Watch scss files for changes & recompile
  * Watch files => generate sw.js => reload BrowserSync
  */
@@ -171,8 +181,21 @@ gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
     gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
     gulp.watch(['app/sw.js']).on('change', browserSync.reload);
+    browserSync.reload();
 });
 
+/**
+ * For development, run without service worker for faster live-reload, use `gulp dev`
+ * empty service worker, launch BrowserSync & watch files.
+ */
+gulp.task('dev', ['html', 'scripts', 'browser-sync'], function() {
+    fs.writeFileSync('app/sw.js', ''); // empty service worker file
+    gulp.watch('app/js/*.js', ['scripts']);
+    // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
+    gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
+    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
+    browserSync.reload();
+});
 
 // run below command to deploy folder 'app' to gh-pages branch
 // git subtree push --prefix app origin gh-pages
