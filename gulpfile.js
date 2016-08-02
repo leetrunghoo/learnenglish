@@ -137,8 +137,6 @@ gulp.task('jsonminify', function() {
  */
 gulp.task('generate-service-worker', function() {
     var rootDir = 'app';
-    var flagProduction = (argv.production) ? true : false;
-    console.log("flagProduction", flagProduction);
     swPrecache.write('app/sw.js', {
         staticFileGlobs: [
             rootDir + '/index.html',
@@ -146,7 +144,7 @@ gulp.task('generate-service-worker', function() {
             rootDir + '/js/min/main.min.js'
         ],
         stripPrefix: rootDir,
-        handleFetch: flagProduction, //false in development builds, to ensure that features like live reload still work
+        handleFetch: true, //false in development builds, to ensure that features like live reload still work
         runtimeCaching: [{
             urlPattern: /^https:\/\/cdnjs\.cloudflare\.com\//,
             handler: 'cacheFirst'
@@ -167,32 +165,27 @@ gulp.task('generate-service-worker', function() {
 });
 
 /**
- * Default task, running just `gulp` or 'gulp --production' when you want service worker cache all fetch 
+ * Default task, run `gulp` for development (without generating Service Worker) 
+ * or 'gulp --production' when you want service worker cache all fetch 
  * compile scss, minify files, launch BrowserSync & watch files.
  * Watch scss files for changes & recompile
- * Watch files => generate sw.js => reload BrowserSync
+ * Watch files => generate sw.js
  */
 gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     gulp.watch('app/js/*.js', ['scripts']);
     // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
     gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
-    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
-    gulp.watch(['app/sw.js']).on('change', browserSync.reload);
+    if (argv.production) {
+        console.log('production mode');
+        gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
+    } else {
+        console.log('development mode');
+        fs.writeFileSync('app/sw.js', ''); // empty service worker file
+        gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
+    }
     browserSync.reload();
 });
 
-/**
- * For development, run without service worker for faster live-reload, use `gulp dev`
- * empty service worker, launch BrowserSync & watch files.
- */
-gulp.task('dev', ['html', 'scripts', 'browser-sync'], function() {
-    fs.writeFileSync('app/sw.js', ''); // empty service worker file
-    gulp.watch('app/js/*.js', ['scripts']);
-    // css will be inline in index.html so when the gulp-clean-css is changed -> build index.html
-    gulp.watch(['app/css/**/*.scss', 'app/main.html'], ['html']);
-    gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**']).on('change', browserSync.reload);
-    browserSync.reload();
-});
 
 // run below command to deploy folder 'app' to gh-pages branch
 // git subtree push --prefix app origin gh-pages
