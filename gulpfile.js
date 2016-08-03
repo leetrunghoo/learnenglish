@@ -151,6 +151,9 @@ gulp.task('generate-service-worker', function() {
         }, {
             urlPattern: /^https:\/\/ajax\.cloudflare\.com\//,
             handler: 'cacheFirst'
+        }, {
+            urlPattern: /\*cloudflare\/rocket\.js$/,
+            handler: 'fastest'
         }]
     }, function(error, serviceWorkerString) {
         if (!error) {
