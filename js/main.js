@@ -178,7 +178,7 @@ var lessonsDataJson;
         });
         $('#lessonContent').empty();
         $('#modalLesson .modal-content').scrollTop(0);
-        $.getJSON('data/lessons/' + lessonIndex + '.json', function(lesson) {
+        $.getJSON(location.href + 'data/lessons/' + lessonIndex + '.json', function(lesson) {
             currentLessonIndex = lessonIndex;
             localStorage.setItem('lessonIndex', lessonIndex);
             $('#lessonTitle').text(lesson.title);
