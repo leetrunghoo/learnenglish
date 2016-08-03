@@ -19,6 +19,10 @@ if ('serviceWorker' in navigator &&
             if (!localStorage.getItem('informWorkOffline')) {
                 Materialize.toast('Now this website can work offline', 3000);
                 localStorage.setItem('informWorkOffline', 'already');
+                setTimeout(function() {
+                    location.reload();
+                    // TODO: checking after sw cached all resource => refresh
+                }, 1000);
             }
 
             // Check to see if there's an updated version of service-worker.js with
@@ -113,7 +117,7 @@ var lessonsDataJson;
             $cateItem.find('.section-item:eq(' + savedSectionIndex + ')').addClass('selected');
             loadSection(savedCateIndex, savedSectionIndex);
             if (savedLessonIndex) {
-                loadLesson(savedLessonIndex);
+                loadLesson(savedLessonIndex, true);
             }
         }
     }
@@ -131,7 +135,7 @@ var lessonsDataJson;
 
     $(document).on('click', '.lesson-item', function() {
         var lessonIndex = $(this).data('lesson');
-        loadLesson(lessonIndex);
+        loadLesson(lessonIndex, true);
     });
 
     $('#btnPreviousLesson').click(function() {
@@ -167,17 +171,18 @@ var lessonsDataJson;
         });
     }
 
-    function loadLesson(lessonIndex) {
+    function loadLesson(lessonIndex, flagOpenPopup) {
         stopSpeaking();
         $('#btnPreviousLesson').hide();
         $('#btnNextLesson').hide();
-
-        $('#modalLesson').openModal({
-            in_duration: modalAnimation_duration,
-            out_duration: modalAnimation_duration
-        });
-        $('#lessonContent').empty();
+        $('#lessonContent').hide();
         $('#modalLesson .modal-content').scrollTop(0);
+        if (flagOpenPopup) {
+            $('#modalLesson').openModal({
+                in_duration: modalAnimation_duration,
+                out_duration: modalAnimation_duration
+            });
+        }
         $.getJSON(location.href + 'data/lessons/' + lessonIndex + '.json', function(lesson) {
             currentLessonIndex = lessonIndex;
             localStorage.setItem('lessonIndex', lessonIndex);
@@ -192,7 +197,6 @@ var lessonsDataJson;
             // remove ad
             lesson.html = lesson.html.replace('<br><br><b>Download all the conversations</b> for your mp3 player. Hundreds of dialogs and printable lessons are available for download in the TalkEnglish Offline Package. &#xA0;Go to the <a href=\"/english-download.aspx\">English Download</a> page and download today!<br><br><br>', '');
 
-
             $('#lessonContent').html(lesson.html);
             $('#lessonContent table').each(function(i, ele) {
                 if ($(this).attr('border') === '1') {
@@ -200,6 +204,7 @@ var lessonsDataJson;
                 }
             });
 
+            $('#lessonContent').fadeIn();
         });
     }
 
