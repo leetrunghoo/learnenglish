@@ -45,7 +45,7 @@ __Requirement:__ installed nodejs & npm
 	gulp
 	```
 
-Or with flag --production when you want to have Service Worker.
+	Or with flag --production when you want to have Service Worker.
 
 	```
 	gulp --production
