@@ -274,7 +274,7 @@ var lessonsDataJson;
     };
 
     if (!window.speechSynthesis) {
-        $('#settingWebSpeech').hide(); 
+        $('#settingWebSpeech').hide();
     }
 
     $('#btnPractise').click(function() {
@@ -327,14 +327,16 @@ var lessonsDataJson;
         if (window.speechSynthesis) {
             window.speechSynthesis.cancel();
         }
-        audioPlayer.pause();
+        if (audioPlayer) {
+            audioPlayer.pause();
+        }
     }
 
     // show toast that ask to use Web Speech when can't get audio file
     function askToUseWebSpeech() {
         if (window.speechSynthesis && !chkUseVirtual.checked) {
             console.info('Could not get the audio file, should use Web Speech instead');
-            var $toastContent = $('<div>Could not get the audio file, CLICK HERE to turn on Web Speech</div>');
+            var $toastContent = $('<div>Network has problem, CLICK HERE to use Web Speech instead</div>');
             $toastContent.click(function() {
                 $('#toast-container').hide();
                 speak(text2Speak);
