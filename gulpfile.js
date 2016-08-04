@@ -11,6 +11,7 @@ var gulp = require('gulp'),
     uncss = require('gulp-uncss'),
     htmlmin = require('gulp-htmlmin'),
     swPrecache = require('sw-precache'),
+    gulpif = require('gulp-if'),
     argv = require('yargs').argv;
 
 var lessonData = '';
@@ -92,10 +93,10 @@ gulp.task('indexHtml', function() {
  */
 gulp.task('uncss', ['styles', 'indexHtml'], function() {
     return gulp.src(['app/css/main.css'])
-        .pipe(uncss({
+        .pipe(gulpif(argv.production, uncss({
             html: ['app/index.html'],
             ignore: ['.lean-overlay', '#sidenav-overlay', '.drag-target', /^\#slideNav/, /^\#mainContent/, /^\#lessonContent/, /^\#toast-container/, /^\.toast/, /^\.waves/]
-        }))
+        })))
         .pipe(minifycss())
         .pipe(gulp.dest('app/css'));
 });
@@ -135,7 +136,9 @@ gulp.task('jsonminify', function() {
 /**
  * generate service worker (sw.js) and minify it
  */
-gulp.task('generate-service-worker', function() {
+gulp.task('generate-service-worker', generateSW);
+
+function generateSW() {
     var rootDir = 'app';
     swPrecache.write('app/sw.js', {
         staticFileGlobs: [
@@ -162,8 +165,7 @@ gulp.task('generate-service-worker', function() {
                 .pipe(gulp.dest('app'));
         }
     });
-});
-
+}
 /**
  * Default task, run `gulp` for development (without generating Service Worker) 
  * or 'gulp --production' when you want service worker cache all fetch 
@@ -178,6 +180,7 @@ gulp.task('default', ['html', 'scripts', 'browser-sync'], function() {
     if (argv.production) {
         console.log('production mode');
         gulp.watch(['app/index.html', 'app/js/min/*.js', 'app/img/**'], ['generate-service-worker']);
+        generateSW();
     } else {
         console.log('development mode');
         fs.writeFileSync('app/sw.js', ''); // empty service worker file
