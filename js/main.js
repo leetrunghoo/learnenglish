@@ -138,11 +138,11 @@ var lessonsDataJson;
         loadLesson(lessonIndex, true);
     });
 
-    $('#btnPreviousLesson').click(function() {
+    $('#btnPreviousLesson').on('click touchstart', function() {
         loadLesson(--currentLessonIndex);
     });
 
-    $('#btnNextLesson').click(function() {
+    $('#btnNextLesson').on('click touchstart', function() {
         loadLesson(++currentLessonIndex);
     });
 
@@ -307,7 +307,7 @@ var lessonsDataJson;
     });
 
     // handle playing voice
-    $(document).on('click', 'a', function(e) {
+    $(document).on('click touchstart', 'a', function(e) {
         if (e.target.href && e.target.href.indexOf('.mp3') > -1) {
             e.preventDefault();
             $('.playingAudio').removeClass('playingAudio');
