@@ -17,12 +17,12 @@ if ('serviceWorker' in navigator &&
             console.log("Service Worker Registered", registration);
 
             if (!localStorage.getItem('informWorkOffline')) {
-                Materialize.toast('Now this website can work offline. Reloading page...', 3000);
+                Materialize.toast('Now this website can work offline. Please refresh to update.', 3000);
                 localStorage.setItem('informWorkOffline', 'already');
-                setTimeout(function() {
-                    location.reload();
-                    // TODO: checking after sw cached all resource => refresh
-                }, 1000);
+                // TODO: checking after sw cached all resource => refresh
+                // setTimeout(function() {
+                //     location.reload();
+                // }, 1000);
             }
 
             // Check to see if there's an updated version of service-worker.js with
@@ -378,16 +378,11 @@ var lessonsDataJson;
             var flagListening = false;
             //fired when speech recognization starts listening.
             window.recognizer.onstart = function() {
-                    setTimeout(function() {
-                        if (!flagListening) { // fix bug stop right after started listening
-                            window.recognizer.start();
-                        }
-                    }, 200);
-                    $('#btnAgain').text('Stop');
-                    $('#recordTitle').text('Listening...');
-                    $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
-                }
-                //fired everytime user stops speaking.
+                $('#btnAgain').text('Stop');
+                $('#recordTitle').text('Listening...');
+                $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
+            };
+            //fired everytime user stops speaking.
             window.recognizer.onresult = function() {
                 if (event.results.length > 0) {
                     var text = event.results[0][0].transcript;
