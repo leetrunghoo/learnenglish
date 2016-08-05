@@ -14,22 +14,19 @@ if ('serviceWorker' in navigator &&
     (window.location.protocol === 'https:' || isLocalhost)) {
     navigator.serviceWorker.register('sw.js')
         .then(function(registration) {
-            console.log("Service Worker Registered", registration);
+            console.info("Service Worker Registered", registration);
 
             if (!localStorage.getItem('informWorkOffline')) {
-                Materialize.toast('Now this website can work offline. Please refresh to update.', 3000);
+                console.info("Now this website can work offline");
+                Materialize.toast('Now this website can work offline.', 3000);
                 localStorage.setItem('informWorkOffline', 'already');
-                // TODO: checking after sw cached all resource => refresh
-                // setTimeout(function() {
-                //     location.reload();
-                // }, 1000);
             }
 
             // Check to see if there's an updated version of service-worker.js with
             // new files to cache:
             // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-registration-update-method
             if (typeof registration.update === 'function') {
-                console.log("Updating Service Worker");
+                console.info("Updating Service Worker");
                 registration.update();
             }
 
@@ -39,12 +36,11 @@ if ('serviceWorker' in navigator &&
                 // and there's no need to prompt for a reload at that point.
                 // So check here to see if the page is already controlled,
                 // i.e. whether there's an existing service worker.
-                console.log('onupdatefound', navigator.serviceWorker.controller);
                 if (navigator.serviceWorker.controller) {
                     // The updatefound event implies that registration.installing is set:
                     // https://slightlyoff.github.io/ServiceWorker/spec/service_worker/index.html#service-worker-container-updatefound-event
                     var installingWorker = registration.installing;
-                    console.log('installingWorker.state', installingWorker.state);
+                    console.info('installingWorker.state', installingWorker.state);
                     installingWorker.onstatechange = function() {
                         switch (installingWorker.state) {
                             case 'installed':
@@ -53,7 +49,7 @@ if ('serviceWorker' in navigator &&
                                 // It's the perfect time to display a 'New content is
                                 // available; please refresh.' message in the page's interface.
                                 setTimeout(function() { // setTimeout to avoid message when refreshing
-                                    console.log('New version is available, please refresh to update.');
+                                    console.info('New version is available, please refresh to update.');
                                     Materialize.toast('New version is available, please refresh to update.', 3000);
                                 }, 1000);
                                 break;
@@ -274,7 +270,7 @@ var lessonsDataJson;
     };
     audioPlayer.onerror = function(err) {
         // play fail => try again
-        console.log('fail playing, try using Web Speech ', err);
+        console.warn('fail playing, try using Web Speech ', err);
         clearTimeout(window.timeoutCheckingNetwork);
         askToUseWebSpeech();
     };
