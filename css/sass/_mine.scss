@@ -170,6 +170,10 @@ h3 {
     max-height: 50%;
     top: 25% !important;
 } 
+#naviLesson {    
+    padding: 20px 0;
+    height: 70px;
+}
 
 @media #{$small-and-down} {
     #modalLesson,
