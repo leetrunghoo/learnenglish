@@ -17,7 +17,7 @@ if ('serviceWorker' in navigator &&
             console.log("Service Worker Registered", registration);
 
             if (!localStorage.getItem('informWorkOffline')) {
-                Materialize.toast('Now this website can work offline', 3000);
+                Materialize.toast('Now this website can work offline. Reloading page...', 3000);
                 localStorage.setItem('informWorkOffline', 'already');
                 setTimeout(function() {
                     location.reload();
@@ -260,6 +260,7 @@ var lessonsDataJson;
     } else {
         window.recognizer = new window.SpeechRecognition();
         window.recognizer.continuous = false;
+        window.recognizer.lang = "en-US";
     }
 
     // create audio wo/ src
@@ -372,40 +373,41 @@ var lessonsDataJson;
     }
 
     // use Web Speeck Api to recognize voice
-    function listen(callback) {
+    function startListen(callback) {
         if (window.SpeechRecognition) {
-            //fired everytime user stops speaking.
-            window.recognizer.onresult = function(event) {
+            var flagListening = false;
+            //fired when speech recognization starts listening.
+            window.recognizer.onstart = function() {
+                    setTimeout(function() {
+                        if (!flagListening) { // fix bug stop right after started listening
+                            window.recognizer.start();
+                        }
+                    }, 200);
+                    $('#btnAgain').text('Stop');
+                    $('#recordTitle').text('Listening...');
+                    $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
+                }
+                //fired everytime user stops speaking.
+            window.recognizer.onresult = function() {
                 if (event.results.length > 0) {
                     var text = event.results[0][0].transcript;
-                    if (callback) {
-                        console.log("---text recognized: " + text);
-                        callback(text);
-                    }
+                    $('#listenResult').text(text);
+                    console.log("---text recognized: " + text);
                 }
             };
             //fired when recognization is stopped manually or automatically.
             window.recognizer.onend = function() {
-                window.flagListening = false;
+                flagListening = false;
+                $('#recordTitle').text('Result');
+                $('#btnAgain').text('Again');
             }
-            if (!window.flagListening) {
+            if (!flagListening) {
+                flagListening = true;
                 window.recognizer.start();
-                window.flagListening = true;
             }
         } else {
             console.warn("This browser doesn't support Web Speech API");
         }
-    }
-
-    function startListen() {
-        $('#btnAgain').text('Stop');
-        $('#recordTitle').text('Listening...');
-        $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
-        listen(function(text) {
-            $('#recordTitle').text('Result');
-            $('#listenResult').text(text);
-            $('#btnAgain').text('Again');
-        });
     }
 
     function stopListen() {
