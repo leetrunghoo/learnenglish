@@ -51,7 +51,7 @@ if ('serviceWorker' in navigator &&
                                 setTimeout(function() { // setTimeout to avoid message when refreshing
                                     console.info('New version is available, please refresh to update.');
                                     Materialize.toast('New version is available, please refresh to update.', 3000);
-                                }, 1000);
+                                }, 500);
                                 break;
 
                             case 'redundant':
@@ -374,6 +374,11 @@ var lessonsDataJson;
             var flagListening = false;
             //fired when speech recognization starts listening.
             window.recognizer.onstart = function() {
+                setTimeout(function() {
+                    if (!flagListening) { // fix bug stop right after started listening
+                        window.recognizer.start();
+                    }
+                }, 200);
                 $('#btnAgain').text('Stop');
                 $('#recordTitle').text('Listening...');
                 $('#listenResult').html('<span class="grey-text lighter-2">Speak whatever you like :D</span>');
