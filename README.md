@@ -18,15 +18,16 @@ Connectivity independent - Enhanced with service workers to work offline or on l
 Other cool features of this web app is it has Text-to-Speech (in case offline) and Speech-to-Text (to practise speaking).
 
 ## About the project:
-- Firsly I need the content for my web app so I wrote a simple crawler/scraper runs on nodejs to scrape the data from <http://www.talkenglish.com>, then all json data are uploaded to Github.
+- Firsly I need the content for my web app so I wrote a simple crawler/scraper runs on Nodejs to scrape the data from <http://www.talkenglish.com>, then all json data are uploaded to Github.
 - I want to keep this project simple and lightweight so currently I'm using: 
+	- Service Worker (for PWA, and use sw-precache for generating sw file)
+	- Nodejs (for running crawler on backend & development enviroment)
 	- Jquery
 	- Materializecss (CSS framework) 
 	- Sass (preprocessor css) 
 	- Masonry (for Masonry Layout)
 	- Handlebar (html template)
 	- Web Speech API
-	- Service Worker (for PWA, and use sw-precache for generating sw file)
 	- Gulp (automating tasks while deleloping)
 	- Browsersync (for live-server & for testing UI in multi-devices)
 	- Github Page (for hosting from your GitHub repository)
@@ -40,12 +41,12 @@ __Requirement:__ installed nodejs & npm
 	npm install
 	```
 
-2. Then running default gulp task for development mode, without generating service worker for faster live-reload.
+2. Then running default gulp task for development mode, without generating service worker and uncss for faster live-reload.
 	```
 	gulp
 	```
 
-	Or with flag --production when you want to have Service Worker.
+	Or with flag --production for production.
 
 	```
 	gulp --production
